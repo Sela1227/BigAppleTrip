@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon/app-icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#22252b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="紐約行程">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABmJLR0QA/wD/AP+gvaeTAAAgAElEQVR4nO3dd3xc1Z3///e5M+qyJRfJlmyM3G0EtmWTCgRIQgvNQEwoNi2ELEl+JKRAdtn9rr/5bhoQyJKQDaaXDcWBANkkhDgJKVRjMCwkOBiwcZcrtiSrzNzz+0OWEUaSR9LMnFtez8fDj4ctzdz7vtZo7mfOPedzjeBc7ck3lZYWNo831tRZqzoZjTTSCCszQtaOlDFVkq2wkmeMKiRJVoWSytwmBwC9IyNfVk2SOiTtlrRVVhutZzdKptHz7Xrfmo2JhFb8wxuzWovPTDvODEnGdYA4mX769TUdnj3EWG+m9f0ZMmaypPGSql1nA4A8aZP0umRXSN4KK73sK/XMWw99fbXrYHFDAZAjdXOvr0xIH5FnP+pZfcQaM1PSSNe5ACCgNkl61ho9J19PpyveeWrVHQtbXYeKMgqALBl34k+GFRa3HmOt+biRDpN0kCTPdS4ACKkWyfxZ1n9cnh5f+eBXX3UdKGooAAbMmolzb5ithH+8sTpB0oclJVynAoCIWieZR2T9B1bO3PkXLVzouw4UdhQA/TTpjOvqJbNAVgskW+s6DwDE0FZJv5bR4pXe2F8zqXBgKAAyMGXudR/0EzpLVp+WdIDrPACAvVYbmVtNwt72j8VfXec6TJhQAPRiwrzvVRi/6DNG9lJZzXKdBwDQJ99KfzDWLhq7fdcvnnhiYcp1oKCjANjHlFOvO8L3dImkT0sqdp0HANBvq2XsD4sSxbe8uviLTa7DBBUFgCQtXOhNenHoifL0L+qczAcACL+dVrojme74/opHr1zvOkzQxLoAmHTCDUNV3HGxZC6TdKDrPACAnGiVMbdLie+sfOiyta7DBEUsC4Cpp3x/iO8VfNkafU1Spes8AIC8aJU1P1VB4jsrF1+22XUY12JVANSefFNpWaL5c9bonyWNcp0HAOCAUbOs+XHK6nurHr58h+s4rsSiAJhzyU0FO7a0/JOx9ipx4gcAdNpqpH99PTn25jj2Eoh8ATDljOs/6fv+9ZI52HUWAEAgLfd8XfaPR776F9dB8imyBcDUU3441ffS11mjT7nOAgAIPCure70Cc0VcGgpFrgAYO++6kuKU/o9kvyapwHUeAECovGOtveKNh792s2Ss6zC5FKkCYMJp1x7uydxspWmuswAAQu0vVrr4zV987R+ug+RKJAqAurnXVyaMf7WkixWRYwIAONdija56c8auG6J498HQnywnnHH9J43v3yFpjOssAIAoMk8Y07Fg5UNXRqqJUGgLgDmX3FTwzpamq6zVv0nyXOcBAETaO5L5pzd+8dX7XAfJllAWAJNPu366b/3/llGD6ywAgBix5u6ylvSlLz/+jWbXUQYrdAXAhNN+cJGRfiypxHUWAEAsvWql08M+QTA0BcCkE24osoUdV8voMtdZAACxt8sae8Gbv/j6Q66DDFQoCoApJ103Jp2wP5fhVr0AgMCwxujqlTN3/UsYVwkEvgAYf+rVR3jG+7mkatdZAAB4H6tf2cLUuW8u/uY7rqP0R6ALgEmn/WCe9e1dMip2nQUAgF4ZveobnfjWQ19f7TpKpgK7fG7C3Gu/bK29j5M/ACDwrOq9tJ6ZcMp1h7qOkqnAjQAcddTC5JphZT+WNZ93nQUAgP6wUrPnm3NWPvq1R11n2Z9AFQBj511XUtThPyjpBNdZAAAYoLSkL7zx8NcXuQ7Sl4TrAF1mHHtNmZ/QI5KOc50FAIBB8CSdNHz6MS3bX/vdU67D9CYQBUDd3OsrUwX2MUlHus4CAEAWGMkcM2L6cSXbXnt8ieswPXF+CWDKydeOTCfMbyU723UWAABy4D/fePhrl0vGug7SndMCoG7u9ZUJpf8g0dMfABBhxt70xi++fmmQigBnlwBqT15YWugV/krSh1xlAAAgP8yhw6c9PXz7a4//xnWSLk4KgLHzrispVsGvJMs1fwBAXHxoxLRjK7e99rvfug4iOSgA5lxyU0FqV+svJB2T730DAODYh4dPPbZg+4rf/cF1kLwXAGXjjrxF0rx87xcAgEAw+tiwqce2bl/xuyddxshrATBx7jX/Jumr+dwnAABBY4w+MXzaMau3v/a75c4y5GtHE0+9+jOSuTef+wQAIMA6ZO0pbzx6xWMudp6Xk/HkU679mG/s45KK8rE/AABCYpeMOfqNh7++LN87znkBMOn074+1aW+ZpOpc7wsAgPCxm6zvf/DNX37z7XzuNae3A55zyU0FNu3dJ07+AAD0wozyTOLRGcdeU5bPvea0ANixaeeNkg7L5T4AAAg7azSzuUR3SzZv8+Rytgpg0txrF0j6j1xtHwCAiJk+bOpTdvuK3/0pHzvLSaUx6eTv1VvPWyqpJBfbBwAgoqy19tNvPnrlQ7neUdYLgEkn3FDkF7Y+Y6RZ2d42AAAxsMu39gNvPXrlilzuJOtzAPyi3d/h5A8AwIAN8Yx5YOy863I6ip7VAmDCqdd80ljzlWxuEwCAGJpR1J66Lpc7yNokwLq511d6Sj8uqSJb2wQAIMYOHTbt2Ne3r/jd/+Zi41kbAUjY9qsljcnW9gAAgF008ZTvTsrFlrMyCbDutKuP9Hz9MVvbAwAAez35ZmHdkVp8ZjqbGx30CMCkE24o8nz9VJz8AQDIhcMmdqz6WrY3OugCwC9sXShp2uCjAACAnlirb40/7Xszs7nNQX1qH3/K96camf+VVJClPAAAoGcvlxS1fODVxQvbs7Gx5GCebKTrJcvJHwCA3JvR0l7yDUnfzsbGBjwCMOHUaz4p6/8uGyEAAEBG2tIJNaz+xZV/H+yGBjQH4KijFiZl/R8OducAAKBfipJp/Vc27ho4oAJgzZDSSyXVD3bnAACgf6x05IRTrrlwsNvpdwUx6thrysqK/TckjRrszgEAQP9ZaWtHUcGUtYu/um2g2+j3CEB5cfqL4uQPAIAzRhpR0N6+cJDbyFz9vIXlu9tK3pBUPZidAgCAQUvL2IY3H/nmgO4V0K8RgNa2ksvFyR8AgCBISOb6gT454xGASSfcMNQv2L1aUuVAdwYAALLLGnvKW49885f9fV7GIwDpgt2fEyd/AAACxVjzXc17INHf52X0hKOOWpjcWZT8maSKficDAAC5VF2Z3v76jhVLXu7PkzIaAXi7ovhMSeMGFAsAAOSUkf5f/byFhf15TmaXAHx9eUCJAABAPtS1thf3qznQficBjj/16iOM9f888EwAACAP1nkdpRNX/uaytkwevN8RAGP9SwafCQAA5NgYW9B8fqYP7nMEoG7u9ZVeum2dpNJBxwIAADllpTffKp4wRYvPTO/vsX2OACTS7eeJkz8AAKFgpAnj2944PZPH9lkAWNmLshMJAADkg5H5l0xuF9xrATD+pO9/UNLMrKYCAAC5ZTVr4snfO3p/D+u1ADDGnpXdRAAAIB+szBf295hehgismXDy91aJ5j8AAIRRykt541f+5sq1vT2gxxGACSd//zBx8gcAIKySfoF/cV8P6LEAsPLPzE0eAACQF1aXzLnkpoLevt1DAWCNJ3NGLjMBcG/m6Hc0c/QO1zEA5E7Njg1bT+ztm+8rACae+L3ZVqrNbSYArs2fuVrnzlzjOgaAHLIy83v73vtHAIw5IadpADhXXd6mT0zcrGMmbtLo8ozahgMIp5OnnfadET19430FgJWlAAAi7uxD1ijp+Up4VmcewigAEGGFHemeL+u/pwAYd+J3h8nog/nJBMCF4mRan65/d2XQvPq1Ki3Yb9twACFlpR4vA7ynAEh45hhJybwkAuDEydM2qKK4Y++/K4o79KkpGxwmApBTVodPOek/xuz75X0uAdhP5CsPADfO6mHIf/6st2WMdZAGQB6YlJc8Zd8vvufTvrX2sPzlAZBvHx23VZNHNL3v6xOGNetDY7bp6TXDHaQCkHPWnirpv7p/ae8IQN3chZVGmp73UADyZn4fy/7mz3o7j0kA5JXRx+vmLqzs/qW9BYBNF3xE+7k9MIDwGle5W4fVben1+0ccuFXjhzXnMRGAvLEqMOmCY7t/ae8J3/PF8D8QYQtmru6zwjfG6uwZvd43BEDIWesd1/3f774fGPPhvKcBkBdDilI6dfr+Z/qfOn29KopTeUgEIN+MtR/v/u/uHwhm5DkLgDw546B1KslgrX9pQVpzp6/PQyIAeWdUd+DJ/2981z89STrglO/XSqpyFgpAziSM1WdmZN7t75yZbyvBkkAgkjwlPv7u3yUl0qlD3MUBkEtHT2jU2KGtGT++dkirjpqwOYeJADhjdXTXXzsvARgz01kYADm1YFb/e/0v4C6BQCRZo73z/TxJMtLB7uIAyJXpVbs0u3ZHv583Z8x21VfvzEEiAC4Zqwljj1s4XNrbCdBOdRkIQG4MprnP2TPW6F+XHJTFNAACwBQUFcyR9LuuVQDj+3o0gPAZXtKh4yZtGvDzPzV1o0aWtmUxEYAgML4OlSRv1LHXlEka6TgPgCz7zIw1Kkr6A35+gWc175B1WUwEIAisNFuSvCFFu+skGbdxAGRTYcLXmQcPfj3/WYesHVQRASCQpkmS5/uJOsdBAGTZp6Zsysrw/fCSDh0/eeCXEQAE0mTNeyDhybMHuk4CILvOOiR7Pf3PZUkgEDVFdR1vHJCUNdWi6RcQGYeO2a76Udlbwje9apfm1O7QsnWV+38wgFAwaU3xrDUjXAcBkD3nDqDxz/4MpJkQgOAyfnqSZ2RZAQBERO2QVh09YUvWt3vUhM06oGJ31rcLwA0rM9qzEiMAQEScOys3N/LpvKFQ9uYVAHBuVFLGjmQOABB+pQUpnX7Qhpxt/9P16/Rfz45Xc3siZ/sAkC9mtGethrqOAWDw5h60UeVFqZxtv6wwrVOm5a7AAJBXozwjU+Q6BYDBMcbq7DwM0c+ftUbe/h8GIPDsCE+yFABAyH2sbpvqhrXkfD/jKnfr8LrsTzIEkGdWRZ6kQtc5AAzOYO761/99MRkQCD2jYgoAIOQmDm/Wh8buyNv+PjJum6aMaMrb/gDkBAUAEHbzG9bI5GDpX1/OmsldAoGQK/EksaYHCKmK4pROnLox7/s9edpGVZZ05H2/ALImyYReIMTOPGSdShzcrrc4mdan6xkFAMKMAgAIqWTC12eyeNe//jp75lolE/kvPgBkR1K0AQRC6ZhJjRpV3uZs/9Vl7Tpm4mb95h/VzjIAGLgk538gnObPdL8c7/yGNfrNCgoAIIy4BACE0KzROzVj9E7XMVQ/aqdm1rzjOgaAAaAAAELo3IY1riPsdS6NgYBQSnIFAAiXUeVt+uTE4LTjPWbSZo0a0qaNu+gqDoQJIwBAyJw9c12gZt8nPavPHMKSQCBsKACAEClOpvXpg9e7jvE+Zx6yTqUFadcxAPQDBQAQIqdM36TK4uB14OvsSLjJdQwA/UABAITI2TOCO+FufsPavN+TAMDAUQAAIfHRA7dp8shm1zF6NXF4sz58QP7uSghgcOgECIREEBr/7M/8hjV6+u1K1zEAZIARACAExlXu1uHjt7qOsV8fO3Cbxg9rcR0DQAYoAIAQWDBrbSh+WY2xOmcmSwKBMAjDewoQa0OKUpo7faPrGBk79aCNqihOuY4BYD8oAICAO6N+g0oKw7PGvrQgrdMO2uA6BoD9oAAAAixhrM4K4ZD6ObPWKcGSQCDQKACAAPv4xC0aO7TVdYx+qx3SqqMnBOd+BQDeL8kqQCC4FoT4TnsLGtZpycoq1zEA9IIRACCgplc3afaYd1zHGLA5Y3aoftRO1zEA9IICAAioBQ3h/fTfhSWBQHBRAAABNLy0Q8dNbnQdY9A+Na1RI0vbXccA0ANaAQMBdNaMtSpK+q5jDFqBZ3XmjHX6yTN1rqMA2AcjAEDAFCZ8nTkjOuvoz5qxPhLFDBA1FABAwERt2Hx4aYeOn7LZdQwA+6AAAALm7BnrXUfIuvkhXs4IRBUFABAgh47dofpRu1zHyLrp1U2aE+IljUAUUQAAATJ/VnSXzUVhWSMQJRQAQEDUDmnV0RO3uo6RM0dP3KoDKsLX1hiIKgoAICDObYj2DXQSxuozNAYCAoMCAAiA0oKUzqjf6DpGzs07eIPKQnRrYyDKKACAAJhbv0nlRSnXMXKurDCtU6ZHv9ABwoBOgIBjxlidMzN6S/96s6Bhne5/qVa0BgLc4nbAgGMfG79ddcNaXMfIm3GVu3VE3Vb96a0RrqMAscYlAMCxOC6Pm98QnxEPIKgoAACHJo1o1ocO2OE6Rt595MDtmjKy2XUMINYoAACH5s9eL2Ncp3Dj7FmMAgAuUQAAjlQUp3TitE2uYzhz8vRGVZZ0uI4BxBYFAODIZ2ZuUEmMb5NbnExr3iHRue0xEDYUAIADyYSvz0Twrn/9dfbM9Uom4lsEAS4lWQUI5N8xk7doVHmb6xjOVZe365OTtuo3K6pcRwFihxEAwIEFLIPb64I58VsGCQSBOfD4f2cQAMiSoUUpVZe3q6qsXdVlbRpaktbIsjZVl+352p7vDY1B29/+aEt52tmWVGNToTY3F6qxuUibmwu0q61g79c2NxVqw64ipfyYLpsAsizpOgAQdMVJX0OLU3tO6u2qKmvTyPJ2VZV1qLqsTRXFKY0sa1fNkDYlPerpgShK+qpKdhZH+7OzLanNzYXa2dpVMBRpc1OhNjcX7CkcCvcWEwB6RwGA2OLTejgNLUpl9DNhVAHoGwUAIoVP6+jCqALQNwoAhAKf1pFLjCogjigA4Ayf1hE2jCogSigAkHV8WgcYVUDwJcUHK2TgPZ/Wy/d8Wi/b82m9vE0VRXs+rQ/l0zrQHwMaVdidVGPzPqMKTYwqoH8YAUBG5s3YqCuOeoPOUYBD+xtVsFb64V/H65alY/OYCmHF+zkycvcLtbr80elqS/GSAYKowze64jfTOPkjY4nKSUcudB0C4fDmtlI9+3alPjFpq4oLuIELEBS7WpP6p1/U609vDncdBSHCxzn0y/INQ3T+AzO0YWeR6ygAJDU2FeqCnx+s59dWuI6CkKEAQL+t3Fqqc+6bqdcay11HAWKN30UMBgUABqSxqVAL7j9ET60a5joKEEtL11Zo/v2MxmHgKAAwYC0dCX3h4YP069e4lzuQT0tWjtTnH6rXrlYWcmHgKAAwKJ0zj6fqxqfHuY4CxMI9L9bq8kensSIHg0b5iEGzVvrJ0+O0qy2pK456k6oSyIHONf51LPND1vBejazp7BXAJxMg27pG2jj5I5t4p0ZWLVk5UhctPkQ7djO4BGTDrtakLv75wcy1QdZRACDr6BUAZAdr/JFLicpJH1voOgSiZ9vuAj32j5H68AE7NTKDm5wAeK+VW0t14c8P1qptJa6jIKIYAUDOdPYKOFhPrap0HQUIlaVrh2r+/YcwioacSlRO5F4AyJ2OtKfHVlRpXGWrJle1uI4DBN6SlSP05Uemq6U94ToKIo4RAORc5wzmKbrx6QNcRwEC7Z4XanX5I6ykQX4wVRt5Ya30k6fGaVdbAb0CgH1YK/3wL3W6ZekY11EQI7wPI6/uXlbDJxygm64RMk7+yDfehZF3S1aO0EUPHEyvAMRe5xr/ev3676zxR/5RAMCJ5RuG6HxmOSPGGpsKdcHiej2/hjX+cIMCAM6s3Fqqc+6dwb3METu89hEEFABwqrGpUAvuo1cA4mPp2qGafx+jX3AvUTmRToBwq8M3emzFSHoFIPI61/hPY40/AoERAAQCvQIQdfe8UKPLH5nKChgERtK6TgDsYa1041MHaGdbUlce9RbVKSLBWun6vxzIMj8EDu+xCJy7l9XoK3xSQgSwxh9BxjssAmnJyhG68IF6egUgtDrX+B+kX/19pOsoQI8oABBYyzcM0Xn3H8xsaYROY1Ohzl9cr6Ws8UeAUQAg0FZuLdXZ9x6i1xrLXEcBMsJrFmFBAYDAa2wq1Pz7DtaT9ApAwC1dO1Tn3seoFcIhUTGBPgAIvo60p8de6+wVMIVeAQigJa+P0GWs8UeIMAKA0Ojwja749RTd+BS9AhAs97zAyhWET1KiEwDCo7NXwFjtbEvoyqNXUcHCqb1r/J+rFe+lCBvePxFKnb0CpvCJC850jkhN3nPyB8KHd0+E1pLX6RUAN3a1JnXxYtb4I9woABBqy9eX67z76rVhZ6HrKIiJxqZCnf/AQVq6ZqjrKMCgmHHHXMWFK4RedXm7fnr6a5pW3ew6SqyVHfv7Pr/f/Pgn8pQkN1ZuLdXnH5xOwYlIYAQAkdDYVKj599bTKwA5s3TNUJ17L6NNiA4KAERGS0dCX3hoGtdlkXVLXh+hSx6crl2tzDdBdFAAIFK6Zmbf+NRY11EQEZ1r/FlxguihnEXkdPYKOEA725L0CsCAvXeNPxA9vDcisugVgIFijT/igE6AiLQlrw/XhQ8cpJ+c9poqS1Ku4yAEdrUm9aVHpuxZ5sf7I6KLj0aIvM5eAQcxexv71dhUoPMfmM4af8QCBQBiYeXWUp39M+7Rjt7xGkHcJBnhQlw07irQ/HsP0n+e+g8dVveO6zgIkKVrhupLD09hmR9ihREAxEpLe0JfeJBeAXjXkteH65KfT+Pkj9ihAEDsdPhGV/xqEr0CoHuW1egrD7NSBPFEyYtYsla68cmx2tma1JUfp1dA3FgrXf/ncSzzQ6zxvodYu3vZaD4BxkzXCBAnf8Qd73qIvSWvD9eF9x+kHbsZEIu6Xa1JXfzAdOaAAKIAACTRKyAOGpsKdP79rPEHutAJENhj5ZYSnf3fB+unZ6zQtOpm13GQRSu3lOjzD07bU+DxngdIjAAA79HYVKD5907Xk6sqXEdBlixdM0Tn3svoDrAvCgBgH529AqbqV38f4ToKBok1/kDvKACAHrzbK2CM6ygYoHuWjdZXHp7MCg+gF/xmAL2wVnrof6tdx8AA3b60Rr7rEECAUQAAfZg9ZpfrCBighrH87IC+JJkPC/RuFgVAaM2qbWIeB9AHRgCAPjTUNrmOgAFqoHgD+kQBAPSitMDXlKoW1zEwQFOrWlRamHYdAwisJD0xgJ7NqNmlpMcvSFglPatDRjfr2dV0/gN6QidAoBdzxjD8H3ZzxuzUs6uHuI4BBBKXAIBeMAEw/GZRxAG9ogAAeuCpcxY5wm32mCbe5IBe8LsB9GBS1W6VFzGBLOzKCtOaOJKJnEBPaJAN9IAGQLlR9olf53V/NtWsbw99RZde+xdt3cGIDtAdIwBADxq4dhwJJlmmQw/9kO679mKVlxa5jgMECgUA0AOayESHZ6RxNcP11fM/6ToKECgUAMA+RpR16IDKNtcxkCWeJCPppCNnuI4CBApzAIB9zK7l0/+ApYNZOHnGqmJIiesYQKAwAgDsY/ZYrv9HjWdcJwCCh06AwD5oHhM9nrHqvBDA+x3QhREAoJviAl/1o5tdx0CWGUYAgPehAAC6qR/VogJuABQ5Rl2jAAC6UAAA3bD8L7qYBwC8F7cDBrqZzfX/yPKMZQoA0A0jAMAexkgza7n+H1WeYS4A0B0FALBH3bBWDS/tcB0DOWIkHTis1XUMIDAoAIA9Zo/l+n/UcYkHeBcFALAH6/+jj58x8C4KAGCPOWO4/h91cxjlAfaiEyAgaWhxSnXDd7uOgRwbP7xVFcUpvdOacB0FcI4RAEDS7DHNzBCPAWOkWfR6ACRRAACSpAauDccGP2ugEwUAIO4AGCezmesBSJKSrgMAriUTVvU1vZ8UTHGVCid/TokRc2QS+bmnvE01K735KbWvvF22fUde9hkXh9Q0q8Cz6vC55oN4YwQAsVc/qkUlSb/H75niKpV86MdKVh+et5O/JJlkmZI1x6j40GtlkqV5228cFBf4mj6qxXUMwDkKAMReX2vDCyd/TiY5JI9p3ssrqVXBxPOd7T+q6AcAUAAAfXaHS4yYk8ckPUuOPsp1hMihIyBAAQBoZm3vJ4N8Dvv3msHhCERUNTDpE6AAQLyNrWjXqCHcAChuqss7NKaizXUMwKmktXQCRHw10Bo2thrGNGntjkLXMQBnGAFArHEtOL7oB4C4owBArM3iJBBbrARA3FEAILbKCn1NrornevA1O4r0hZ9P0kX3TdGbW4tdx3FiSnWLyovSrmMAztAJELE1a0yTEjFrBtfa4emWZ0fp5mdGqy3VWf+fcttBOmf2Zn3liPUqLYzPCTFhpBk1zXpq1VDXUQAnGAFAbMXtpjB/XFmhE285SD/+a+3ek78kpdJGdy2t1gk31+uRV0c4TJh/3AMCccYIAGIrLm/+q7cV6dtLxunPb/b9SXfTrgJd+cs6PfTSCP3bsWs0aeTuPCV0Z/ZY5oAgvigAEEsJI82sjfab/+6Up1ufGaVFT9eoPZ35tY5n3x6iubdP1zmzN+vLR6xTWWHP90mIgpm1zUoYKc1qaMQQlwAQS1NH7Y70ie2PKyt04qJ6/fivtf06+Xfpuixw/KKD9cirIxTVdiFlhWlNqY7nRFCAAgCxFNUlYG9tK9ZF903WpT+fpPU7B9/kZnNT52WBBT+bqhWb3bdFzoWovhaA/UlKES3tgT5ErQHQrtaEFj0zWnc8V73nPvfZ/b1+fk2Zzrh9ms6YsVWXH7lelSWprG7fpdljmnTvC1WuYwB5xxwAxFJUbgZjrfTo34br6j+M1dbm3P46p3yj+5eP1G9XVOqLh23UuYc2RmIIcfZYLgEgnqLw+wv0S3V5h8YMbXcdY9D+trFE5/73FF35y7qcn/y727E7qW8vGasz75yq5evK8rbfXBlT0abRQ8L/egD6iwIAsTMn5J/+d7Ym9Z3fH6B5d07XC2vLneV4ZUOZzrl7qr75PwdqW0uBsxzZQEtoxBEFAGInrA2AfEmPvDpcxy+arruWVgVi6Zov6eFXRuj4RdN19/PVoZ1R1EA/AMQQBQBip+GA8L3Zd33avvKXdYH8tL2ztfOyQHvKyA9hFdDACABiKBnakh0YgOICX9Oqw9Phzqpz8t2Zd0xVGLoW+DJqSxsljHsP5xoAABciSURBVFVBwiost1o4qLpFJQlfu1N8JkJ88GpHrMyoaVGBF/yqt/PEL7WljFK+CcXJv7u0NXuyh2OhcTJhdXDEO0MC+6IAQKyEof+/b6X2lFGH7yk8n6Hfz6rzGNpSJhDzFfZnDvMAEDP0AUCsBHmyl5XUkTZK2/Ce9HtiZdQegssCswL82gBygU6AiA1jgtn21UpK+53X+ns/PYb/9zRtjdIpKelJSS94hcDsMc3yZEN3uQUYKC4BIDYmDG9VRXHadYz3SEdkuD9znXMagnhZYGhxSnUj21zHAPKGAgCxMeeA4Hz6t5La00btaU9+LE7879V5WcBTe9oEamwj7E2igP6gAEBsBGGtd9fs/tZU9K71D0TaGrWmjDr8YBQCQXiNAPnCJEDExmzHk7zStnOSXzyG+vujc7lg2pcKElYJh/89YVglAmQLIwCIhWGlKY0b5ub6rq93h/s5+feu67JAW9pd34MDh7VpeGl0bnUM9IUCALEwe0yTTJ7PvVZSx94Jb5z4M+XvaSLk4rJA50oRLgMgHigAEAv5vud72r7bxU986h+Ad1cLpPJcBXAZAHHBHADEQr4aAPmSUhFs5uOKlelsjmSsCjwrLw//rR+ZUqIfHXauDp8zWWUlRbnfYTdNza16/KlXde2tj2nLDgoR5BYFACKvMGFVPzq3IwBdN+1J+RKf+LPPt0Zt6dw3ETLFVTp07tVqM0Pl4udYXlas04+Zo0Pr6zT3Sz9SUwt9CZA7dAJE5NWPblZRMnfTyt6d3d8lF79TYfk9zW3OztUCRsmEVTIH5+fCyZ+TVzBEXlryrbv/83G1w/XVC47Tt37yiLMMiD5uB4zIy9Xabl+dJ34/H1PWw/J7moecVlJHyijtKeuXBRIj5kiSPKP8/Fz7cPLRM/WtGykAkDtcAkDkzT4guwXAe4b7w3JijiDfl9qsUdJ03s43G3WASZRIkjxj5fpSTkV5idP9I/ooABB5s8Zk7/p/ynZO8nM4OozubOfPJG2Nkp5VwsvOaTsfkw0B15K8jyFXaqoqdNXnT9Lhc6aorKTQSQZjpOKklU01K735KbWvvF22fUe/t+PbzjX9roaF+T3tm90zD6Orm+BgT+BGna8d14UeP3fkEiMAyImaqgr98r++7HwYs+tEYJJlStYcI6+yXq3PXSabymxUgOH+cPGt1JY2SpjOQmAwdYBnFLg7FgLZRCMg5MRVnz/J+clf6rqW2+3fJbUqmHj+fp/nW+mRV4Z3NqJJi5N/mNjO+wp0NmIa+I9u39cOEDUUAMiJw+dMcR1BUs/XcpOjj+rzOa9sKNXZd03WFY+Ocz4EjIHruizQnjLyB/BzZB4Aoo5LAMgJV9f8uzNGPfb/N8khPT5+x+6EbnxytO5ZWjWgEwaCqftlgS3NSY0sy+xmP54JxjwAIFcYAUBkGZPZjPCUb3T/iyN13E8P0l3PcfKPpD2XBY6/abpufrpaHenMPt7n+wZSQD7RCRCRlck13OffLtO3Hh+rFY3Fe74S1N+HoOYKl12tnq79Y40efGm4/u24dTps/K4+H+8ZK99pPwB+7sgdLgEgsvq6hru5qUDX/nG0HnllOEO8MfTWtiJddO8EfXzyTv3bsWtVW9HR4+OYB4AoowBANJme37ytuoaCp6mpjStgcfeH14fq6VXT9dkPb9LnP9qosn2+73XdzZkiERHEOyAiydP7r/+nbefSsI604eSPvXZ3GP34L6N10s3T3rfu34g3SUQXIwCIJK/bu7bVu13ioqimqjLnHRebWtr0+JOv6JrbfqMt26N5n/rV2wrVnjJKeJ33Fuh6CXme5KedRgNyggIAkeQZu3e4v8M3kR3CramqzEvHxfLSos771B9cp1O/eEOk71Of9t+9t0DSC8aNgYBcYHQLkWS7DfdH9eQv5b/j4riaEfrahcfnbX/O7LnpU1uKGz8hupJRfnNEfO13nXfYXve95HXRcfHko2fp//44pPep7+fPvauboDNhe50iVBgBAELMRcfFINzjAcDgUQAAABBDdAJETIXtdR+0vEHLk6mw5Q5bXoQJIwAAAMQQBQAAADFEAQAAQAxRAAAAEEMUAAAAxBAFAAAAMUQBAABADFEAAAAQQxQAAADEEJ0AEVNhe90HLW/Q8mQqbLnDlhdhwggAAAAxxO2AEU9he90HLW/Q8mQqbLnDlhehwggAAAAxlHQdAAAwcDVVlbrq0pN1+JypKispdB2nR00trXr8r6/omlt/rS3bm1zHwR4UAAAQUjVVlfrlTy9XxZAS11H6VF5arNOPPVSHHjJep176QzW1tLmOBHEJAABC66pLTw78yb+7cTUj9LWLTnAdA3tQAABASB0+Z6rrCP128tENriNgjySTTBFHYXvdBy1v0PJkKmy595c3qNf8+1IxpCR0P4eoYgQAAIAYohMgYipsr/ug5Q1ankyFLXfY8mYqqscVLowAAAAQQxQAAADEEAUAAAAxRCMgBzo7d52iI+ZMUVlJkes4Pdr1ns5du1zHAQBkGQVAntVUVep/fvrVwDfvGFJarDP2du66ns5dABAxXALIs6suPSXwJ//uDqwZoa9f9CnXMQAAWUYBkGdHzJniOkK/0bkLAKInyXLM/ArqNf++VAwpid6y3bAdT9DyBi1PpsKWO2x5MxXV4woZRgAAAIghOgEiQ1F7nYTteIKWN2h5MhW23GHLm6moHle4MAIAAEAMUQAAABBDFAAAAMQQBQAAADFEAQAAQAxRAAAAEEMUAAAAxBAFAAAAMUQBAABADNEJEBmK2uskbMcTtLxBy5OpsOUOW95MRfW4woURAAAAYogCAACAGOJ2wMhM1F4nYTueoOUNWp5MhS132PJmKqrHFTKMAAAAEEMUAAAAxBAFAAAAMUQBAABADFEAAAAQQxQAAADEEJ0AkaGovU7CdjxByxu0PJkKW+6w5c1UVI8rXBgBAAAghpLUYchE1F4nYTueoOUNWp5MhS132PJmKqrHFTaMAAAAEEMUAAAAxBAFAAAAMUQBAABADFEAAAAQQxQAAADEUJL1GMhI1F4nYTueoOUNWp5MhS132PJmKqrHFTJ0AkSGovY6CdvxBC1v0PJkKmy5w5Y3U1E9rnDhEgAAADFEAQAAQAxRAAAAEEMUAAAAxBAFAAAAMUQBAABADFEAAAAQQxQAAADEEAUAAAAxRCdAZChqr5OwHU/Q8gYtT6bCljtseTMV1eMKF0YAAACIIQoAAABiiAIAAIAY4nbAyEzUXidhO56g5Q1ankyFLXfY8mYqqscVMowAAAAQQxQAAADEEAUAAAAxRAEAAEAMUQAAABBDFAAAAMQQrYCRoai9TsJ2PEHLG7Q8mQpb7rDlzVRUjytcGAEAACCGKAAAAIghCgAAAGKIAgAAgBiiAAAAIIaSzMVEJqL2Ognb8QQtb9DyZCpsucOWN1NRPa6wYQQAAIAYogAAACCGkozFICNRe52E7XiCljdoeTIVttxhy5upqB5XyNAJEBmK2uskbMcTtLxBy5OpsOUOW95MRfW4woVLAAAAxBAFAAAAMeRJSrsOAQAA8irtSWp1nQIAAORVmyepzXUKAACQV22eZBkBAAAgXto9yex2nQIAAORVmydpq+sUAAAgf8yeAmCT6yAAACB/rMyOpJHdRE8m7F/UXiVhO56g5Q1ankyFLXfY8mYqqscVJnaL5zMCAABArFhpq2esNrgOAgAA8sczZqtnPPOG6yAAACCPrLYk/ZT3D+PRDRj7EbVLdmE7nqDlDVqeTIUtd9jyZiqqxxUmVlu8TXVbVsvSDRAAgNhIaJWnxYvTMnrTdRYAAJAfpsN7q+t2wH93mgQAAOSLLSzfvdqTJGP0gus0AAAgLzaseuKO1s4RAN8+7zgMAADIA2O1SpKSkuSp8Pm02q0k4zIUgixq03bDdjxByxu0PJkKW+6w5c1UVI8rHKzRPyTJk6R1z924VeqsCAAAQHQZ2ZekPQVA5xf0jLs4AAAgH3xjXpG6FQAy+qOzNAAAID+8xMtStwIgZXwKAAAAIs1u3PTUTxulbgXA5qdvXSmjt92FAgAAuWRlXu76u7fPtxgFAAAgooy1T3X9/T0FgPX12/zHAQAA+eAb9VwAtKe9X0tqz3siAACQa2k/6e9d8feeAmD7skXvGOlP+c8EAABy7KUtT962q+sfyX2/a2UfsVbH5DcTgs7aaHXuCtvxBC1v0PJkKmy5w5Y3U1E9rhB4svs/vH2/m5AeEX0aAQCIFCvznon+7ysA1j17y1pJT+ctEQAAyLWOjrT5Q/cvvK8AkCRrdU9+8gAAgJyzenL7skXvdP9SjwVAYdLeL6ktL6EAAEBOGWMe2/drPRYAa5++dZtkfpP7SAAAINd8Y993Tu+xAJAka+3duY0DAADy4O3GZ2/5332/2GsB0Oh7v5S0LqeRAABAThlrHlAPq/t6LQC0bFGHsebWXIYCAAA590BPX+y9AJCUKkzfJKkjJ3EAAECuvbVx6c3P9/SNPguALU/ett4Y+8vOkQP+ZOdPWEXtOMN2HEHLF7Q8mQrLz7tL2PJmyvX7cIz+GP9+9fJi6bMAkCTr6yf7ewwAAAge30/c39v39lsAbFp66+8lLctqIgAAkGvLNi+9eXlv39xvASBJxtqrs5cHAADkmpW9pa/vZ1QAbKzb9aCk17OSCAAA5JjZ3d7u39fXIzIqALR4cdr6+oHruQyR+BNWUTvOsB1H0PIFLU+mwvLz7hK2vJly/T4ciz/+fTuW37Gjrx9DZgWApNLy9J2S1mf6eAAA4IY1unl/j8m4AFj1xB2tRvr24CIBAIDcsksbn7vt6f09KuMCQJI2+ombJb054EwAACCnrNX3M3mc6e+GR3/ws+dbqzv6nQiSpDf+4y3XEQAgkCb+63jXEaLgrU11Oydr8eL0/h7YrxEASdp44M57ZO3fAzDDIaR/AAA9c/3+HP4/xtofZHLylwZQAHRu2P5zv58HAAByabNnk7dn+uD+FwCSNj1/+yOyenwgzwUAANlnZa5ev2xRS6aPH1ABIEkmYS+XlBro8wEAQNZsTPqJft27Z8AFwMZnb/+blW4a6PMBAEC22O/259O/NIgCQJIKTOrfJW0bzDYAAMDAWWltSZld1N/nDaoAWPfcXVtl7JWD2QYAABg4I31r1RN3tPb3eYMqACRp03O33yrpD4PdDgAA6C+zfFPdrtsG8sxBFwCSbNokLpXU7+oDAAAMnJH/lUzX/b//uVlS/YEL/4+R+b/Z2h4AAOidNfp543O3zRvo8xPZClI3bPLTLQWFcyWNytY2AQBAj1qNScxtXvdCn7f87UvWRgAkqeoDF8zyrHlWUmE2twsAAN5ljf69cent3xrMNrI2AiBJLeuXbyyvmZ2S0SezuV0AALDXa0N3lC/Ytu25AV3775KNSYDvsWnZuKsl/Snb2wUAAPKt/ItXrvxR22A3lNVLAF1GffDi8dZPvyRpSC62DwBAHBmZH216/rbLsrGtrI8ASNKm5255S0ZfyMW2AQCIqdXpIl2VrY1ldQ5Ad83rl79cVjN7jIzm5GofAADEhO9Zc0bjs7etyNYGczIC0KV0iH+ZpBdzuQ8AAKLOSt/duOy2P2ZzmzktAFY9cUer9b0zJb2Ty/0AABBVxphl1bubBrXkryc5LQAkafMLt66UzGcl2VzvCwCAiGnyPf/sV19d3J7tDedsDkB3zetf/HtZTYMnY4/Mx/4AAIgG+7nNS+/M6tB/l7wUAJLUvGH5n8prGqbLqD5f+wQAILzs9Y3P33l1rrae80sA3diCwqYLjNGyPO4TAIAweqpqd8s3c7mDnDQC6ktNw2cPTCfSz4qbBgEA0JP11mjO5qV3bMzlTvI5AiBJ2vDirat9354o2aZ87xsAgIDbbaw5Pdcnf8lBASBJW164c5nxvVMlDbqXMQAAEeFLdsGmZbc/m4+d5W0S4L6aNyx/q7y24Q1ZnS4HlyIAAAgW+43GZXfemq+9OSsAJKl5/fJXSmtntRpx+2AAQKz9pHHZnf+azx06LQAkqWXD8idLaxoKjNHHXGcBAMCBhxsnNF+ov/0trw3znBcAktSyYfkfymtnFUs63HUWAADyxtolpUPNGTt+/bOOfO86EAWAJDVvWP77stqZ5ZI+6joLAAA5Z/S0bW05af3Sn7W42H1gCgBJat7w0pKymobRMjrUdRYAAHLFWi1NJ1PHbn3xvl2uMgSqAJCk5g3Lf1Va21BppA+7zgIAQLZZq6VFRcnjNz1z5w6XOQJXAEhSy4blj5XWzmw1MqwOAABEyV/SBSnnJ38poAWAJLVseOnJ0jEztxqZE0SfAABAyFnpj2ptOcnlsH93gS0AJKll/UvPldc0rJfRp+SoayEAAFnwi4p3hp62dsXtu10H6RKKT9bVc84/VtJiSUNdZwEAoD+sdMvmIasv1RNPpFxn6S4UBYAkVc8+b4Y15n+MdIDrLAAAZMDKmG81Pn/HQtdBehKaAkCSRjZcVOt56V9JmuU6CwAAfWgzxlyw6fk77nMdpDehuq6+5cXb1neo6Cgj/cp1FgAAerHeWHNUkE/+UshGALoxVXPOu8JI31HIihgAQKT91Zd/5pZl92xwHWR/wloASJKqDl3wKc+ae6w0zHUWAEDMGbuo0ZZ8ScsW5b2v/0CEugCQpJEzz5viJfSgpINdZwEAxFKTseaSTS/eea/rIP0R6D4AmWjZ9NLWqqkNt6da/aEy5oOKQFEDAAgHK7vUps3xm5ff9SfXWforUifLUbPOO9V6ulXSCNdZAACRZo21PxrZ3vqNV19d3O46zEBEqgCQpBEzzxvjJXS3kY52nQUAEEmrrTXnbX7xzj+7DjIYob8EsK/dm17a1bLhtLvLa7dvl3SEpELXmQAAkeAbox/7JclPb3nujtddhxmsyI0AdDd61gV1vrGLZOwxrrMAAELtdc/zLtn4/B1PuA6SLZEuAPYwI+ec91ljda2kCtdhAACh0mqN/e6W1tbvKaTX+nsThwJAUmcbYZnU9410rmJ03ACAgbIPeil9Y9PLd7/lOkkuxO5EOGLWuR/wvMQNkv2w6ywAgED6u5Eub3zh7t+6DpJLsSsAOi30Rs5+42IjfVvSSNdpAAABYLTWWn1ry8TW27R4cdp1nFyLaQHQqap+XrkKi74o4/2zZJkfAADxtFnW/qCouO2GtU8v3u06TL7EugDoMrrhwirf6/imteYLkopd5wEA5MUWI3N10hTfuH7ZohbXYfKNAqCb4TPOHeslEv9ijL1AUonrPACAnHhD0vUFpuT2OJ74u1AA9GB0w4VVvkl/0cp+SbQVBoCoeMFY+5+NFWt/pieeSLkO4xoFQB9GzVhQ5hfos7K6XFKd6zwAgH5rkfSAsWZR44t3Pe06TJBQAGRkoTeq4c2P+8ZeIqu5kgpcJwIA9M5If7Oyd7W1F92889Vbt7nOE0QUAP00suGsWmMKLpTVxWJUAACC5C3JPCDr3bd5+R3LXYcJOgqAgTPVs87/qDX+mZL5tGRrXQcCgLgx0tuSFqd988DWl+56znWeMKEAyIqFXtXslYfJ6kwjnWKlca4TAUBEdUh6UtJjRnqs8cV7XnIdKKwoAHJgxOwF0z3fHiuj4yQdKanUdSYACKm0jF6W1ZPG2D+kCvT7bc/+907XoaKAAiDHJk36/4p2lG//iJH5iPXsB43VhyTVuM4FAAG1SUYvGelp+XrS3134zJYVt+1yHSqKKAAcGP6Bsw5IppIftLKzZM0UGU2VNFV0IQQQHxskvSWrFdbolYS8l5W2L296+e5G18HiggIgMBZ6o2a8caBNaor1VSPjj5Yxo41VtZVqJVXKaoiM9SRToc6fXaXj0ADQpM7r8r6s3pEkGW2VtNUYbbXSFmu11ZPZbI1d5Zv0qiFDilateuKOVpehIf3/17lUIRsiM3YAAAAASUVORK5CYII=">
+<title>New York · July 2026</title>
+<style>
+:root {
+  --bg:       #22252b;
+  --bg-2:     #282b31;
+  --card:     #2e3138;
+  --card-2:   #363940;
+  --card-3:   #404348;
+  --line:     #44474e;
+  --line-l:   #383b42;
+
+  --text:     #eaebee;
+  --text-2:   #a6aab2;
+  --text-3:   #72767e;
+  --text-mute:#4e5158;
+
+  --primary:  #4e8fc4;
+  --primary-d:#1d4d7a;
+  --primary-l:#7ab0d8;
+
+  --act:      #4e8fc4;
+  --act-bg:   #243446;
+  --act-bg2:  #1e2d3e;
+
+  --food:     #c9955a;
+  --food-bg:  #3c2e1e;
+  --food-bg2: #342819;
+
+  --trans:    #6a9ea0;
+  --trans-bg: #1e3335;
+  --trans-bg2:#192c2e;
+
+  --note:     #8a8fb8;
+  --note-bg:  #252840;
+  --warn:     #d97070;
+  --warn-bg:  #3c2424;
+
+  --hotel:    #a08ab0;
+  --hotel-bg: #2e2838;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: rgba(78,143,196,.15); }
+html { font-size: 16px; }
+body {
+  font-family: -apple-system,'Segoe UI','Helvetica Neue',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── ICONS ─── */
+svg { display:inline-block; vertical-align:middle; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+
+/* ─── PAGE HEADER ─── */
+.ph { text-align:center; padding:20px 0 16px; }
+.ph-label { font-size:.7rem; letter-spacing:.22em; text-transform:uppercase; color:var(--text-2); margin-bottom:6px; font-weight:600; }
+.ph-title { font-size:1.85rem; font-weight:800; letter-spacing:-.03em; color:var(--text); }
+.ph-dates { font-size:.85rem; color:var(--text-2); margin-top:6px; }
+
+/* ─── INFO CARD ─── */
+.info-card { background:var(--card); border:1px solid var(--line); border-radius:12px; margin-bottom:12px; padding:14px 16px; }
+.ic-title { font-size:.68rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--text-3); margin-bottom:10px; }
+.ic-row { display:flex; align-items:flex-start; gap:11px; padding:7px 0; border-bottom:1px solid var(--line-l); font-size:.86rem; color:var(--text-2); line-height:1.5; }
+.ic-row:last-child { border-bottom:none; padding-bottom:0; }
+.ic-row svg { flex-shrink:0; margin-top:2px; color:var(--primary-l); width:18px; height:18px; }
+.ic-row b { color:var(--text); font-weight:700; }
+.legend-row { display:flex; gap:14px; flex-wrap:wrap; font-size:.8rem; color:var(--text-2); margin-top:4px; }
+.leg-item { display:flex; align-items:center; gap:7px; }
+.leg-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+
+/* ─── DAY CARD ─── */
+.day-card { background:var(--card); border:1px solid var(--line); border-radius:12px; margin-bottom:12px; overflow:hidden; }
+
+.day-head {
+  padding:16px;
+  background:linear-gradient(135deg, var(--primary-d) 0%, #1a5a8a 100%);
+  display:flex; align-items:center; gap:14px;
+  border-bottom:1px solid var(--line);
+}
+.date-box { text-align:center; min-width:42px; }
+.date-num { font-size:1.65rem; font-weight:800; color:#fff; line-height:1; }
+.date-wd { font-size:.6rem; color:rgba(255,255,255,.7); letter-spacing:.08em; margin-top:4px; font-weight:600; text-transform:uppercase; }
+.day-info { flex:1; min-width:0; }
+.day-title { font-size:1.02rem; font-weight:700; color:#fff; letter-spacing:-.01em; }
+.day-sub { font-size:.76rem; color:rgba(255,255,255,.75); margin-top:3px; }
+
+/* ─── SECTION DIVIDERS ─── */
+.sec {
+  display:flex; align-items:center; gap:8px;
+  padding:9px 14px;
+  font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  border-bottom:1px solid var(--line-l);
+}
+.s-act   { background:var(--act-bg2);   color:var(--act);   border-left:3px solid var(--act); }
+.s-food  { background:var(--food-bg2);  color:var(--food);  border-left:3px solid var(--food); }
+.s-trans { background:var(--trans-bg2); color:var(--trans); border-left:3px solid var(--trans); }
+.s-note  { background:var(--note-bg);   color:var(--note);  border-left:3px solid var(--note); }
+.sec svg { width:13px; height:13px; opacity:.85; }
+
+/* ─── ROWS ─── */
+.row {
+  display:grid;
+  grid-template-columns:46px 24px 1fr;
+  gap:0 8px;
+  padding:10px 14px;
+  border-bottom:1px solid var(--line-l);
+  align-items:start;
+}
+.row:last-of-type { border-bottom:none; }
+.row-t { font-size:.78rem; color:var(--text-3); font-weight:600; padding-top:2px; text-align:right; letter-spacing:.02em; }
+.row-i { color:var(--text-3); padding-top:2px; display:flex; justify-content:center; }
+.row-i svg { width:16px; height:16px; }
+.row-b { min-width:0; }
+.row-name { font-size:.92rem; color:var(--text); font-weight:500; line-height:1.4; }
+.row-desc { font-size:.78rem; color:var(--text-2); margin-top:3px; line-height:1.45; }
+
+.r-act   { background:var(--act-bg); }
+.r-act   .row-i { color:var(--act); }
+.r-act   .row-name { color:var(--text); }
+
+.r-food  { background:var(--food-bg); }
+.r-food  .row-i { color:var(--food); }
+.r-food  .row-name { color:var(--text); }
+
+.r-trans { background:var(--trans-bg); }
+.r-trans .row-i { color:var(--trans); }
+.r-trans .row-name { color:var(--text-2); font-weight:400; }
+
+.r-note  { background:var(--note-bg); }
+.r-note  .row-i { color:var(--note); }
+.r-note  .row-name { color:var(--text-2); font-weight:400; font-style:italic; }
+
+/* ─── TAGS ─── */
+.rtag { display:inline-block; font-size:.65rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; border-radius:4px; padding:2px 7px; margin-top:5px; margin-right:4px; }
+.rt-pre  { background:var(--warn-bg);  color:var(--warn);  }
+.rt-free { background:var(--act-bg);   color:var(--primary-l); }
+.rt-tip  { background:var(--trans-bg); color:var(--trans); }
+
+/* ─── INFO PANEL ─── */
+.info-btn {
+  display:inline-flex; align-items:center; gap:5px;
+  margin-top:6px;
+  font-size:.73rem; font-weight:600; color:var(--primary-l);
+  background:none; border:1px solid rgba(78,143,196,.3); border-radius:5px;
+  padding:3px 9px; cursor:pointer; transition:background .15s;
+}
+.info-btn:hover { background:rgba(78,143,196,.1); }
+.info-panel { display:none; margin:0; padding:0 14px 0 78px; background:var(--bg-2); border-bottom:1px solid var(--line-l); }
+.info-panel.open { display:block; }
+.ip-row { display:flex; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-l); font-size:.82rem; }
+.ip-row:last-child { border-bottom:none; }
+.ip-label { color:var(--text-3); font-weight:600; min-width:52px; flex-shrink:0; }
+.ip-text  { color:var(--text-2); line-height:1.5; }
+.ip-text b { color:var(--text); }
+
+/* ─── HOTEL STRIP ─── */
+.hotel-strip {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:11px 14px;
+  background:var(--hotel-bg);
+  border-top:1px solid var(--line);
+}
+.hotel-strip > svg { color:var(--hotel); width:16px; height:16px; margin-top:2px; flex-shrink:0; }
+.hs-body { flex:1; min-width:0; }
+.hs-name { font-size:.85rem; font-weight:600; color:var(--hotel); }
+.hs-detail { font-size:.76rem; color:var(--text-2); margin-top:2px; }
+.hbadge { font-size:.63rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; border-radius:5px; padding:3px 8px; flex-shrink:0; margin-top:1px; }
+.hb-in   { background:rgba(160,138,176,.18); color:var(--hotel); }
+.hb-out  { background:rgba(160,138,176,.12); color:var(--text-2); }
+.hb-stay { background:rgba(160,138,176,.10); color:var(--text-3); }
+
+/* ─── CHECKLIST ─── */
+.checklist-card { background:var(--card); border:1px solid var(--line); border-radius:12px; margin-bottom:12px; padding:14px 16px; }
+.cl-title { font-size:.68rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--text-3); margin-bottom:12px; }
+.cl-item { display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid var(--line-l); }
+.cl-item:last-child { border-bottom:none; padding-bottom:0; }
+.cl-box { width:18px; height:18px; border:1.5px solid var(--primary); border-radius:4px; flex-shrink:0; margin-top:1px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.cl-box.done { background:var(--primary); }
+.cl-box.done::after { content:'✓'; font-size:11px; color:#fff; font-weight:700; }
+.cl-label { font-size:.86rem; color:var(--text); font-weight:500; }
+.cl-sub { font-size:.76rem; color:var(--text-2); margin-top:2px; }
+
+footer {
+  text-align:center; padding:24px 0 32px;
+  font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute);
+}
+
+.map-link { display:inline-flex; align-items:center; gap:4px; margin-left:8px; font-size:.7rem; font-weight:600; color:var(--primary-l); text-decoration:none; border:1px solid rgba(78,143,196,.25); border-radius:4px; padding:1px 6px; vertical-align:middle; white-space:nowrap; }
+.map-link:hover { background:rgba(78,143,196,.12); }
+.map-link svg { width:11px; height:11px; stroke:var(--primary-l); }
+</style>
+</head>
+<body>
+
+<!-- SVG DEFS -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+  <symbol id="i-pin"    viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-hotel"  viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-plane"  viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
+  <symbol id="i-train"  viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 16l-2 4M20 16l2 4M9 19h6M8 9h.01M16 9h.01"/><line x1="12" y1="3" x2="12" y2="9"/></symbol>
+  <symbol id="i-walk"   viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><path d="M9 10l1 6m4-6l-1 6M9 16l-2 4M15 16l2 4"/><path d="M8 10h8"/></symbol>
+  <symbol id="i-star"   viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="i-food"   viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-museum" viewBox="0 0 24 24"><rect x="3" y="18" width="18" height="3"/><rect x="3" y="10" width="3" height="8"/><rect x="10.5" y="10" width="3" height="8"/><rect x="18" y="10" width="3" height="8"/><polygon points="12 2 2 9 22 9"/></symbol>
+  <symbol id="i-park"   viewBox="0 0 24 24"><path d="M12 22V12M5 17c0-5 7-10 7-10s7 5 7 10"/><path d="M3 22h18"/></symbol>
+  <symbol id="i-shop"   viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></symbol>
+  <symbol id="i-show"   viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></symbol>
+  <symbol id="i-swim"   viewBox="0 0 24 24"><path d="M2 12h2a4 4 0 014-4 4 4 0 014 4 4 4 0 004-4 4 4 0 014 4h2M2 17c2 2 4 2 6 0s4-2 6 0 4 2 6 0"/></symbol>
+  <symbol id="i-ice"    viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></symbol>
+  <symbol id="i-check"  viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-info"   viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
+  <symbol id="i-sky"    viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></symbol>
+  <symbol id="i-bridge" viewBox="0 0 24 24"><path d="M3 17V7M21 17V7M3 12h18M7 7c0 3-4 5-4 5M17 7c0 3 4 5 4 5M7 7h10"/></symbol>
+  <symbol id="i-bag"    viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></symbol>
+  <symbol id="i-clock"  viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+</defs>
+</svg>
+
+<!-- ─── PAGE HEADER ─── -->
+<div class="ph">
+  <div class="ph-label">Family Travel · 2 大 2 小</div>
+  <div class="ph-title">New York</div>
+  <div class="ph-dates">July 5 – 12, 2026 · 8 天行程</div>
+</div>
+
+<!-- ─── INFO CARD ─── -->
+<div class="info-card">
+  <div class="ic-title">行程概覽</div>
+  <div class="ic-row"><svg><use href="#i-hotel"/></svg><div><b>M Social Hotel New York Times Square</b><br>226 West 52nd Street, NY 10019<br>Check-in 7/4 16:00 起 · Check-out 7/12 11:00 前</div></div>
+  <div class="ic-row"><svg><use href="#i-plane"/></svg><div>
+    <b>去程 BR32</b> · EVA AIR · 7/4 TPE T2 <b>19:10</b> 出發 → JFK T1 <b>22:05</b> 抵達（飛行 14h55m）<a href="https://www.google.com/maps/search/?api=1&query=JFK+Airport+Terminal+1+Queens+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>T1 地圖</a><br>
+    <b>回程 BR31</b> · EVA AIR · 7/13 JFK T1 <b>01:25</b> 出發 → TPE T2 05:20 抵達（7/14）<a href="https://www.google.com/maps/search/?api=1&query=Taiwan+Taoyuan+International+Airport+Terminal+2" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>T2 地圖</a><br>
+    行李各 2PC · FF# 3305763694
+  </div></div>
+  <div class="ic-row"><svg><use href="#i-train"/></svg><div><b>交通</b> · OMNY 感應 或 7-Day Unlimited MetroCard<br>American Dream Mall 搭 NJ Transit Bus 351 from Port Authority</div></div>
+  <div class="ic-row" style="padding-bottom:4px;border-bottom:none;">
+    <svg><use href="#i-info"/></svg>
+    <div>
+      <div style="margin-bottom:8px;font-weight:600;color:var(--text)">色碼說明</div>
+      <div class="legend-row">
+        <div class="leg-item"><div class="leg-dot" style="background:var(--act)"></div>景點活動</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--food)"></div>餐廳用餐</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--trans)"></div>交通移動</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--note)"></div>備注提醒</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ARRIVAL · 7/4 ═══ -->
+<div class="day-card">
+  <div class="day-head" style="background:linear-gradient(135deg,#1a3d30 0%,#1f4f3a 100%);">
+    <div class="date-box"><div class="date-num">4</div><div class="date-wd">SAT · 7月</div></div>
+    <div class="day-info"><div class="day-title">抵達紐約</div><div class="day-sub">2026-07-04 · Arrival Day</div></div>
+  </div>
+
+  <div class="sec s-trans" style="border-left-color:#6db895;color:#6db895;background:#1a2e22;"><svg><use href="#i-plane"/></svg>去程航班</div>
+  <div class="row r-trans">
+    <div class="row-t">19:10</div>
+    <div class="row-i"><svg><use href="#i-plane"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">BR32 EVA AIR 起飛 — 桃園 T2<a href="https://www.google.com/maps/search/?api=1&query=Taiwan+Taoyuan+International+Airport+Terminal+2" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>T2 地圖</a></div>
+      <div class="row-desc">台灣桃園國際機場 Terminal 2 · Class Q · Seat 54C · 行李 2PC</div>
+    </div>
+  </div>
+  <div class="row r-trans">
+    <div class="row-t">22:05</div>
+    <div class="row-i"><svg><use href="#i-plane"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">BR32 落地 — JFK Terminal 1<a href="https://www.google.com/maps/search/?api=1&query=JFK+Airport+Terminal+1+Queens+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>T1 地圖</a></div>
+      <div class="row-desc">John F. Kennedy International Airport · T1 · 飛行 14h 55m</div>
+    </div>
+  </div>
+  <div class="row r-trans">
+    <div class="row-t">22:30</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">AirTrain → Jamaica → E 線 → Times Square</div>
+      <div class="row-desc">AirTrain 至 Jamaica Station → 搭 E 線 · 全程約 70 分鐘</div>
+    </div>
+  </div>
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body">
+      <div class="hs-name">M Social Hotel New York Times Square<a href="https://www.google.com/maps/place/?q=place_id:ChIJfUjfDstYwokRV2zVbFJYTDs" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>飯店地圖</a></div>
+      <div class="hs-detail">226 West 52nd Street · 深夜抵達，前台 24 小時 · Check-in 7/4 16:00 起</div>
+    </div>
+    <span class="hbadge hb-in">入住</span>
+  </div>
+</div>
+
+<!-- ═══ DAY 1 · 7/5 ═══ -->
+<div class="day-card">
+  <div class="day-head">
+    <div class="date-box"><div class="date-num">5</div><div class="date-wd">SAT · 7月</div></div>
+    <div class="day-info"><div class="day-title">Yankee Stadium</div><div class="day-sub">2026-07-05 · Day 1</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往球場</div>
+  <div class="row r-trans">
+    <div class="row-t">08:45</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">飯店出發，搭 D 線前往 Bronx</div><div class="row-desc">Times Square → 161st St-Yankee Stadium · 約 30 分鐘</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-star"/></svg>球賽</div>
+  <div class="row r-act">
+    <div class="row-t">09:20</div>
+    <div class="row-i"><svg><use href="#i-camera"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">Yankee Stadium — Monument Park 導覽<a href="https://www.google.com/maps/place/?q=place_id:ChIJcWnnWiz0wokRCB6aVdnDQEk" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">1 E 161st St, Bronx · 比賽前 1 小時入場</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">1 E 161st St, Bronx, NY 10451</div></div>
+    <div class="ip-row"><div class="ip-label">交通</div><div class="ip-text">地鐵 B/D/4 線，161st St-Yankee Stadium 站</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">Monument Park（球員紀念碑）賽前開放，提早入場值得</div></div>
+  </div>
+  <div class="row r-food">
+    <div class="row-t">12:00</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b"><div class="row-name">午餐 — 球場美食</div><div class="row-desc">美式球場 · Yankee Stadium 內</div></div>
+  </div>
+  <div class="row r-trans">
+    <div class="row-t">賽後</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">搭地鐵返回 Midtown</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
+  <div class="row r-food">
+    <div class="row-t">19:00</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">晚餐 — The Halal Guys<a href="https://www.google.com/maps/search/?api=1&query=The+Halal+Guys+46th+St+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">中東 Halal · 46th St & 6th Ave · 步行可達</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">307 W 46th St（室內版）或 53rd & 6th（路邊攤）</div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">紐約最著名街頭 Halal，白醬拌飯 / 雞肉捲超人氣</div></div>
+    <div class="ip-row"><div class="ip-label">價格</div><div class="ip-text">$8–14，快速方便</div></div>
+  </div>
+
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">226 West 52nd Street · 步行 10 分鐘回飯店</div></div>
+    <span class="hbadge hb-stay">住宿中</span>
+  </div>
+</div>
+
+<!-- ═══ DAY 2 · 7/6 ═══ -->
+<div class="day-card">
+  <div class="day-head">
+    <div class="date-box"><div class="date-num">6</div><div class="date-wd">SUN · 7月</div></div>
+    <div class="day-info"><div class="day-title">Museum Day</div><div class="day-sub">2026-07-06 · Day 2 · AMNH → Met → Central Park</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Upper West Side</div>
+  <div class="row r-trans">
+    <div class="row-t">08:50</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">搭 B/C 線至 81st St</div><div class="row-desc">Times Square → 81st St-Museum of Natural History · 約 15 分</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-museum"/></svg>上午博物館</div>
+  <div class="row r-act">
+    <div class="row-t">10:00</div>
+    <div class="row-i"><svg><use href="#i-museum"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">American Museum of Natural History<a href="https://www.google.com/maps/place/?q=place_id:ChIJCXoPsPRYwokRsV1MYnKBfaI" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">恐龍廳 · 藍鯨廳 · 天文館 · 200 Central Park W</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">耗時</div><div class="ip-text">建議 2 小時，有孩子可能更久</div></div>
+    <div class="ip-row"><div class="ip-label">重點</div><div class="ip-text">恐龍廳（第四樓）·藍鯨模型（海洋廳）· Rose Center 天文館</div></div>
+    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">成人 $28，孩童 $16，建議提前網購</div></div>
+  </div>
+  <div class="row r-food">
+    <div class="row-t">12:15</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b"><div class="row-name">午餐 — Shake Shack<a href="https://www.google.com/maps/search/?api=1&query=Shake+Shack+Upper+West+Side+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">漢堡 · Upper West Side 分店</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-museum"/></svg>下午博物館</div>
+  <div class="row r-act">
+    <div class="row-t">13:30</div>
+    <div class="row-i"><svg><use href="#i-museum"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">The Metropolitan Museum of Art<a href="https://www.google.com/maps/place/?q=place_id:ChIJb8Jg9pZYwokR-qHGtvSkLzs" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">埃及廳 · Temple of Dendur · 1000 5th Ave</div>
+      <span class="rtag rt-tip">週三公休，今日週日正常</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">挑重點：埃及廳 Temple of Dendur + 希臘羅馬廳，1.5–2 小時</div></div>
+    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">成人 $30，孩童免費（12歲以下）</div></div>
+    <div class="ip-row"><div class="ip-label">注意</div><div class="ip-text"><b>週三公休</b>，7/6 為週日無問題</div></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">15:30</div>
+    <div class="row-i"><svg><use href="#i-park"/></svg></div>
+    <div class="row-b"><div class="row-name">Central Park — Bethesda Fountain 散步<a href="https://www.google.com/maps/search/?api=1&query=Bethesda+Fountain+Central+Park+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">兩館之間步行可達 · 孩子跑跑放電</div><span class="rtag rt-free">免費</span></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
+  <div class="row r-food">
+    <div class="row-t">18:30</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">晚餐 — Jacob's Pickles<a href="https://www.google.com/maps/search/?api=1&query=Jacobs+Pickles+509+Amsterdam+Ave+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">美式南方菜 · Upper West Side · 炸雞 / 餅乾招牌</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">509 Amsterdam Ave, Upper West Side</div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">美式南方料理，份量大、適合家庭。醃黃瓜（Pickles）是招牌</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">尖峰時段排隊，建議 6pm 前到</div></div>
+  </div>
+
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">搭 B/C 線從 81st St 返回 Times Square</div></div>
+    <span class="hbadge hb-stay">住宿中</span>
+  </div>
+</div>
+
+<!-- ═══ DAY 3 · 7/7 ═══ -->
+<div class="day-card">
+  <div class="day-head">
+    <div class="date-box"><div class="date-num">7</div><div class="date-wd">MON · 7月</div></div>
+    <div class="day-info"><div class="day-title">Landmarks</div><div class="day-sub">2026-07-07 · Day 3 · 自由女神 → 9/11</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Battery Park</div>
+  <div class="row r-trans">
+    <div class="row-t">08:00</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">飯店出發，搭 1 線至 South Ferry</div><div class="row-desc">最早出發日 · 約 25 分鐘 · 08:45 抵達 Battery Park</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-camera"/></svg>自由女神</div>
+  <div class="row r-act">
+    <div class="row-t">09:00</div>
+    <div class="row-i"><svg><use href="#i-plane"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">Statue of Liberty — 第一班渡輪出發<a href="https://www.google.com/maps/place/?q=place_id:ChIJPTacEpBQwokRKwIlDXelxkA" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">Liberty Island · Statue Cruises</div>
+      <span class="rtag rt-pre">提前購票 nps.gov</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">預訂</div><div class="ip-text"><b>務必提前 2–4 週於 nps.gov 購票</b>，夏季常售罄</div></div>
+    <div class="ip-row"><div class="ip-label">票種</div><div class="ip-text">Reserve Only（登島）· Crown（登頂，需提早訂）</div></div>
+    <div class="ip-row"><div class="ip-label">耗時</div><div class="ip-text">Liberty Island 約 1 小時 + Ellis Island 約 45 分</div></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">11:00</div>
+    <div class="row-i"><svg><use href="#i-museum"/></svg></div>
+    <div class="row-b"><div class="row-name">Ellis Island — 移民博物館<a href="https://www.google.com/maps/search/?api=1&query=Ellis+Island+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">同一張票含 Ellis Island · 渡輪接駁</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>午餐</div>
+  <div class="row r-food">
+    <div class="row-t">12:45</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">午餐 — Katz's Delicatessen<a href="https://www.google.com/maps/place/?q=place_id:ChIJCar0f49ZwokR6ozLV-dHNTE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">猶太燻肉 · 205 E Houston St · 1888 年創立</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text">Pastrami on Rye · 份量超大可共食</div></div>
+    <div class="ip-row"><div class="ip-label">注意</div><div class="ip-text">入場拿票、結帳交票，勿搞丟</div></div>
+    <div class="ip-row"><div class="ip-label">交通</div><div class="ip-text">渡輪回 Battery Park 後搭 4/5 至 Fulton，轉 J 至 Essex St</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-museum"/></svg>下午</div>
+  <div class="row r-act">
+    <div class="row-t">14:30</div>
+    <div class="row-i"><svg><use href="#i-museum"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">9/11 Memorial & Museum<a href="https://www.google.com/maps/place/?q=place_id:ChIJRcvoOxpawokR7R4dQMXMMPQ" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">180 Greenwich St · 耗時 2–3 小時</div>
+      <span class="rtag rt-pre">週二公休，今日週一正常</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">注意</div><div class="ip-text">情感衝擊大，孩子需心理準備；<b>週二公休</b>，7/7 週一無問題</div></div>
+    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">成人 $33，孩童 $21（7 歲以下免費）</div></div>
+    <div class="ip-row"><div class="ip-label">耗時</div><div class="ip-text">博物館 2–3 小時；紀念池外觀免費</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
+  <div class="row r-food">
+    <div class="row-t">19:00</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b"><div class="row-name">晚餐 — Koreatown<a href="https://www.google.com/maps/search/?api=1&query=Koreatown+32nd+Street+Manhattan+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">韓式烤肉 · 32nd St, Midtown · 回程順路</div></div>
+  </div>
+
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">Koreatown 步行 5 分鐘回飯店</div></div>
+    <span class="hbadge hb-stay">住宿中</span>
+  </div>
+</div>
+
+<!-- ═══ DAY 4 · 7/8 ═══ -->
+<div class="day-card">
+  <div class="day-head">
+    <div class="date-box"><div class="date-num">8</div><div class="date-wd">TUE · 7月</div></div>
+    <div class="day-info"><div class="day-title">Midtown Classic</div><div class="day-sub">2026-07-08 · Day 4 · 步行為主</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-walk"/></svg>上午步行</div>
+  <div class="row r-act">
+    <div class="row-t">09:20</div>
+    <div class="row-i"><svg><use href="#i-camera"/></svg></div>
+    <div class="row-b"><div class="row-name">第五大道漫步 + St. Patrick's Cathedral<a href="https://www.google.com/maps/search/?api=1&query=St+Patricks+Cathedral+5th+Ave+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">5th Ave · 從飯店步行出發 · 哥德式大教堂免費入場</div><span class="rtag rt-free">免費</span></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">10:30</div>
+    <div class="row-i"><svg><use href="#i-star"/></svg></div>
+    <div class="row-b"><div class="row-name">Rockefeller Center 廣場<a href="https://www.google.com/maps/place/?q=place_id:ChIJ9U1mz_5YwokRosza1aAk0jM" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">45 Rockefeller Plaza · NBC Studio · 廣場免費</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>午餐</div>
+  <div class="row r-food">
+    <div class="row-t">12:30</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">午餐 — Los Tacos No. 1<a href="https://www.google.com/maps/search/?api=1&query=Los+Tacos+No+1+Chelsea+Market+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">墨西哥 · Chelsea Market 分店 · 75 9th Ave</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text">Carne Asada Taco · 簡單直接超好吃</div></div>
+    <div class="ip-row"><div class="ip-label">價格</div><div class="ip-text">每個 Taco $5–7，快速便宜</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-museum"/></svg>下午</div>
+  <div class="row r-act">
+    <div class="row-t">14:00</div>
+    <div class="row-i"><svg><use href="#i-museum"/></svg></div>
+    <div class="row-b"><div class="row-name">Grand Central Terminal — 穹頂大廳<a href="https://www.google.com/maps/search/?api=1&query=Grand+Central+Terminal+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">42nd St & Park Ave · 免費參觀 · 仰頭看星空穹頂</div><span class="rtag rt-free">免費</span></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">16:00</div>
+    <div class="row-i"><svg><use href="#i-sky"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">Top of the Rock 觀景台<a href="https://www.google.com/maps/search/?api=1&query=Top+of+the+Rock+30+Rockefeller+Plaza+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">30 Rockefeller Plaza · 訂黃昏場，可看到日落</div>
+      <span class="rtag rt-pre">提前網購</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">俯瞰 Empire State Building 的角度，比 Edge 更經典</div></div>
+    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">成人 $40，孩童 $34</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">訂日落前 1 小時的場次，光線最好</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
+  <div class="row r-food">
+    <div class="row-t">19:00</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">晚餐 — Carmine's<a href="https://www.google.com/maps/search/?api=1&query=Carmines+Italian+200+W+44th+St+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">義式家庭份量 · 200 W 44th St · 步行可達</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">Southern Italian，份量超大（設計給桌共食），適合家庭</div></div>
+    <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text">Rigatoni · Veal Parmigiana</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">建議提前訂位或開門就到</div></div>
+  </div>
+
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">Carmine's 步行 5 分鐘回飯店</div></div>
+    <span class="hbadge hb-stay">住宿中</span>
+  </div>
+</div>
+
+<!-- ═══ DAY 5 · 7/9 ═══ -->
+<div class="day-card">
+  <div class="day-head">
+    <div class="date-box"><div class="date-num">9</div><div class="date-wd">WED · 7月</div></div>
+    <div class="day-info"><div class="day-title">American Dream Mall</div><div class="day-sub">2026-07-09 · Day 5 · 水樂園日 · 帶泳衣！</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 NJ</div>
+  <div class="row r-note">
+    <div class="row-t">08:30</div>
+    <div class="row-i"><svg><use href="#i-bag"/></svg></div>
+    <div class="row-b"><div class="row-name">準備行李：泳衣 + 換洗衣物 + 防水袋</div></div>
+  </div>
+  <div class="row r-trans">
+    <div class="row-t">08:45</div>
+    <div class="row-i"><svg><use href="#i-walk"/></svg></div>
+    <div class="row-b"><div class="row-name">步行至 Port Authority Bus Terminal<a href="https://www.google.com/maps/search/?api=1&query=Port+Authority+Bus+Terminal+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">飯店步行 5 分鐘 · 42nd St & 8th Ave</div></div>
+  </div>
+  <div class="row r-trans">
+    <div class="row-t">09:00</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">NJ Transit Bus 351 → American Dream Mall</div><div class="row-desc">約 30 分鐘 · 09:30 抵達</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-swim"/></svg>Mall 全天</div>
+  <div class="row r-act">
+    <div class="row-t">09:30</div>
+    <div class="row-i"><svg><use href="#i-shop"/></svg></div>
+    <div class="row-b"><div class="row-name">American Dream Mall 等候開門<a href="https://www.google.com/maps/place/?q=place_id:ChIJ3U3JLY35wokRfD602TzR6EE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">East Rutherford, NJ · Mall 11:00 開門</div></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">11:00</div>
+    <div class="row-i"><svg><use href="#i-star"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">Nickelodeon Universe 主題樂園<a href="https://www.google.com/maps/place/?q=place_id:ChIJ3U3JLY35wokRfD602TzR6EE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">室內主題公園 · 摩天輪 · 雲霄飛車</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">美國第二大室內 Mall，含 Nickelodeon 樂園、室內滑雪、摩天輪</div></div>
+    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">All-Day Pass 約 $45–55，含大部分設施</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">提前網購夏季熱門，水樂園分開計費</div></div>
+  </div>
+  <div class="row r-food">
+    <div class="row-t">12:30</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b"><div class="row-name">午餐 — Mall 美食廣場</div><div class="row-desc">Mall 速食 · 補充體力備戰水樂園</div></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">14:00</div>
+    <div class="row-i"><svg><use href="#i-swim"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">DreamWorks Water Park<a href="https://www.google.com/maps/place/?q=place_id:ChIJ3U3JLY35wokRfD602TzR6EE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">泳衣已備好 · 室內水樂園 · 全年恆溫</div>
+      <span class="rtag rt-pre">建議提前購票</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">室內水樂園，含滑水道、波浪池、兒童戲水區</div></div>
+    <div class="ip-row"><div class="ip-label">注意</div><div class="ip-text">帶泳衣、換洗衣物、防水袋；更衣室 + 置物櫃 on-site</div></div>
+    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">約 $40–60/人，夏季需提前預訂</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>返回 Times Square</div>
+  <div class="row r-trans">
+    <div class="row-t">17:30</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">搭 NJ Transit Bus 返回 Port Authority</div><div class="row-desc">約 30 分鐘返回 Manhattan</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
+  <div class="row r-food">
+    <div class="row-t">18:30</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">晚餐 — Mercado Little Spain<a href="https://www.google.com/maps/search/?api=1&query=Mercado+Little+Spain+Hudson+Yards+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">西班牙 Tapas · Hudson Yards · José Andrés 主廚</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">10 Hudson Yards, 10th Floor</div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">西班牙美食市集風格，多種 Tapas 共食，適合家庭</div></div>
+    <div class="ip-row"><div class="ip-label">交通</div><div class="ip-text">Port Authority 搭 7 線一站至 Hudson Yards 即可</div></div>
+  </div>
+
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">Hudson Yards → Times Square 搭 7 線一站</div></div>
+    <span class="hbadge hb-stay">住宿中</span>
+  </div>
+</div>
+
+<!-- ═══ DAY 6 · 7/10 ═══ -->
+<div class="day-card">
+  <div class="day-head">
+    <div class="date-box"><div class="date-num">10</div><div class="date-wd">THU · 7月</div></div>
+    <div class="day-info"><div class="day-title">Keens + Lion King</div><div class="day-sub">2026-07-10 · Day 6 · 重頭戲在晚上</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-park"/></svg>輕鬆上午</div>
+  <div class="row r-act">
+    <div class="row-t">09:00</div>
+    <div class="row-i"><svg><use href="#i-park"/></svg></div>
+    <div class="row-b"><div class="row-name">Bryant Park 早晨散步<a href="https://www.google.com/maps/search/?api=1&query=Bryant+Park+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">6th Ave & 42nd St · 步行即達 · 免費</div><span class="rtag rt-free">免費</span></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">10:00</div>
+    <div class="row-i"><svg><use href="#i-museum"/></svg></div>
+    <div class="row-b"><div class="row-name">紐約公共圖書館<a href="https://www.google.com/maps/search/?api=1&query=New+York+Public+Library+5th+Ave+42nd+St" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">5th Ave & 42nd St · 大理石閱覽室 · 免費入場</div><span class="rtag rt-free">免費</span></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>午餐</div>
+  <div class="row r-food">
+    <div class="row-t">12:30</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b"><div class="row-name">午餐 — Num Pang<a href="https://www.google.com/maps/search/?api=1&query=Num+Pang+Sandwich+Bryant+Park+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">柬埔寨三明治 · Bryant Park 旁 · 輕食備戰晚上</div></div>
+  </div>
+  <div class="row r-note">
+    <div class="row-t">14:00</div>
+    <div class="row-i"><svg><use href="#i-clock"/></svg></div>
+    <div class="row-b"><div class="row-name">飯店休息，備戰晚上重頭戲</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐 — 頂級牛排</div>
+  <div class="row r-food">
+    <div class="row-t">17:30</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">晚餐 — Keens Steakhouse<a href="https://www.google.com/maps/place/?q=place_id:ChIJ5804KalZwokRzGll2Rm7nag" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">頂級牛排 · 72 W 36th St · 1885 年創立 · 步行 10 分</div>
+      <span class="rtag rt-pre">必須提前訂位</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text"><b>Mutton Chop</b>（羊排）是 Keens 獨特招牌，必點</div></div>
+    <div class="ip-row"><div class="ip-label">氛圍</div><div class="ip-text">天花板掛滿煙斗，百年歷史，非常有氛圍</div></div>
+    <div class="ip-row"><div class="ip-label">訂位</div><div class="ip-text"><b>週六只開晚餐</b>；今日週四正常午晚餐。務必訂位</div></div>
+    <div class="ip-row"><div class="ip-label">預算</div><div class="ip-text">人均 $80–120，含前菜酒水</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-show"/></svg>百老匯</div>
+  <div class="row r-act">
+    <div class="row-t">20:00</div>
+    <div class="row-i"><svg><use href="#i-show"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">The Lion King — 百老匯<a href="https://www.google.com/maps/search/?api=1&query=Minskoff+Theatre+200+W+45th+St+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">Minskoff Theatre · 200 W 45th St · Mezzanine E101–104 · 散場約 22:30</div>
+      <span class="rtag" style="background:#1a3d1a;color:#6db895;">已確認訂票</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">劇場</div><div class="ip-text">Minskoff Theatre · 200 W 45th St, New York, NY 10036</div></div>
+    <div class="ip-row"><div class="ip-label">場次</div><div class="ip-text">Friday, July 10, 2026 · <b>20:00</b> 開演</div></div>
+    <div class="ip-row"><div class="ip-label">座位</div><div class="ip-text"><b>Mezzanine E101–104</b>（走道旁，中層前段中間區，視野最佳）</div></div>
+    <div class="ip-row"><div class="ip-label">票數</div><div class="ip-text">4 張 · $139 × 4 = $556 · 總計 $771.44（含手續費）</div></div>
+    <div class="ip-row"><div class="ip-label">取票</div><div class="ip-text">Mobile Tickets · 7/9 20:00 後發送至 snako.tw@gmail.com</div></div>
+    <div class="ip-row"><div class="ip-label">訂單</div><div class="ip-text">Order # 207013772-8380115 · Box Office # TGMQ6JG</div></div>
+    <div class="ip-row"><div class="ip-label">時長</div><div class="ip-text">約 2.5 小時含中場休息，散場約 22:30 · 步行 5 分回飯店</div></div>
+  </div>
+
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">百老匯散場步行 5 分鐘回飯店</div></div>
+    <span class="hbadge hb-stay">住宿中</span>
+  </div>
+</div>
+
+<!-- ═══ DAY 7 · 7/11 ═══ -->
+<div class="day-card">
+  <div class="day-head">
+    <div class="date-box"><div class="date-num">11</div><div class="date-wd">FRI · 7月</div></div>
+    <div class="day-info"><div class="day-title">Village + Brooklyn</div><div class="day-sub">2026-07-11 · Day 7 · 文青漫步</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Greenwich Village</div>
+  <div class="row r-trans">
+    <div class="row-t">08:50</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">搭 A/C/E 線至 14th St</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-walk"/></svg>Greenwich Village</div>
+  <div class="row r-act">
+    <div class="row-t">09:15</div>
+    <div class="row-i"><svg><use href="#i-park"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">Washington Square Park + Bleecker St 漫步<a href="https://www.google.com/maps/search/?api=1&query=Washington+Square+Park+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">Greenwich Village · 咖啡館 · 街頭表演 · 自由氛圍</div>
+      <span class="rtag rt-free">免費</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">路線</div><div class="ip-text">Washington Square Park → Bleecker St 精品咖啡 → MacDougal St</div></div>
+    <div class="ip-row"><div class="ip-label">推薦</div><div class="ip-text">Joe Coffee / Partners Coffee 品杯咖啡 · 早晨光線最好</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Williamsburg</div>
+  <div class="row r-trans">
+    <div class="row-t">11:30</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">搭 L 線至 Bedford Ave（Williamsburg）</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>午餐</div>
+  <div class="row r-food">
+    <div class="row-t">12:00</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">午餐 — L'Industrie Pizzeria<a href="https://www.google.com/maps/place/?q=place_id:ChIJQ-hJIuBbwokRRUdquw_5w5U" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">精品薄皮 Pizza · 254 S 2nd St, Williamsburg</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text">Burrata Pizza · Fig & Bacon — 全紐約評分最高之一</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">開門即到，排隊快；外帶也可</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 DUMBO</div>
+  <div class="row r-trans">
+    <div class="row-t">13:30</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">搭 F 線至 York St（DUMBO）</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-bridge"/></svg>Brooklyn</div>
+  <div class="row r-act">
+    <div class="row-t">14:00</div>
+    <div class="row-i"><svg><use href="#i-bridge"/></svg></div>
+    <div class="row-b"><div class="row-name">Brooklyn Bridge Park<a href="https://www.google.com/maps/place/?q=place_id:ChIJjaFpo0ZawokRBcOFUZ13CaE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">拍橋景 · 草坪奔跑 · Manhattan 天際線最佳視角</div><span class="rtag rt-free">免費</span></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
+  <div class="row r-food">
+    <div class="row-t">18:00</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">晚餐 — Gran Electrica<a href="https://www.google.com/maps/search/?api=1&query=Gran+Electrica+5+Front+St+DUMBO+Brooklyn" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">墨西哥菜 · DUMBO 就地解決 · 露天位置可看橋景</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">5 Front St, DUMBO, Brooklyn</div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">露天座位可看 Manhattan Bridge，夏日傍晚氛圍極佳</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">推薦 Tacos al Pastor + Guacamole</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>返回</div>
+  <div class="row r-trans">
+    <div class="row-t">19:30</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">搭 A/C 線返回 Times Square</div></div>
+  </div>
+
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">明日 11:00 前退房 · 行李今晚整理好</div></div>
+    <span class="hbadge hb-stay">最後一夜</span>
+  </div>
+</div>
+
+<!-- ═══ DAY 8 · 7/12 ═══ -->
+<div class="day-card">
+  <div class="day-head">
+    <div class="date-box"><div class="date-num">12</div><div class="date-wd">SAT · 7月</div></div>
+    <div class="day-info"><div class="day-title">West Side → JFK</div><div class="day-sub">2026-07-12 · Day 8 · 由北往南 · 21:00 出發機場</div></div>
+  </div>
+
+  <div class="sec s-note"><svg><use href="#i-bag"/></svg>退房</div>
+  <div class="row r-note">
+    <div class="row-t">08:30</div>
+    <div class="row-i"><svg><use href="#i-hotel"/></svg></div>
+    <div class="row-b"><div class="row-name">Check out，行李寄放飯店</div><div class="row-desc">確認行李可寄放至 20:30 取件</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-sky"/></svg>West Side 連線（由北往南）</div>
+  <div class="row r-act">
+    <div class="row-t">09:00</div>
+    <div class="row-i"><svg><use href="#i-sky"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">Edge NYC 觀景台<a href="https://www.google.com/maps/place/?q=place_id:ChIJ3aqq5Q1ZwokRb9hLO7Gyxgw" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">30 Hudson Yards · 步行 15 分 · 週六 8am 開</div>
+      <span class="rtag rt-pre">提前網購</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">玻璃地板外傾觀景台，視野極廣，可看 Statue of Liberty</div></div>
+    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">成人 $38，孩童 $32</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">早上光線從東照來，早場最清晰；提前網購省排隊</div></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">10:45</div>
+    <div class="row-i"><svg><use href="#i-walk"/></svg></div>
+    <div class="row-b"><div class="row-name">High Line — 34th St 北端入口<a href="https://www.google.com/maps/place/?q=place_id:ChIJ5bQPhMdZwokRkTwKhVxhP1g" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">由北往南步行至 14th St · 免費 · 約 1 小時 · 沿途藝術裝置</div><span class="rtag rt-free">免費</span></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">12:00</div>
+    <div class="row-i"><svg><use href="#i-park"/></svg></div>
+    <div class="row-b"><div class="row-name">Little Island — 河景浮島公園<a href="https://www.google.com/maps/place/?q=place_id:ChIJL-CJmTFZwokRsPcqje_bn7w" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">Pier 55, Hudson River · High Line 南端步行 5 分 · 免費</div><span class="rtag rt-free">免費</span></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>午餐</div>
+  <div class="row r-food">
+    <div class="row-t">12:30</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">午餐 — Lobster Place<a href="https://www.google.com/maps/place/?q=place_id:ChIJw2lMFL9ZwokRXmhKDX7Chxs" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">海鮮龍蝦捲 · Chelsea Market · 75 9th Ave</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text">Lobster Roll · 熱版（奶油）或冷版（美乃滋）都推薦</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">開門就去排隊，夏季中午非常熱門</div></div>
+  </div>
+
+  <div class="row r-act">
+    <div class="row-t">14:00</div>
+    <div class="row-i"><svg><use href="#i-ice"/></svg></div>
+    <div class="row-b"><div class="row-name">Van Leeuwen Ice Cream — 旅程甜點收尾<a href="https://www.google.com/maps/place/?q=place_id:ChIJ6TpSo1pZwokRk1_rftbqXxY" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">Chelsea Market 附近 · Honeycomb 口味招牌</div></div>
+  </div>
+
+  <div class="sec s-note"><svg><use href="#i-clock"/></svg>下午緩衝</div>
+  <div class="row r-note">
+    <div class="row-t">14:30</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b"><div class="row-name">搭地鐵回飯店，休息 / 最後 Times Square 購物</div></div>
+  </div>
+
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>最後晚餐</div>
+  <div class="row r-food">
+    <div class="row-t">19:00</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">晚餐 — Ichiran<a href="https://www.google.com/maps/search/?api=1&query=Ichiran+Ramen+132+W+31st+St+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">日式豚骨拉麵 · W 31st St · 格子獨立座位</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">132 W 31st St, Midtown · 步行 10 分</div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">博多豚骨，獨立格子座位，完全客製化辣度 / 麵硬度。孩子新奇體驗</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">約 20:30 前結束，留時間回飯店取行李，21:00 出發 JFK</div></div>
+  </div>
+
+  <div class="sec s-trans"><svg><use href="#i-plane"/></svg>前往 JFK</div>
+  <div class="row r-note">
+    <div class="row-t">20:30</div>
+    <div class="row-i"><svg><use href="#i-bag"/></svg></div>
+    <div class="row-b"><div class="row-name">回飯店取行李</div></div>
+  </div>
+  <div class="row r-trans">
+    <div class="row-t">21:00</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">出發 JFK — E 線 → Jamaica → AirTrain<a href="https://www.google.com/maps/search/?api=1&query=Jamaica+Station+AirTrain+JFK+Queens+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">全程約 70 分鐘 · 22:15 抵達 JFK T1</div>
+    </div>
+  </div>
+  <div class="row r-note">
+    <div class="row-t">22:15</div>
+    <div class="row-i"><svg><use href="#i-plane"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">抵達 JFK Terminal 1 · Check-in &amp; 安檢<a href="https://www.google.com/maps/search/?api=1&query=JFK+Airport+Terminal+1+Queens+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>T1 地圖</a></div>
+      <div class="row-desc">EVA AIR 櫃台 · T1 · 行李 2PC · 建議至少 2.5 小時前到</div>
+    </div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">01:25</div>
+    <div class="row-i"><svg><use href="#i-plane"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">BR31 EVA AIR 起飛 — JFK T1 → 桃園 T2<a href="https://www.google.com/maps/search/?api=1&query=Taiwan+Taoyuan+International+Airport+Terminal+2" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>T2 地圖</a></div>
+      <div class="row-desc">Class W · 抵達桃園 T2 05:20（7/14）· 再見，紐約 ✈</div>
+    </div>
+  </div>
+
+  <div class="hotel-strip">
+    <svg><use href="#i-hotel"/></svg>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">退房 11:00 · 行李寄放 · 20:30 取件後出發 JFK</div></div>
+    <span class="hbadge hb-out">退房日</span>
+  </div>
+</div>
+
+<!-- ─── CHECKLIST ─── -->
+<div class="checklist-card">
+  <div class="cl-title">出發前預訂清單</div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">自由女神渡輪票</div><div class="cl-sub">nps.gov · 建議出發前 4 週購買 · 夏季極熱門</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box done"></div>
+    <div><div class="cl-label">The Lion King 百老匯票</div><div class="cl-sub">✓ 已訂 · Mezzanine E101–104 · 4 張 $771.44 · Order# 207013772-8380115</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">Keens Steakhouse 訂位</div><div class="cl-sub">7/10 晚餐 · keenssteakhouse.com · 必須提前</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">Edge NYC 門票</div><div class="cl-sub">7/12 · edgenyc.com · 提前購省排隊</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">Top of the Rock 門票</div><div class="cl-sub">7/8 黃昏場 · rockefellercenter.com</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">DreamWorks Water Park 票</div><div class="cl-sub">7/9 · americandream.com · 夏季熱門需提前</div></div>
+  </div>
+</div>
+
+<footer>New York · July 5–12, 2025 · M Social Hotel Times Square</footer>
+
+<script>
+function toggleInfo(btn) {
+  const panel = btn.closest('.row-b').nextElementSibling;
+  if (!panel || !panel.classList.contains('info-panel')) return;
+  const open = panel.classList.toggle('open');
+  btn.textContent = open ? '收起' : '詳細資訊';
+}
+</script>
+<script>
+try{
+  const m={name:'紐約行程',short_name:'紐約行程',start_url:'./',scope:'./',display:'standalone',background_color:'#22252b',theme_color:'#22252b',orientation:'portrait',icons:[{src:"data:image/png;base64,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",sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
+  const l=document.createElement('link');l.rel='manifest';l.href='data:application/manifest+json,'+encodeURIComponent(JSON.stringify(m));document.head.appendChild(l);
+}catch(e){}
+try{ if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(()=>{}); } }catch(e){}
+</script>
+</body>
+</html>
