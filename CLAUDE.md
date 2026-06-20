@@ -7,7 +7,7 @@
 > 1. **以本專案 CLAUDE.md 為主、Kit 為輔**
 > 2. 本專案刻意不對齊 Kit 的部分：
 >    - **配色保留現有 navy `#1B3A6B` / `#15315C` + gold `#F4B942`**（兒童／活潑類「依向性自訂」、已迭代驗證，不為對齊改色）
->    - **kids.html / itinerary.html 維持單檔自包含**（已驗證可運作；拆檔列為下版候選、非對齊強制）
+>    - **index.html / itinerary.html 維持單檔自包含**；**kids 已於 V1.2.0 拆成 HTML/CSS/JS/data 四層**（單檔達 236KB 後拆分，邏輯與資料分離、好維護）
 >    - **UI 內部稱呼保留中文**（紐約家庭之旅 / 小小探險家）；英文程式名 = `BigAppleTrip`（資料夾 + zip 用）
 >    - **App logo = 自製 NYC 圖示**（深藍＋金星＋天際線）為主視覺；**SELA logo 為品牌歸屬印記**放 README footer
 > 3. **不要為對齊 Kit 而動既有設計** — 已驗證的就是事實標準
@@ -18,11 +18,11 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.0.0
+- **版本：** V1.2.0
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
-- **技術棧：** 純 HTML + 原生 JS + CSS（三個自包含單檔 + sw.js），零後端、零 build
-- **入口點：** `index.html`（首頁選單）→ `itinerary.html` / `kids.html`
+- **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
+- **入口點：** `index.html`（首頁選單）→ `itinerary.html` / `kids.html`（kids 載入順序：`kids.data.js` 必須在 `kids.js` 前）
 
 ---
 
@@ -33,6 +33,7 @@
 | 純靜態單檔 HTML | React / Vite PWA | 全家手機看、零後端、GitHub Pages branch-serve 直接託管、不需 build（Git Pusher 推 main 即上線）|
 | localStorage（包 fallback）| 後端 DB / 雲端同步 | 個人／家族用、各自手機存自己的護照進度、不需跨裝置同步 |
 | data-URI manifest + 真實 `./sw.js` | blob manifest / 真實 manifest 檔 | 自包含可攜 + HTTPS 上可安裝（見坑 #4）|
+| kids 拆 HTML/CSS/JS/data 四層 | 維持單檔 | V1.2.0：單檔達 236KB、改一處難找；拆後 `kids.js` 純邏輯、`kids.data.js` 純資料（景點/圖示），好維護。index/itinerary 較小仍單檔 |
 
 > branch-serve 部署 = **不可有 build step**（原始碼即上線檔）。維持純靜態正是為了這條路徑。
 
@@ -60,8 +61,12 @@
 |---------|------|
 | 首頁選單 / 兩個 app 連結 | `index.html` |
 | 行程內容 | `itinerary.html`（各 day 區塊）|
-| kids 功能 / 頭像 / 分頁 | `kids.html`（`buildAvatar` / `SPOTS` / `HUNT` / `showScreen`）|
-| 主題色 | 三檔的 CSS `:root --navy` + HTML `<meta theme-color>` + JS manifest `theme_color`（4 處，坑 #5）|
+| kids 樣式 | `css/kids.css` |
+| kids 邏輯（頭像生成 / 分頁 / 蓋章 / 問答）| `js/kids.js`（`buildAvatar` / `showScreen` / 各 `avXxx`）|
+| kids 資料（景點/地標圖示/尋寶/徽章）| `js/kids.data.js`（`SPOTS` / `SPOT_ART` / `HUNT_ART` / `BADGE_ART` / `TRIVIA` / `BOROUGHS` / `BADGES`）|
+| kids 結構 / 載入 | `kids.html`（shell，先載 `kids.data.js` 再 `kids.js`）|
+| 尋寶 / 知識卡資料 | `js/kids.js`（`HUNT` / `KNOWLEDGE`，較小、留在邏輯層）|
+| 主題色 | CSS `:root --navy` + HTML `<meta theme-color>` + JS manifest `theme_color`（多處，坑 #5）|
 | 離線快取策略 | `sw.js`（network-first）|
 | App 圖示 | `favicon/`（套組）+ 各 HTML data-URI apple-touch-icon |
 
@@ -83,6 +88,7 @@
    - 症狀：同頁第二個之後的頭像顏色錯亂、共用到第一個頭像的漸層
    - 原因：相同 `gradient id` 在同份 DOM 衝突，瀏覽器只認第一個
    - 做法：`buildAvatar` 每次用遞增 `uid` 產唯一 id（`sk${uid}` / `hr${uid}` / `sh${uid}`）
+   - 延伸（V1.1.0）：18 個地標貼紙 SVG 同頁渲染（收集冊）也中——每個 SVG 的 `bg` 漸層 id 唯一化成 `bg_<spotid>`
 
 4. **GitHub Pages 用 blob manifest／SW 裝不了 App**
    - 症狀：Android Chrome 不出現安裝、PWA 不成立
@@ -99,6 +105,11 @@
    - 原因：`file://` 不是安全來源，這些 API 受限
    - 做法：部署 GitHub Pages HTTPS 才完整；localStorage 一律過 `storeGet` / `storeSet`，失敗 fallback in-memory `mem{}`，本地也不報錯
 
+8. **拆檔後 classic script 的載入順序與全域作用域**
+   - 症狀：拆 JS 後 `kids.js` 找不到 `SPOTS` / `SPOT_ART`，或 inline `onclick` 點了沒反應
+   - 原因：①`kids.data.js` 沒在 `kids.js` 之前載入；②inline `onclick` 只看得到 `window` 上的函式（`function foo(){}` 宣告會上 window，`const fn=()=>{}` 不會）
+   - 做法：HTML 內 `kids.data.js` 先、`kids.js` 後；所有被 onclick 呼叫的都用 `function` 宣告（同份全域作用域，跨 classic script 共用 `const`/`let`）
+
 7. **子路徑部署資源 404（呼應 Kit 坑 #39）**
    - 症狀：部署到 `帳號.github.io/repo/` 子路徑時資源抓不到
    - 原因：用了絕對路徑 `/favicon/...`
@@ -109,8 +120,10 @@
 ## 五、煙霧測試（每次升版必跑，可貼上）
 
 ```bash
-# 1. kids.html 的 JS 可編譯（改頭像／功能後必跑）
-node -e "const h=require('fs').readFileSync('kids.html','utf8');require('vm').compileFunction(h.match(/<script>([\s\S]*)<\/script>/)[1]);console.log('kids JS OK')"
+# 1. kids 兩個 JS 檔可編譯、且合併無宣告衝突（改頭像／資料後必跑）
+node -e "const fs=require('fs');const d=fs.readFileSync('js/kids.data.js','utf8'),l=fs.readFileSync('js/kids.js','utf8');require('vm').compileFunction(d);require('vm').compileFunction(l);require('vm').compileFunction(d+l);console.log('kids JS OK')"
+# 1b. kids.html 載入順序：data 在 logic 前
+grep -n 'js/kids' kids.html   # kids.data.js 應在 kids.js 之前
 
 # 2. 沒有絕對路徑 / file:// 假設（坑 #7）
 grep -n 'href=\"/\|src=\"/\|file://' index.html itinerary.html kids.html || echo "OK 無絕對路徑"
@@ -130,6 +143,8 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.2.0 | 尋寶 12 + 徽章 6 的 emoji 也換成同款 SVG（尋寶＝方形貼紙、徽章＝金色圓獎章）；**kids 拆檔**：`kids.html`/`css/kids.css`/`js/kids.data.js`/`js/kids.js` 四層，邏輯與資料分離。|
+| V1.1.0 | 景點圖示 emoji → 自製 SVG 地標貼紙（18 個、深藍＋金、各唯一漸層 id）；護照格／收集冊／detail 浮水印／相簿全換。跨裝置一致、風格統一。kids.html 增至 ~236KB。 |
 | V1.0.0 | **首次對齊 SELA Kit V1.18.0 里程碑**：英文化為 `BigAppleTrip`、補 CLAUDE/README/.gitignore/SELA-handoff、整理 favicon 套組、確立 GitHub Pages PWA（data-URI manifest + `sw.js`）。對齊前已在對話中迭代完成：三個自包含 app（行程 + kids 探險 + 首頁選單）、Mii 風格捏臉系統（9 部位、包頭框臉髮型、深色大眼）、相機蓋章護照、英文字卡發音、尋寶與成就。 |
 
 > 對齊前的迭代是在單一對話內連續完成、未編正式版號；V1.0.0 為對齊 Kit 的重新校準起點（見 Kit SPEC §11.4.5），歷史不回頭重訂。
@@ -138,12 +153,12 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 七、下版候選工作（按優先序）
 
-1. **評估要不要把 `kids.html`（單檔 216KB）拆成 `data/` `css/` `js/`** — 第 1 名理由：單檔過大是目前唯一明顯技術債，改一處要在巨檔裡找（對應靜態網頁示範的反面教材「健保藥物 22,800 行單檔」）。**取捨：** 拆檔會失去「一個檔可攜」優點、且現狀已驗證可運作；先評估值不值得，不是非拆不可。
-2. 行程頁補強：景點離線地圖 / 導航深連結 / 訂位資訊一鍵開
+1. **行程頁補強** — 第 1 名理由：kids 已大幅美化，行程頁相對陽春；景點離線地圖 / 導航深連結 / 訂位資訊一鍵開最實用。
+2. 知識卡加小插圖（延續景點/尋寶/徽章的 SVG 風格，視覺全統一）
 3. 頭像新增更多髮型 / 配件（依小孩回饋）
 4. 護照成就分享（截圖 / 匯出一張卡）
 5. kids 加英文 / 中文切換，當作旅途英文學習
-6. 行程倒數與「今日該去哪」首頁小卡
+6. （視需要）itinerary 若繼續長大再考慮同樣拆層
 
 ---
 
@@ -155,4 +170,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.0.0 首次對齊 SELA Kit：專案英文化為 `BigAppleTrip`、補齊 Kit 規範檔（CLAUDE / README / .gitignore / SELA-handoff）、整理 favicon，GitHub Pages 可安裝 PWA 就緒；配色、單檔結構、UI 中文稱呼依「不為對齊改既有設計」保留。下版第一優先是評估要不要把 216KB 的 `kids.html` 拆檔（單檔過大是唯一明顯技術債）。
+V1.2.0：把尋寶與徽章的 emoji 也換成同款 SVG（尋寶方形貼紙、徽章金色獎章），全 app 視覺統一；並把 kids 拆成 HTML/CSS/data/logic 四層，`kids.js` 純邏輯、`kids.data.js` 純資料，解決單檔過大的技術債。下版第一優先是補強相對陽春的行程頁（離線地圖 / 導航深連結 / 訂位一鍵開）。
