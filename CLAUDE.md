@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.4.0
+- **版本：** V1.5.0
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -49,6 +49,7 @@
 | 捏臉頭像 9 部位 | `buildAvatar(cfg)` 組 9 個 `avXxx()` | `avFace` / `avHairBack` / `avHair` / `avBrow` / `avEyes` / `avNose` / `avMouth` / `avAcc` + `AV_CATS` |
 | 6 分頁 + detail/celebrate | `.screen` / `showScreen()` | CSS `.screen.active` + 底部 nav |
 | 18 收集景點 / 12 尋寶 | `SPOTS[]` / `HUNT[]` | 對應陣列 |
+| 全 app SVG 圖示 | `SPOT_ART`/`HUNT_ART`/`BADGE_ART`/`KNOW_ART`（皆 kids.data.js）+ `spotArt`/`huntArt`/`badgeArt`/`knowArt` | 同款 navy／金貼紙、各唯一漸層 id（坑 #3）|
 | 存檔讀寫 | `storeGet` / `storeSet`（fallback in-memory `mem{}`）| 所有持久化都過這兩個（坑 #6）|
 
 > itinerary.html 為單純內容頁（各 day 區塊），無上述抽象層。
@@ -156,6 +157,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.5.0 | 知識卡（9 張）加同款 SVG 插圖（城市天際線／帆船／披薩／地鐵／面具／帝國大廈／樹／地球／棒球），KNOW_ART 放 kids.data.js。**全 app 圖示風格徹底統一**：景點 18＋尋寶 12＋徽章 6＋知識 9 都是同款 navy／金 SVG。 |
 | V1.4.0 | **導覽列一致性**：兩個內容頁加上同款深藍頂部導覽列（回首頁鍵＋跳另一 app 的切換鍵）；解決「進了行程/探險就出不來、只能瀏覽器返回」。kids 原有 `.topbar` 補回首頁＋切換；itinerary 新增 sticky `.topbar`。三頁導覽統一、可互通。 |
 | V1.3.0 | **全頁 UI 一致性**：itinerary 由深灰＋系統字＋藍棕，統一成淺色 navy＋金＋Nunito（重映 `:root`），與 kids 一致；index 的 navy 由 `#15315C` 收斂到 `#1B3A6B`；三頁 theme-color 統一 `#1B3A6B`。itinerary 功能（地圖／資訊面板／訂位）原已齊備，本版專注視覺統一。 |
 | V1.2.0 | 尋寶 12 + 徽章 6 的 emoji 也換成同款 SVG（尋寶＝方形貼紙、徽章＝金色圓獎章）；**kids 拆檔**：`kids.html`/`css/kids.css`/`js/kids.data.js`/`js/kids.js` 四層，邏輯與資料分離。|
@@ -168,8 +170,9 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 七、下版候選工作（按優先序）
 
-1. **知識卡加小插圖** — 延續景點／尋寶／徽章的 SVG 風格，視覺全統一（目前知識卡偏純文字）
-2. itinerary 加 Apple Maps 深連結（iOS 用戶偏好）+ 8 天快速跳轉（topbar 已有，可再加日次跳轉）
+1. **itinerary 加 Apple Maps 深連結**（iOS 用戶偏好）+ 8 天日次快速跳轉
+2. 護照成就分享（截圖／匯出一張卡）
+3. kids 加英文／中文切換，當作旅途英文學習
 3. 頭像新增更多髮型 / 配件（依小孩回饋）
 4. 護照成就分享（截圖 / 匯出一張卡）
 5. kids 加英文 / 中文切換，當作旅途英文學習
@@ -185,4 +188,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.4.0 導覽列一致性：兩個內容頁加上同款深藍頂部導覽列（回首頁＋直接切換另一 app），解決進去出不來、三頁導覽統一可互通。下版第一優先是知識卡加小插圖（延續 SVG 風格）。
+V1.5.0 知識卡加 9 個同款 SVG 插圖，至此全 app 圖示（景點 18＋尋寶 12＋徽章 6＋知識 9＝45 個）風格徹底統一為 navy／金貼紙。下版第一優先是 itinerary 加 Apple Maps 深連結與日次快速跳轉。

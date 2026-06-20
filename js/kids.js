@@ -699,7 +699,7 @@ function renderKnowledge(){
   list.innerHTML=KNOWLEDGE.map((k,i)=>`
     <div class="know-card" id="kc-${i}">
       <div class="know-head" onclick="toggleKnow(${i})">
-        <span class="know-emoji">${k.emoji}</span>
+        <span class="know-art">${knowArt(i)}</span>
         <div class="know-head-text"><div class="know-title">${k.title}</div><div class="know-sub">${k.sub}</div></div>
         <span class="know-arrow">▶</span>
       </div>
