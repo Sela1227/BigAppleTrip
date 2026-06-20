@@ -6,7 +6,7 @@
 > 衝突仲裁規則：
 > 1. **以本專案 CLAUDE.md 為主、Kit 為輔**
 > 2. 本專案刻意不對齊 Kit 的部分：
->    - **配色保留現有 navy `#1B3A6B` / `#15315C` + gold `#F4B942`**（兒童／活潑類「依向性自訂」、已迭代驗證，不為對齊改色）
+>    - **配色 = navy `#1B3A6B` + gold `#F4B942`**（V1.3.0 統一：index 原 `#15315C`、itinerary 原灰藍都收斂到 `#1B3A6B`；kids/itinerary 為淺色米白底、index 為深藍封面）
 >    - **index.html / itinerary.html 維持單檔自包含**；**kids 已於 V1.2.0 拆成 HTML/CSS/JS/data 四層**（單檔達 236KB 後拆分，邏輯與資料分離、好維護）
 >    - **UI 內部稱呼保留中文**（紐約家庭之旅 / 小小探險家）；英文程式名 = `BigAppleTrip`（資料夾 + zip 用）
 >    - **App logo = 自製 NYC 圖示**（深藍＋金星＋天際線）為主視覺；**SELA logo 為品牌歸屬印記**放 README footer
@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.2.0
+- **版本：** V1.3.0
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -98,7 +98,7 @@
 5. **主題色多處要一致（呼應 Kit 坑 #42）**
    - 症狀：改了主色但某處沒跟著變
    - 原因：主色散在 4 處：CSS `:root --navy` / HTML `<meta theme-color>` / JS manifest `theme_color` / favicon manifest
-   - 做法：navy `#1B3A6B`（kids）/ `#15315C`（首頁）四處一起改
+   - 做法：navy 統一 `#1B3A6B`，三頁的 CSS / `<meta theme-color>` / manifest `theme_color` 一起對齊（V1.3.0 已收斂）
 
 6. **`file://` 雙擊下 localStorage／相機／語音失效**
    - 症狀：本地直接開檔，存檔不留、相機掃章／英文發音壞
@@ -116,6 +116,17 @@
    - 做法：全部相對路徑（`favicon/...`、`./sw.js`、`./itinerary.html`）
 
 ---
+
+10. **深色換淺色重映時，inline style 寫死的色會被漏掉、白字變看不見**
+   - 症狀：itinerary 由深轉淺後，「抵達日」標題列白字消失（淺底白字）
+   - 原因：那列背景是元素上的 inline `style="background:..."` 覆寫（非 `:root` 變數）；全域 hex 替換把它的深色換成淺色，但列上的白字（`color:#fff`）沒被換
+   - 做法：重映後**務必渲染檢查**（`wkhtmltoimage`），揪出 inline style 覆寫的特殊色塊；白字區塊的背景要維持深色，或一併改深字
+
+11. **跨頁設計 token 不一致（獨立開發的頁面會各走各的）**
+   - 症狀：itinerary 用灰藍＋系統字，index/kids 用 navy＋金＋Nunito，三頁長相不一
+   - 原因：三頁分別在不同時間做、沒有共用 token 來源
+   - 做法：統一 token —— navy `#1B3A6B` / gold `#F4B942` / 字型 Nunito / theme-color `#1B3A6B`；itinerary 因全用 CSS 變數，重映 `:root` 即整頁換色
+
 
 ## 五、煙霧測試（每次升版必跑，可貼上）
 
@@ -143,6 +154,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.3.0 | **全頁 UI 一致性**：itinerary 由深灰＋系統字＋藍棕，統一成淺色 navy＋金＋Nunito（重映 `:root`），與 kids 一致；index 的 navy 由 `#15315C` 收斂到 `#1B3A6B`；三頁 theme-color 統一 `#1B3A6B`。itinerary 功能（地圖／資訊面板／訂位）原已齊備，本版專注視覺統一。 |
 | V1.2.0 | 尋寶 12 + 徽章 6 的 emoji 也換成同款 SVG（尋寶＝方形貼紙、徽章＝金色圓獎章）；**kids 拆檔**：`kids.html`/`css/kids.css`/`js/kids.data.js`/`js/kids.js` 四層，邏輯與資料分離。|
 | V1.1.0 | 景點圖示 emoji → 自製 SVG 地標貼紙（18 個、深藍＋金、各唯一漸層 id）；護照格／收集冊／detail 浮水印／相簿全換。跨裝置一致、風格統一。kids.html 增至 ~236KB。 |
 | V1.0.0 | **首次對齊 SELA Kit V1.18.0 里程碑**：英文化為 `BigAppleTrip`、補 CLAUDE/README/.gitignore/SELA-handoff、整理 favicon 套組、確立 GitHub Pages PWA（data-URI manifest + `sw.js`）。對齊前已在對話中迭代完成：三個自包含 app（行程 + kids 探險 + 首頁選單）、Mii 風格捏臉系統（9 部位、包頭框臉髮型、深色大眼）、相機蓋章護照、英文字卡發音、尋寶與成就。 |
@@ -153,8 +165,8 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 七、下版候選工作（按優先序）
 
-1. **行程頁補強** — 第 1 名理由：kids 已大幅美化，行程頁相對陽春；景點離線地圖 / 導航深連結 / 訂位資訊一鍵開最實用。
-2. 知識卡加小插圖（延續景點/尋寶/徽章的 SVG 風格，視覺全統一）
+1. **知識卡加小插圖** — 延續景點／尋寶／徽章的 SVG 風格，視覺全統一（目前知識卡偏純文字）
+2. itinerary 加 Apple Maps 深連結（iOS 用戶偏好）+ 8 天快速跳轉導覽列
 3. 頭像新增更多髮型 / 配件（依小孩回饋）
 4. 護照成就分享（截圖 / 匯出一張卡）
 5. kids 加英文 / 中文切換，當作旅途英文學習
@@ -170,4 +182,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.2.0：把尋寶與徽章的 emoji 也換成同款 SVG（尋寶方形貼紙、徽章金色獎章），全 app 視覺統一；並把 kids 拆成 HTML/CSS/data/logic 四層，`kids.js` 純邏輯、`kids.data.js` 純資料，解決單檔過大的技術債。下版第一優先是補強相對陽春的行程頁（離線地圖 / 導航深連結 / 訂位一鍵開）。
+V1.3.0 全頁 UI 一致性：把 itinerary 由深灰＋系統字統一成淺色 navy＋金＋Nunito（重映 :root 整頁換色），與 kids 一致；index 的 navy 收斂到 #1B3A6B、三頁 theme-color 統一。itinerary 功能原已齊備故專注視覺。下版第一優先是知識卡加小插圖（延續 SVG 風格）。
