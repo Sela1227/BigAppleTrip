@@ -9,7 +9,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 #app{height:100dvh;display:flex;flex-direction:column;max-width:540px;margin:0 auto;background:var(--bg);box-shadow:0 0 50px rgba(0,0,0,.1)}
 
 /* TOP BAR */
-.topbar{background:var(--navy);padding:calc(env(safe-area-inset-top) + 13px) 16px 11px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.topbar{background:var(--navy);padding:calc(env(safe-area-inset-top) + 13px) 14px 11px;display:flex;align-items:center;gap:10px;flex-shrink:0}.topbar-home{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.13);color:#fff;text-decoration:none;flex-shrink:0}.topbar-home:active{background:rgba(255,255,255,.22)}.topbar-home svg{width:20px;height:20px}.topbar-mid{flex:1;min-width:0}.topbar-switch{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:var(--gold);color:var(--navy);text-decoration:none;flex-shrink:0}.topbar-switch svg{width:18px;height:18px}
 .topbar-title{font-size:1.05rem;font-weight:900;color:#fff;line-height:1.35}
 .topbar-sub{font-size:.68rem;color:rgba(255,255,255,.65);margin-top:1px;font-weight:600;line-height:1.3}
 .prog-badge{background:var(--gold);color:var(--navy);border-radius:20px;padding:4px 12px;font-size:.82rem;font-weight:900;display:flex;align-items:center;gap:4px}
