@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.9.0
+- **版本：** V1.9.1
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -158,7 +158,15 @@
    - 內嵌既有 SVG 資產：剝掉外層 `<svg>`、用 `<g transform="translate scale">` 包 inner（各資產 viewBox 0-100，scale=size/100）
 
 
-## 五、煙霧測試（每次升版必跑，可貼上）
+15. **`let`/`const` 的 TDZ：在宣告行執行前存取會 runtime 報錯（compile 抓不到！）**
+   - 症狀：V1.9.0 把 `let huntPhotos={}` 放在尋寶邏輯區（檔案後段），但 `loadKidState()` 在開頭就執行並存取它 → `Cannot access 'huntPhotos' before initialization` → init 中斷 → 護照/地圖/尋寶全空白
+   - 關鍵：`compileFunction`（語法檢查）**驗不出** TDZ／執行期錯誤；只有實際執行才會現形
+   - 做法：① 所有會被 `loadKidState()`／init 早期存取的狀態變數，一律宣告在檔案**頂層狀態區**（和 stamped/quizDone 同一行）② 交付前**務必跑 DOM harness**（見下方煙霧測試）實際執行 init + 每個 render + 互動函式，不能只靠 compile
+
+
+## 五、煙霧測試
+
+> **鐵律：compile 過 ≠ 能跑。** 每次改 kids.js 後，除了 `compileFunction` 語法檢查，**一定要用 DOM-proxy harness（專案內 `_smoketest.js`）實際 eval 整個 app**，確認 init 不拋例外，且 renderHome/Map/Hunt/Cards/Postcard/Knowledge/Achieve + openDetail/navTo/switchKid 全部能跑。`node _smoketest.js` 應全部顯示 ✓。這次 V1.9.0→V1.9.1 的空白 bug 就是只跑 compile、沒跑 runtime 漏掉的。（每次升版必跑，可貼上）
 
 ```bash
 # 1. kids 兩個 JS 檔可編譯、且合併無宣告衝突（改頭像／資料後必跑）
@@ -184,6 +192,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.9.1 | **修 bug**：V1.9.0 的 `huntPhotos` 用 `let` 宣告在尋寶區，被開頭 `loadKidState` 早期存取 → TDZ 例外 → init 中斷、多畫面空白。宣告移到頂層狀態區即修復。新增 `_smoketest.js`（DOM harness）為必跑煙霧測試（坑 #15）。|
 | V1.9.0 | 5 項：①知識庫手風琴（開一關其他）②景點標題列縮小（det-hdr/title/tagline 緊縮）③景點知識 3→5、挑戰 1→2 題（quiz 改陣列、多題渲染、per-題作答記錄）並清掉本區 emoji（story 開頭圖示去除、facts 改統一金點、quiz 結果 ✅❌🌟 改純文字）④明信片支援語音輸入 ⑤尋寶改 20 個分 8 天、拍照完成任務（新增 8 個尋寶 SVG）。|
 | V1.8.0 | 護照成就分享：成就畫面加「分享成就卡給家人」，用現有 SVG 資產（捏臉頭像+徽章+地標貼紙）組一張 navy/金護照成就卡（1080×1350），SVG→canvas→PNG，手機 `navigator.share` 直接分享、桌機下載。零外部套件。 |
 | V1.7.0 | ① itinerary：iOS 自動改用 Apple Maps 深連結（Android/桌機維持 Google）+ 8 天日次快速跳轉列（sticky chips、滑動高亮）。② 全頁 UI chrome emoji 統一：分頁標題/tab/按鈕的 emoji 移除、淡色浮水印移除、焦點圖示換 SVG（護照書、慶祝獎盃、進度金星、倒數飛機、相機/發音/編輯/錄音鍵）。內容文字裡的裝飾 emoji（景點故事、farewell ✈、慶祝 🎉）屬內容保留。|
@@ -219,4 +228,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.9.0 五項：知識庫手風琴、景點標題列縮小、景點知識/挑戰加量（quiz 改多題陣列）並清掉該區 emoji、明信片語音輸入、尋寶任務分 8 天且可拍照完成。下版可做 kids 英文/中文切換。
+V1.9.1 修掉 V1.9.0 的嚴重 bug：huntPhotos 用 let 宣告在後段、卻被開頭的 loadKidState 早期存取（TDZ），導致 init 中斷、護照/地圖/尋寶全空白；已把宣告移到頂層並加 DOM harness 煙霧測試（坑 #15）。

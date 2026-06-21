@@ -27,7 +27,7 @@ let pendingPhotoData=null;
 
 // per-kid namespaced storage
 function kk(base){ return base+'-k'+currentKid; }
-let stamped=[], quizDone=[], photos={}, journals={}, quizAns={};
+let stamped=[], quizDone=[], photos={}, journals={}, quizAns={}, huntPhotos={};
 function loadKidState(){
   stamped=JSON.parse(storeGet(kk('nyc-stamped'),'[]'));
   quizDone=JSON.parse(storeGet(kk('nyc-quiz'),'[]'));
@@ -896,7 +896,6 @@ function renderFun(){
 // ── Scavenger hunt (per kid) ──
 function huntKey(){ return kk('nyc-hunt'); }
 function getHunt(){ try{return JSON.parse(storeGet(huntKey(),'[]'));}catch(e){return [];} }
-let huntPhotos={};
 let pendingHuntId=null;
 function huntPhotoKey(){ return kk('nyc-huntphoto'); }
 function renderHunt(){
