@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.7.0
+- **版本：** V1.8.0
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -49,6 +49,7 @@
 | 捏臉頭像 9 部位 | `buildAvatar(cfg)` 組 9 個 `avXxx()` | `avFace` / `avHairBack` / `avHair` / `avBrow` / `avEyes` / `avNose` / `avMouth` / `avAcc` + `AV_CATS` |
 | 6 分頁 + detail/celebrate | `.screen` / `showScreen()` | CSS `.screen.active` + 底部 nav |
 | 18 收集景點 / 12 尋寶 | `SPOTS[]` / `HUNT[]` | 對應陣列 |
+| 護照成就分享卡 | `buildCardSVG`（組 navy/金卡：頭像+進度+徽章+已收集地標）→ `svgToPng`（SVG→canvas→PNG）→ `shareCard`（navigator.share files / 下載 fallback），按鈕在成就畫面 |
 | 全 app SVG 圖示 | `SPOT_ART`/`HUNT_ART`/`BADGE_ART`/`KNOW_ART`（皆 kids.data.js）+ `spotArt`/`huntArt`/`badgeArt`/`knowArt` | 同款 navy／金貼紙、各唯一漸層 id（坑 #3）|
 | 存檔讀寫 | `storeGet` / `storeSet`（fallback in-memory `mem{}`）| 所有持久化都過這兩個（坑 #6）|
 
@@ -147,6 +148,12 @@
    - 做法：改 `ico.innerHTML='<svg…>'`
 
 
+14. **DOM→圖片分享：用 SVG→canvas→PNG，不需 html2canvas**
+   - 作法：把要分享的內容組成自包含 SVG（可內嵌既有頭像/貼紙 SVG，記得唯一漸層 id），`new Blob([svg],{type:'image/svg+xml'})` → `URL.createObjectURL` → `img.onload` 畫到 canvas → `canvas.toBlob` → `navigator.share({files})`（手機）或 `<a download>`（桌機）
+   - 注意：SVG 要有明確 `width/height/viewBox`；用 Blob URL 而非 data-URI 避免中文編碼問題；HTTPS 才有 share/canvas（file:// 受限，呼應坑 #6）
+   - 內嵌既有 SVG 資產：剝掉外層 `<svg>`、用 `<g transform="translate scale">` 包 inner（各資產 viewBox 0-100，scale=size/100）
+
+
 ## 五、煙霧測試（每次升版必跑，可貼上）
 
 ```bash
@@ -173,6 +180,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.8.0 | 護照成就分享：成就畫面加「分享成就卡給家人」，用現有 SVG 資產（捏臉頭像+徽章+地標貼紙）組一張 navy/金護照成就卡（1080×1350），SVG→canvas→PNG，手機 `navigator.share` 直接分享、桌機下載。零外部套件。 |
 | V1.7.0 | ① itinerary：iOS 自動改用 Apple Maps 深連結（Android/桌機維持 Google）+ 8 天日次快速跳轉列（sticky chips、滑動高亮）。② 全頁 UI chrome emoji 統一：分頁標題/tab/按鈕的 emoji 移除、淡色浮水印移除、焦點圖示換 SVG（護照書、慶祝獎盃、進度金星、倒數飛機、相機/發音/編輯/錄音鍵）。內容文字裡的裝飾 emoji（景點故事、farewell ✈、慶祝 🎉）屬內容保留。|
 | V1.6.0 | 最後的 emoji 圖示也換 SVG：kids 底部 6 分頁（護照/地圖/玩樂/知識/問答/成就，線性圖示 `currentColor` 灰→navy）+ 首頁兩張卡（旅遊行程/小小探險家，金米白填色）。**全 app 零 emoji 圖示**。釐清兩套圖示語言：內容＝貼紙磚、UI 導覽＝線性圖示。 |
 | V1.5.0 | 知識卡（9 張）加同款 SVG 插圖（城市天際線／帆船／披薩／地鐵／面具／帝國大廈／樹／地球／棒球），KNOW_ART 放 kids.data.js。**全 app 圖示風格徹底統一**：景點 18＋尋寶 12＋徽章 6＋知識 9 都是同款 navy／金 SVG。 |
@@ -188,9 +196,9 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 七、下版候選工作（按優先序）
 
-1. **護照成就分享**（截圖／匯出一張卡給家人）
-2. kids 加英文／中文切換，當作旅途英文學習
-3. itinerary 加「今日該去哪」依日期自動高亮當天
+1. **kids 加英文／中文切換**，當作旅途英文學習
+2. itinerary 加「今日該去哪」依日期自動高亮當天
+3. 成就卡可選不同版型/背景
 3. 頭像新增更多髮型 / 配件（依小孩回饋）
 4. 護照成就分享（截圖 / 匯出一張卡）
 5. kids 加英文 / 中文切換，當作旅途英文學習
@@ -206,4 +214,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.7.0：itinerary 加 iOS Apple Maps 深連結＋8 天日次快速跳轉列；全頁 UI chrome emoji 統一（分頁標題/tab/按鈕移除或換 SVG、浮水印移除、焦點圖示 SVG 化），內容文字 emoji 保留。下版第一優先是護照成就分享。
+V1.8.0 護照成就分享：成就畫面可一鍵把捏臉頭像＋進度＋徽章＋已收集地標組成一張 navy/金成就卡，手機直接分享、桌機下載（SVG→canvas→PNG，零套件）。下版第一優先是 kids 英文/中文切換。

@@ -1112,3 +1112,78 @@ try {
     navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(()=>{});
   }
 } catch(e){}
+
+// ══ 成就分享卡 (V1.8.0) ════════════════════════════════════════
+function _stripSvg(s){ return s.replace(/^[\s\S]*?<svg[^>]*>/,'').replace(/<\/svg>\s*$/,''); }
+function _embed(svg,x,y,size){ return '<g transform="translate('+x+','+y+') scale('+(size/100)+')">'+_stripSvg(svg)+'</g>'; }
+function buildCardSVG(){
+  const W=1080,H=1350, cx=W/2;
+  const name=(kidNames[currentKid]||'寶貝'), n=stamped.length, total=SPOTS.length, q=quizDone.length;
+  const earned=[]; BADGES.forEach((b,i)=>{ if(b.req(n,q)) earned.push(i); });
+  const got=stamped.slice().sort((a,b)=>a-b);
+  let s='<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" font-family="Nunito,PingFang TC,Microsoft JhengHei,sans-serif">';
+  s+='<defs><linearGradient id="cardbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#24528F"/><stop offset="100%" stop-color="#10254A"/></linearGradient></defs>';
+  s+='<rect width="'+W+'" height="'+H+'" fill="url(#cardbg)"/>';
+  s+='<rect x="22" y="22" width="'+(W-44)+'" height="'+(H-44)+'" rx="40" fill="none" stroke="#F4B942" stroke-width="5" opacity="0.6"/>';
+  // header star + title
+  s+='<g transform="translate('+(cx-36)+',70)"><path d="M36 4l10 22 24 2-18 16 5 24-21-13-21 13 5-24L8 28l24-2z" fill="#F4B942"/></g>';
+  s+='<text x="'+cx+'" y="210" fill="#fff" font-size="62" font-weight="900" text-anchor="middle">紐約家庭之旅</text>';
+  s+='<text x="'+cx+'" y="262" fill="#F4B942" font-size="32" font-weight="800" text-anchor="middle" letter-spacing="3">旅行護照 · 成就卡</text>';
+  // avatar circle
+  const aR=140, aCY=440;
+  s+='<circle cx="'+cx+'" cy="'+aCY+'" r="'+(aR+10)+'" fill="#1B3A6B"/>';
+  s+='<circle cx="'+cx+'" cy="'+aCY+'" r="'+(aR+10)+'" fill="none" stroke="#F4B942" stroke-width="7"/>';
+  s+='<clipPath id="avclip"><circle cx="'+cx+'" cy="'+aCY+'" r="'+aR+'"/></clipPath>';
+  s+='<g clip-path="url(#avclip)"><rect x="'+(cx-aR)+'" y="'+(aCY-aR)+'" width="'+(2*aR)+'" height="'+(2*aR)+'" fill="#EAF0FA"/>'+_embed(buildAvatar(kidAvatars[currentKid],100), cx-aR, aCY-aR, 2*aR)+'</g>';
+  // name
+  s+='<text x="'+cx+'" y="660" fill="#fff" font-size="56" font-weight="900" text-anchor="middle">'+name+'</text>';
+  // progress
+  s+='<text x="'+cx+'" y="738" fill="#FCEFD2" font-size="40" font-weight="800" text-anchor="middle">已收集 '+n+' / '+total+' 個景點印章</text>';
+  const bx=150,bw=W-300,by=768;
+  s+='<rect x="'+bx+'" y="'+by+'" width="'+bw+'" height="34" rx="17" fill="rgba(255,255,255,0.16)"/>';
+  if(n>0) s+='<rect x="'+bx+'" y="'+by+'" width="'+Math.max(34,bw*n/total)+'" height="34" rx="17" fill="#F4B942"/>';
+  // badges earned
+  s+='<text x="'+cx+'" y="888" fill="#F4B942" font-size="34" font-weight="800" text-anchor="middle">'+earned.length+' 個成就徽章</text>';
+  if(earned.length){ const bs=96, gap=18, tot=earned.length*bs+(earned.length-1)*gap, sx=cx-tot/2;
+    earned.forEach((bi,k)=>{ s+=_embed(badgeArt(bi), sx+k*(bs+gap), 910, bs); }); }
+  // collected stickers grid
+  s+='<text x="'+cx+'" y="1108" fill="#FCEFD2" font-size="32" font-weight="800" text-anchor="middle">'+(n?'蓋章的地標':'快去蓋第一個章吧！')+'</text>';
+  if(n){ const cols=6, cs=112, gp=14, show=got.slice(0,12), rows=Math.ceil(show.length/cols);
+    const gw=cols*cs+(cols-1)*gp, gx=cx-gw/2;
+    show.forEach((si,k)=>{ const r=Math.floor(k/cols), c=k%cols; s+=_embed(spotArt(SPOTS[si].id), gx+c*(cs+gp), 1135+r*(cs+gp), cs); });
+  }
+  // footer
+  s+='<text x="'+cx+'" y="1310" fill="rgba(255,255,255,0.7)" font-size="28" font-weight="700" text-anchor="middle">2026 · 7/4 – 7/12 · 一起去紐約！</text>';
+  s+='</svg>';
+  return s;
+}
+function svgToPng(svg,w,h,cb){
+  var img=new Image();
+  var blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  img.onload=function(){ var cv=document.createElement('canvas');cv.width=w;cv.height=h; cv.getContext('2d').drawImage(img,0,0,w,h); URL.revokeObjectURL(url); cv.toBlob(function(b){cb(b);},'image/png',0.95); };
+  img.onerror=function(){ URL.revokeObjectURL(url); cb(null); };
+  img.src=url;
+}
+function shareCard(){
+  var btn=document.getElementById('share-btn');
+  if(btn){btn.disabled=true;btn.textContent='產生中…';}
+  function reset(){ if(btn){btn.disabled=false;btn.textContent='分享成就卡給家人';} }
+  try{
+    var svg=buildCardSVG();
+    svgToPng(svg,1080,1350,function(blob){
+      reset();
+      if(!blob){alert('產生失敗，請再試一次');return;}
+      var fname=(kidNames[currentKid]||'寶貝')+'的紐約護照.png';
+      var file=new File([blob],fname,{type:'image/png'});
+      var txt=(kidNames[currentKid]||'寶貝')+' 的紐約探險成就！';
+      if(navigator.canShare && navigator.canShare({files:[file]})){
+        navigator.share({files:[file],title:'我的紐約旅行護照',text:txt}).catch(function(){});
+      }else{
+        var a=document.createElement('a');var u=URL.createObjectURL(blob);a.href=u;a.download=fname;document.body.appendChild(a);a.click();a.remove();
+        setTimeout(function(){URL.revokeObjectURL(u);},2000);
+        alert('成就卡已存成圖片，可以分享給家人囉！');
+      }
+    });
+  }catch(e){ reset(); alert('產生失敗，請再試一次'); }
+}

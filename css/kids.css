@@ -354,3 +354,6 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:#C8C4B8;border-radius:3px}
+.share-btn{display:block;width:calc(100% - 32px);margin:18px 16px 8px;padding:15px;border:none;border-radius:16px;background:var(--navy);color:#fff;font-family:inherit;font-size:1.02rem;font-weight:900;cursor:pointer;box-shadow:0 4px 14px rgba(27,58,107,.3)}
+.share-btn:active{transform:scale(.98)}
+.share-btn:disabled{opacity:.6}
