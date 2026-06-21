@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.9.1
+- **版本：** V1.10.0
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -46,7 +46,7 @@
 | 業務概念 | 程式實作 | 改這個動哪 |
 |---------|---------|-----------|
 | 每個小孩獨立護照 | `currentKid` + `kk(key)` 命名空間 + `switchKid()` | 所有 storage key 都過 `kk()` 前綴 |
-| 捏臉頭像 9 部位 | `buildAvatar(cfg)` 組 9 個 `avXxx()` | `avFace` / `avHairBack` / `avHair` / `avBrow` / `avEyes` / `avNose` / `avMouth` / `avAcc` + `AV_CATS` |
+| 捏臉頭像 9 部位 | `buildAvatar(cfg)` 組 9 個 `avXxx()` | `avFace` / `avHairBack` / `avHair` / `avBrow` / `avEyes` / `avNose` / `avMouth` / `avAcc` + `AV_CATS`（V1.10.0：髮型 22／配件 10，新增由 `AV_CATS` 的 `count` 控制顯示）|
 | 6 分頁 + detail/celebrate | `.screen` / `showScreen()` | CSS `.screen.active` + 底部 nav |
 | 18 收集景點 / 12 尋寶 | `SPOTS[]` / `HUNT[]` | 對應陣列 |
 | 知識庫手風琴 | `toggleKnow` 先關其他 `.know-card.open` 再開本項 |
@@ -192,6 +192,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.10.0 | **頭像新增髮型／配件**：髮型 16→22（長直髮〔含後層垂落〕、丸子頭、雙丸子、低雙馬尾、捲髮、短髮）；配件 6→10（金王冠、紅耳罩耳機、花朵髮夾、藍毛帽）。新增由 `AV_CATS` 的 `count` 自動帶入編輯器選項；front 層加進 `avHair`、長直髮/低雙馬尾的後層加進 `avHairBack`、配件加進 `avAcc`。另加 2 組預設造型（丸子頭+王冠、短髮+耳機）。全用既有色票、未引入新漸層 id（坑 #3）。煙霧測試 27/27 全綠、cairosvg montage 視覺確認。|
 | V1.9.1 | **修 bug**：V1.9.0 的 `huntPhotos` 用 `let` 宣告在尋寶區，被開頭 `loadKidState` 早期存取 → TDZ 例外 → init 中斷、多畫面空白。宣告移到頂層狀態區即修復。新增 `_smoketest.js`（DOM harness）為必跑煙霧測試（坑 #15）。|
 | V1.9.0 | 5 項：①知識庫手風琴（開一關其他）②景點標題列縮小（det-hdr/title/tagline 緊縮）③景點知識 3→5、挑戰 1→2 題（quiz 改陣列、多題渲染、per-題作答記錄）並清掉本區 emoji（story 開頭圖示去除、facts 改統一金點、quiz 結果 ✅❌🌟 改純文字）④明信片支援語音輸入 ⑤尋寶改 20 個分 8 天、拍照完成任務（新增 8 個尋寶 SVG）。|
 | V1.8.0 | 護照成就分享：成就畫面加「分享成就卡給家人」，用現有 SVG 資產（捏臉頭像+徽章+地標貼紙）組一張 navy/金護照成就卡（1080×1350），SVG→canvas→PNG，手機 `navigator.share` 直接分享、桌機下載。零外部套件。 |
@@ -210,13 +211,13 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 七、下版候選工作（按優先序）
 
-1. **kids 加英文／中文切換**，當作旅途英文學習
+1. **kids 加英文／中文切換**，當作旅途英文學習（第一優先）
 2. itinerary 加「今日該去哪」依日期自動高亮當天
 3. 知識卡內文 emoji 也可改 SVG/移除（目前知識庫內文仍有裝飾 emoji）
-3. 頭像新增更多髮型 / 配件（依小孩回饋）
-4. 護照成就分享（截圖 / 匯出一張卡）
-5. kids 加英文 / 中文切換，當作旅途英文學習
-6. （視需要）itinerary 若繼續長大再考慮同樣拆層
+4. 成就分享卡不同版型／背景（延伸 V1.8.0）
+5. （視需要）itinerary 若繼續長大再考慮同樣拆層
+
+> 已完成並移出候選：頭像新增髮型／配件（V1.10.0）、護照成就分享卡（V1.8.0）。
 
 ---
 
@@ -228,4 +229,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.9.1 修掉 V1.9.0 的嚴重 bug：huntPhotos 用 let 宣告在後段、卻被開頭的 loadKidState 早期存取（TDZ），導致 init 中斷、護照/地圖/尋寶全空白；已把宣告移到頂層並加 DOM harness 煙霧測試（坑 #15）。
+V1.10.0 擴充捏臉系統：髮型 16→22、配件 6→10（長直髮/丸子頭/雙丸子/低雙馬尾/捲髮/短髮＋王冠/耳機/花朵髮夾/毛帽），新項目由 `AV_CATS` 的 count 自動帶進編輯器、長髮款補 `avHairBack` 後層、全用既有色票零新漸層 id；煙霧測試 27/27 全綠＋cairosvg 視覺驗證。

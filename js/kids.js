@@ -68,7 +68,7 @@ const AV_SKINSH=['#EBC9A6','#E6B584','#D69A6A','#B97C4E','#8A5A38'];
 const AV_HAIRC=['#3A2E27','#6B4423','#A9742E','#E3BE54','#C94A33','#5183C9','#E372A8'];
 const AV_NOSEC='rgba(150,95,70,0.45)';
 let _avuid=0;
-const AV_CATS=[['face','臉型',6,'shape'],['skin','膚色',5,'color',AV_SKIN],['hair','髮型',16,'shape'],['hairColor','髮色',7,'color',AV_HAIRC],['brow','眉毛',8,'shape'],['eyes','眼睛',16,'shape'],['nose','鼻子',5,'shape'],['mouth','嘴巴',8,'shape'],['acc','配件',6,'shape']];
+const AV_CATS=[['face','臉型',6,'shape'],['skin','膚色',5,'color',AV_SKIN],['hair','髮型',22,'shape'],['hairColor','髮色',7,'color',AV_HAIRC],['brow','眉毛',8,'shape'],['eyes','眼睛',16,'shape'],['nose','鼻子',5,'shape'],['mouth','嘴巴',8,'shape'],['acc','配件',10,'shape']];
 function avLighten(hex){let h=hex.replace('#','');let r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);r=Math.min(255,r+(255-r)*0.25|0);g=Math.min(255,g+(255-g)*0.25|0);b=Math.min(255,b+(255-b)*0.25|0);return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');}
 function avDarken(hex,f){f=f||0.18;let h=hex.replace('#','');let r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);r=r*(1-f)|0;g=g*(1-f)|0;b=b*(1-f)|0;return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');}
 function avFace(i,uid){
@@ -95,6 +95,12 @@ function avHairBack(i,c){return ['','','','','','',
  `<path d="M7,58 Q1,82 9,96 Q13,84 13,74 Q11,88 21,95 Q19,74 22,56 Z M93,58 Q99,82 91,96 Q87,84 87,74 Q89,88 79,95 Q81,74 78,56 Z" fill="${c}"/>`,
  '','','',
  `<path d="M8,60 Q3,90 17,95 L25,95 Q18,72 21,55 Z M92,60 Q97,90 83,95 L75,95 Q82,72 79,55 Z" fill="${c}"/>`,
+ '',
+ `<path d="M11,52 Q3,84 13,96 L26,96 Q19,72 21,52 Z M89,52 Q97,84 87,96 L74,96 Q81,72 79,52 Z" fill="${c}"/>`,
+ '',
+ '',
+ `<path d="M14,56 Q3,80 11,95 Q16,84 17,74 Q15,90 27,93 Q22,72 24,56 Z M86,56 Q97,80 89,95 Q84,84 83,74 Q85,90 73,93 Q78,72 76,56 Z" fill="${c}"/>`,
+ '',
  ''
 ][i]||'';}
 function avHair(i,c){return [
@@ -113,7 +119,13 @@ function avHair(i,c){return [
  `<path d="M14,54 C13,32 22,18 50,17 C78,18 87,32 86,54 C84,42 76,36 50,36 C24,36 16,42 14,54 Z" fill="${c}"/>`,
  `<path d="M43,8 L57,8 L55,40 L45,40 Z M14,58 C13,42 20,34 30,33 C22,40 20,50 20,58 Z M86,58 C87,42 80,34 70,33 C78,40 80,50 80,58 Z" fill="${c}"/>`,
  `<path d="M9,66 C6,32 16,10 50,9 C84,10 94,32 91,66 C90,52 82,47 73,48 C62,40 36,40 28,49 C24,43 16,46 13,52 C11,56 10,60 9,66 Z" fill="${c}"/>`,
- `<path d="M11,60 C9,32 18,12 50,11 C82,12 91,30 89,60 C88,48 82,44 74,45 C70,34 56,34 50,40 C44,34 30,36 28,46 C20,45 13,50 11,60 Z" fill="${c}"/>`
+ `<path d="M11,60 C9,32 18,12 50,11 C82,12 91,30 89,60 C88,48 82,44 74,45 C70,34 56,34 50,40 C44,34 30,36 28,46 C20,45 13,50 11,60 Z" fill="${c}"/>`,
+ `<path d="M10,66 C8,34 18,13 50,12 C82,13 92,34 90,66 C88,53 82,49 74,50 C70,41 56,43 51,51 L50,45 L49,51 C44,43 30,41 26,50 C18,49 12,53 10,66 Z" fill="${c}"/>`,
+ `<path d="M12,62 C10,33 20,15 50,14 C80,15 90,33 88,62 C86,50 80,46 73,47 C64,40 36,40 27,47 C20,46 14,50 12,62 Z" fill="${c}"/><ellipse cx="50" cy="12" rx="9.5" ry="8.5" fill="${c}"/><rect x="42" y="19" width="16" height="4" rx="2" fill="${c}"/>`,
+ `<path d="M13,60 C11,33 21,15 50,14 C79,15 89,33 87,60 C85,49 79,45 72,46 C63,39 37,39 28,46 C21,45 15,49 13,60 Z" fill="${c}"/><circle cx="25" cy="20" r="8.5" fill="${c}"/><circle cx="75" cy="20" r="8.5" fill="${c}"/>`,
+ `<path d="M13,62 C11,33 21,15 50,14 C79,15 89,33 87,62 C85,50 79,46 72,47 C63,40 37,40 28,47 C21,46 15,50 13,62 Z" fill="${c}"/>`,
+ `<path d="M50,5 C27,5 11,21 11,46 C11,53 14,59 19,62 C9,59 6,47 9,38 C4,45 7,59 17,65 C12,70 19,76 26,73 C23,50 31,40 50,40 C69,40 77,50 74,73 C81,76 88,70 83,65 C93,59 96,45 91,38 C94,47 91,59 81,62 C86,59 89,53 89,46 C89,21 73,5 50,5 Z" fill="${c}"/>`,
+ `<path d="M16,50 C15,30 24,18 50,17 C76,18 85,30 84,50 C82,40 74,35 50,35 C26,35 18,40 16,50 Z" fill="${c}"/>`
 ][i]||'';}
 function avEye1(cx){return `<ellipse cx="${cx}" cy="59" rx="7" ry="8.8" fill="#fff" stroke="#2a2018" stroke-width="1.4"/><circle cx="${cx}" cy="60" r="5.4" fill="#46301f"/><circle cx="${cx}" cy="60" r="3.1" fill="#14100a"/>`;}
 function avEyes(i){return [
@@ -156,7 +168,11 @@ function avAcc(i,c){return [
  '<g fill="#2b2b2b"><rect x="27" y="52" width="18" height="12" rx="5"/><rect x="55" y="52" width="18" height="12" rx="5"/><rect x="45" y="56" width="10" height="3"/></g>',
  '<g fill="#E5503A"><path d="M50,22 L37,13 Q34,22 37,31 Z"/><path d="M50,22 L63,13 Q66,22 63,31 Z"/></g><circle cx="50" cy="22" r="4.5" fill="#C0392B"/>',
  '<path d="M16,32 Q50,2 84,32 Q85,37 79,38 L21,38 Q15,37 16,32 Z" fill="#3B9AD9"/><path d="M78,35 Q96,34 93,43 L78,42 Z" fill="#2C7AB8"/>',
- '<path d="M15,40 Q50,28 85,40 L85,47 Q50,35 15,47 Z" fill="#E673B0"/>'
+ '<path d="M15,40 Q50,28 85,40 L85,47 Q50,35 15,47 Z" fill="#E673B0"/>',
+ '<path d="M29,31 L29,17 L40,25 L50,12 L60,25 L71,17 L71,31 Z" fill="#F4B942" stroke="#D99B1F" stroke-width="1"/><rect x="29" y="30" width="42" height="4" rx="2" fill="#E0A92A"/><circle cx="50" cy="13" r="2.3" fill="#E5503A"/><circle cx="32" cy="19" r="1.9" fill="#3B9AD9"/><circle cx="68" cy="19" r="1.9" fill="#3B9AD9"/>',
+ '<path d="M17,54 Q17,25 50,25 Q83,25 83,54" fill="none" stroke="#3a3a3a" stroke-width="4" stroke-linecap="round"/><rect x="10" y="51" width="10" height="17" rx="4.5" fill="#E5503A"/><rect x="80" y="51" width="10" height="17" rx="4.5" fill="#E5503A"/>',
+ '<g transform="translate(72,39)"><circle cx="0" cy="-4.2" r="3.1" fill="#F5A0B0"/><circle cx="4" cy="-1.3" r="3.1" fill="#F5A0B0"/><circle cx="2.5" cy="3.4" r="3.1" fill="#F5A0B0"/><circle cx="-2.5" cy="3.4" r="3.1" fill="#F5A0B0"/><circle cx="-4" cy="-1.3" r="3.1" fill="#F5A0B0"/><circle cx="0" cy="0" r="2.5" fill="#F4B942"/></g>',
+ '<path d="M16,46 Q16,15 50,15 Q84,15 84,46 Q84,39 75,39 L25,39 Q16,39 16,46 Z" fill="#5183C9"/><rect x="13" y="39" width="74" height="7.5" rx="3.7" fill="#EAF0FA"/><circle cx="50" cy="12" r="5.2" fill="#EAF0FA"/>'
 ][i]||'';}
 function buildAvatar(cfg,size){
   cfg=cfg||{}; const s=size||34; const uid=_avuid++;
@@ -181,7 +197,9 @@ const AV_PRESETS=[
  {face:0,skin:3,hair:9,hairColor:4,brow:1,eyes:6,nose:2,mouth:6,acc:0},
  {face:2,skin:2,hair:11,hairColor:4,brow:2,eyes:8,nose:4,mouth:5,acc:2},
  {face:1,skin:1,hair:14,hairColor:5,brow:6,eyes:3,nose:2,mouth:0,acc:5},
- {face:4,skin:1,hair:5,hairColor:1,brow:0,eyes:11,nose:2,mouth:7,acc:0}
+ {face:4,skin:1,hair:5,hairColor:1,brow:0,eyes:11,nose:2,mouth:7,acc:0},
+ {face:0,skin:1,hair:17,hairColor:6,brow:1,eyes:2,nose:2,mouth:4,acc:6},
+ {face:1,skin:2,hair:21,hairColor:0,brow:0,eyes:0,nose:2,mouth:0,acc:7}
 ];
 function applyPreset(i){ editCfg=Object.assign({},AV_PRESETS[i]); renderAvOptions(); renderAvPreview(); renderAvPresets(); }
 function renderAvPresets(){
