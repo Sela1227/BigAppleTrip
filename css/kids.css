@@ -106,7 +106,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 
 /* zoomable map */
 .zoom-wrap{position:relative;background:#AED4E6;border-radius:16px;overflow:hidden;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);touch-action:none;width:100%;aspect-ratio:36/38;min-height:300px}
-#usmap{position:absolute;top:0;left:0;width:100%;height:100%;display:block;cursor:grab}
+#usmap{position:absolute;top:0;left:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
 #usmap:active{cursor:grabbing}
 #usmap .pin-tap{cursor:pointer}
 .zoom-ctrl{position:absolute;right:10px;bottom:48px;display:flex;flex-direction:column;gap:6px}
@@ -167,6 +167,15 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 .quiz-reset-btn{border:none;border-radius:8px;padding:5px 12px;background:rgba(255,255,255,.25);color:#fff;font-size:.72rem;font-weight:800;cursor:pointer;font-family:inherit}
 .quiz-reset-btn:active{background:rgba(255,255,255,.4)}
 .quiz-next-btn{width:100%;margin-top:12px;padding:13px;border:none;border-radius:12px;background:var(--navy);color:#fff;font-size:1rem;font-weight:900;cursor:pointer;font-family:inherit;box-shadow:0 3px 10px rgba(27,58,107,.3)}
+.quiz-progress{font-size:.8rem;font-weight:800;color:var(--dc,var(--navy));margin-bottom:9px;text-align:right;opacity:.85}
+.quiz-result-card{background:var(--card);border-radius:16px;padding:24px 18px;box-shadow:0 2px 9px rgba(0,0,0,.08);text-align:center}
+.qr-score{font-size:2.6rem;font-weight:900;color:var(--dc,var(--navy));line-height:1}
+.qr-score span{font-size:1.2rem;color:#5A5A7A;font-weight:800}
+.qr-stars{margin:10px 0 4px;font-size:1.5rem;letter-spacing:2px}
+.qr-stars .on{color:var(--gold)}
+.qr-stars .off{color:#E2DCCB}
+.qr-msg{font-size:.95rem;font-weight:800;color:var(--text);margin-top:8px;line-height:1.45}
+.qr-pass{margin-top:10px;display:inline-block;background:var(--gold);color:var(--navy);font-weight:900;font-size:.8rem;border-radius:20px;padding:5px 14px}
 .quiz-next-btn:active{transform:scale(.97)}
 
 /* ── EXPLORE (legacy trivia styles reused) ── */

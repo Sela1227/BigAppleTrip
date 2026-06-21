@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.10.0
+- **版本：** V1.11.0
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -50,7 +50,7 @@
 | 6 分頁 + detail/celebrate | `.screen` / `showScreen()` | CSS `.screen.active` + 底部 nav |
 | 18 收集景點 / 12 尋寶 | `SPOTS[]` / `HUNT[]` | 對應陣列 |
 | 知識庫手風琴 | `toggleKnow` 先關其他 `.know-card.open` 再開本項 |
-| 景點挑戰（多題）| SPOTS `quiz` 改陣列 `[{q,opts,ans}]`；`quizAns`（kk'nyc-quizans'）記每題作答；全部答對才加入 quizDone（q 上限仍 18，徽章不變）|
+| 景點挑戰（隨機計分）| `buildSpotQuiz(id)` 抽 3 題 `SPOTS.quiz+SPOTQ_EXTRA[id]` + 2 題 `ENGQ`，`_shuffleOpts` 打亂選項並重映 ans；`renderSpotQuiz`/`answerSpotQuiz`/`nextSpotQuestion`/`showSpotQuizResult`/`retrySpotQuiz` 一次一題計分；過關(≥4/5)→`quizDone.push(id)`（徽章門檻 q>=18 不變）。資料 `ENGQ`/`SPOTQ_EXTRA` 在 kids.data.js |
 | 分天尋寶＋拍照 | HUNT 加 `day`（20 個分 8 天）；`huntCapture`→`handleHuntPhoto`（複用 #photo-input，存 `huntPhotos` kk'nyc-huntphoto'）標記完成 |
 | 明信片語音 | `toggleVoice(k,mode)`；mode=postcard 時寫入 #post-msg |
 | 護照成就分享卡 | `buildCardSVG`（組 navy/金卡：頭像+進度+徽章+已收集地標）→ `svgToPng`（SVG→canvas→PNG）→ `shareCard`（navigator.share files / 下載 fallback），按鈕在成就畫面 |
@@ -164,6 +164,12 @@
    - 做法：① 所有會被 `loadKidState()`／init 早期存取的狀態變數，一律宣告在檔案**頂層狀態區**（和 stamped/quizDone 同一行）② 交付前**務必跑 DOM harness**（見下方煙霧測試）實際執行 init + 每個 render + 互動函式，不能只靠 compile
 
 
+16. **`setPointerCapture` 會讓子元素收不到合成 `click`（觸控尤其明顯）**
+   - 症狀：互動地圖（`#usmap`）點 pin／行政區沒反應；pan/zoom 正常但「點擊」失效
+   - 原因：手勢用 `svg.setPointerCapture(e.pointerId)` 做 pan，pointer 事件被捕獲到 `<svg>`，瀏覽器把之後合成的 `click` 改派到捕獲元素（svg）而非 pin/borough → `.pin-tap`/`.boro-shape` 的 click 監聽永遠不觸發
+   - 做法：**不要靠子元素的 click**。在手勢的 `pointerup` 自己做點擊判定（單指、位移<10px、時間<600ms 視為 tap）→ `document.elementFromPoint(x,y)` + `.closest('.pin-tap'/'.boro-shape'/'.us-state')` 直接呼叫對應動作；移除原本收不到的 click 監聽，避免桌機 double-fire。另把 `#usmap` 設 `touch-action:none`（全域 `*{touch-action:manipulation}` 會被它繼承，導致瀏覽器搶走單指手勢）
+
+
 ## 五、煙霧測試
 
 > **鐵律：compile 過 ≠ 能跑。** 每次改 kids.js 後，除了 `compileFunction` 語法檢查，**一定要用 DOM-proxy harness（專案內 `_smoketest.js`）實際 eval 整個 app**，確認 init 不拋例外，且 renderHome/Map/Hunt/Cards/Postcard/Knowledge/Achieve + openDetail/navTo/switchKid 全部能跑。`node _smoketest.js` 應全部顯示 ✓。這次 V1.9.0→V1.9.1 的空白 bug 就是只跑 compile、沒跑 runtime 漏掉的。（每次升版必跑，可貼上）
@@ -192,6 +198,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.11.0 | **三項**：①**修 bug**：互動地圖點 pin/行政區沒反應——`setPointerCapture` 讓合成 `click` 改派到 `<svg>`，子元素收不到（坑 #16）；改在手勢 `pointerup` 自做點擊判定（位移<10px+時間<600ms→`elementFromPoint`+`closest` 觸發 openDetail/showBoro/zoomPreset），`#usmap` 設 `touch-action:none`。②**英文單字題庫** `ENGQ`（28 題）+ 字卡 16→25。③**景點挑戰改隨機計分**：每次抽 5 題（3 該景點知識 + 2 英文單字，選項順序也打亂）一次一題、計分、像問答，過關(≥4/5)記入 `quizDone`；資料新增 `SPOTQ_EXTRA`（每景點 +3 題，依事實撰寫）。煙霧測試 36/36 + 地圖點擊事件模擬 5/5。|
 | V1.10.0 | **頭像新增髮型／配件**：髮型 16→22（長直髮〔含後層垂落〕、丸子頭、雙丸子、低雙馬尾、捲髮、短髮）；配件 6→10（金王冠、紅耳罩耳機、花朵髮夾、藍毛帽）。新增由 `AV_CATS` 的 `count` 自動帶入編輯器選項；front 層加進 `avHair`、長直髮/低雙馬尾的後層加進 `avHairBack`、配件加進 `avAcc`。另加 2 組預設造型（丸子頭+王冠、短髮+耳機）。全用既有色票、未引入新漸層 id（坑 #3）。煙霧測試 27/27 全綠、cairosvg montage 視覺確認。|
 | V1.9.1 | **修 bug**：V1.9.0 的 `huntPhotos` 用 `let` 宣告在尋寶區，被開頭 `loadKidState` 早期存取 → TDZ 例外 → init 中斷、多畫面空白。宣告移到頂層狀態區即修復。新增 `_smoketest.js`（DOM harness）為必跑煙霧測試（坑 #15）。|
 | V1.9.0 | 5 項：①知識庫手風琴（開一關其他）②景點標題列縮小（det-hdr/title/tagline 緊縮）③景點知識 3→5、挑戰 1→2 題（quiz 改陣列、多題渲染、per-題作答記錄）並清掉本區 emoji（story 開頭圖示去除、facts 改統一金點、quiz 結果 ✅❌🌟 改純文字）④明信片支援語音輸入 ⑤尋寶改 20 個分 8 天、拍照完成任務（新增 8 個尋寶 SVG）。|
@@ -211,13 +218,14 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 七、下版候選工作（按優先序）
 
-1. **kids 加英文／中文切換**，當作旅途英文學習（第一優先）
+1. **kids 加英文／中文切換**，當作旅途英文學習（第一優先；ENGQ 題庫已備）
 2. itinerary 加「今日該去哪」依日期自動高亮當天
 3. 知識卡內文 emoji 也可改 SVG/移除（目前知識庫內文仍有裝飾 emoji）
 4. 成就分享卡不同版型／背景（延伸 V1.8.0）
-5. （視需要）itinerary 若繼續長大再考慮同樣拆層
+5. 景點挑戰：可考慮加「最佳成績」記錄、或英文題加發音
+6. （視需要）itinerary 若繼續長大再考慮同樣拆層
 
-> 已完成並移出候選：頭像新增髮型／配件（V1.10.0）、護照成就分享卡（V1.8.0）。
+> 已完成並移出候選：頭像髮型／配件（V1.10.0）、互動地圖點擊修復＋英文題庫＋景點挑戰計分（V1.11.0）、護照成就分享卡（V1.8.0）。
 
 ---
 
@@ -229,4 +237,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.10.0 擴充捏臉系統：髮型 16→22、配件 6→10（長直髮/丸子頭/雙丸子/低雙馬尾/捲髮/短髮＋王冠/耳機/花朵髮夾/毛帽），新項目由 `AV_CATS` 的 count 自動帶進編輯器、長髮款補 `avHairBack` 後層、全用既有色票零新漸層 id；煙霧測試 27/27 全綠＋cairosvg 視覺驗證。
+V1.11.0 修互動地圖點擊失靈（pointer capture 吃掉合成 click，坑 #16，改 pointerup 自判定 tap）、新增英文單字題庫 ENGQ(28)+字卡、景點挑戰改成隨機 5 題（3 景點知識+2 英文）計分像問答（SPOTQ_EXTRA 每景點+3 題）；煙霧 36/36、地圖事件模擬 5/5。
