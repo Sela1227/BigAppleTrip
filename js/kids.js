@@ -27,12 +27,14 @@ let pendingPhotoData=null;
 
 // per-kid namespaced storage
 function kk(base){ return base+'-k'+currentKid; }
-let stamped=[], quizDone=[], photos={}, journals={};
+let stamped=[], quizDone=[], photos={}, journals={}, quizAns={};
 function loadKidState(){
   stamped=JSON.parse(storeGet(kk('nyc-stamped'),'[]'));
   quizDone=JSON.parse(storeGet(kk('nyc-quiz'),'[]'));
   photos=JSON.parse(storeGet(kk('nyc-photos'),'{}'));
   journals=JSON.parse(storeGet(kk('nyc-journals'),'{}'));
+  huntPhotos=JSON.parse(storeGet(kk('nyc-huntphoto'),'{}'));
+  quizAns=JSON.parse(storeGet(kk('nyc-quizans'),'{}'));
 }
 loadKidState();
 
@@ -282,16 +284,23 @@ function openDetail(id){
   document.getElementById('det-title').textContent=s.name;
   document.getElementById('det-tagline').textContent=s.short;
 
-  document.getElementById('tab-story').innerHTML=`<div class="story-text">${s.story}</div>`;
-  document.getElementById('tab-facts').innerHTML=s.facts.map(f=>`<div class="fact-card"><span class="fact-e">${f.i}</span><div class="fact-t">${f.t}</div></div>`).join('');
+  document.getElementById('tab-story').innerHTML=`<div class="story-text">${s.story.replace(/^[\u{1F000}-\u{1FAFF}\u2600-\u27BF\u2B00-\u2BFF\uFE0F\u2049\u203C]+\s*\n?/u,'')}</div>`;
+  document.getElementById('tab-facts').innerHTML=s.facts.map(f=>`<div class="fact-card"><span class="fact-e"><svg viewBox="0 0 24 24" style="width:14px;height:14px"><circle cx="12" cy="12" r="6" fill="#F4B942"/><circle cx="12" cy="12" r="9" fill="none" stroke="#F4B942" stroke-width="1.6" opacity="0.45"/></svg></span><div class="fact-t">${f.t}</div></div>`).join('');
 
-  const qDone=quizDone.includes(s.id);
-  document.getElementById('tab-quiz').innerHTML=`<div class="quiz-card">
-    <div class="quiz-q">${s.quiz.q}</div>
-    ${s.quiz.opts.map((o,i)=>`<div class="quiz-opt${qDone?(i===s.quiz.ans?' correct dis':' dis'):''}" onclick="answerQuiz(this,${i},${s.quiz.ans},'${s.id}')">
-      <span class="opt-letter">${'ABCD'[i]}</span>${o}</div>`).join('')}
-    <div class="quiz-res${qDone?' show ok':''}" id="quiz-res">${qDone?'✅ 答對了！你超厲害！🌟':''}</div>
-  </div>`;
+  const qz=Array.isArray(s.quiz)?s.quiz:[s.quiz];
+  const qans=quizAns[s.id]||{};
+  document.getElementById('tab-quiz').innerHTML=qz.map(function(qq,qi){
+    const done=qans[qi]!==undefined;
+    return '<div class="quiz-card">'
+      +'<div class="quiz-q">'+(qz.length>1?('<span class="quiz-num">第 '+(qi+1)+' 題</span> '):'')+qq.q+'</div>'
+      +qq.opts.map(function(o,i){
+        var cls='quiz-opt';
+        if(done){ cls+=' dis'; if(i===qq.ans)cls+=' correct'; else if(i===qans[qi])cls+=' wrong'; }
+        return '<div class="'+cls+'" onclick="answerQuiz(this,'+i+','+qq.ans+',\''+s.id+'\','+qi+')"><span class="opt-letter">'+'ABCD'[i]+'</span>'+o+'</div>';
+      }).join('')
+      +'<div class="quiz-res'+(done?(qans[qi]===qq.ans?' show ok':' show bad'):'')+'" id="quiz-res-'+qi+'">'+(done?(qans[qi]===qq.ans?'答對了！你超厲害！':('正確答案是 '+'ABCD'[qq.ans])):'')+'</div>'
+      +'</div>';
+  }).join('');
 
   renderJournal();
   renderStampZone(isStamped);
@@ -337,7 +346,8 @@ function saveJournal(k){
 
 // ── Voice input (per kid slot) ──
 let recognizing=false, recognition=null, activeSlot=0;
-function toggleVoice(k){
+var voiceMode='journal';
+function toggleVoice(k,mode){ voiceMode=mode||'journal';
   if(!SPEECH_OK)return;
   if(recognizing){ if(recognition) recognition.stop(); return; }
   activeSlot=k;
@@ -352,8 +362,8 @@ function toggleVoice(k){
   recognition.onresult=(e)=>{
     let txt='';
     for(let i=0;i<e.results.length;i++){ txt+=e.results[i][0].transcript; }
-    const ta=document.getElementById('journal-text-'+activeSlot);
-    if(ta){ ta.value=(ta.value?ta.value+' ':'')+txt; saveJournal(activeSlot); }
+    if(voiceMode==='postcard'){ const pm=document.getElementById('post-msg'); if(pm){ pm.value=(pm.value?pm.value+' ':'')+txt; if(typeof updatePostMsg==='function') updatePostMsg(); } }
+    else { const ta=document.getElementById('journal-text-'+activeSlot); if(ta){ ta.value=(ta.value?ta.value+' ':'')+txt; saveJournal(activeSlot); } }
   };
   try{ recognition.start(); }catch(e){ recognizing=false; setVoiceUI(false); }
 }
@@ -441,22 +451,29 @@ function stampIt(){
   if(stamped.length===SPOTS.length) setTimeout(()=>{closeModal();setTimeout(()=>navTo('celebrate'),300);},1800);
 }
 
-function answerQuiz(el,chosen,correct,id){
+function answerQuiz(el,chosen,correct,id,qi){
   if(el.classList.contains('dis'))return;
-  document.querySelectorAll('.quiz-opt').forEach(o=>o.classList.add('dis'));
-  const res=document.getElementById('quiz-res');
+  const card=el.closest('.quiz-card');
+  card.querySelectorAll('.quiz-opt').forEach(function(o){o.classList.add('dis');});
+  const res=document.getElementById('quiz-res-'+qi);
+  if(!quizAns[id])quizAns[id]={};
+  quizAns[id][qi]=chosen;
   if(chosen===correct){
     el.classList.add('correct');
-    res.className='quiz-res show ok';
-    res.textContent='✅ 答對了！你超厲害！🌟';
-    if(!quizDone.includes(id)){quizDone.push(id);save();}
+    res.className='quiz-res show ok'; res.textContent='答對了！你超厲害！';
     shootStars(el);
   } else {
     el.classList.add('wrong');
-    document.querySelectorAll('.quiz-opt')[correct].classList.add('correct');
+    card.querySelectorAll('.quiz-opt')[correct].classList.add('correct');
     res.className='quiz-res show bad';
-    res.textContent='❌ 不對，正確是 '+('ABCD'[correct])+': '+document.querySelectorAll('.quiz-opt')[correct].textContent.slice(1)+' 加油！';
+    res.textContent='正確答案是 '+('ABCD'[correct])+'：'+card.querySelectorAll('.quiz-opt')[correct].textContent.slice(1)+' 加油！';
   }
+  const sp=SPOTS.find(function(x){return x.id===id;});
+  const qz=Array.isArray(sp.quiz)?sp.quiz:[sp.quiz];
+  const allRight=qz.every(function(qq,j){return quizAns[id][j]===qq.ans;});
+  if(allRight && quizDone.indexOf(id)<0){ quizDone.push(id); }
+  storeSet(kk('nyc-quizans'),JSON.stringify(quizAns));
+  save();
 }
 
 // ══ MAP DATA (real US states + NYC boroughs, Mercator) ════════
@@ -486,18 +503,26 @@ const KNOWLEDGE=[
 
 // ══ SCAVENGER HUNT ════════════════════════════════════════════
 const HUNT=[
- {id:'taxi',emoji:'🚕',name:'黃色計程車',hint:'紐約的招牌！街上到處都是'},
- {id:'hotdog',emoji:'🌭',name:'熱狗攤',hint:'路邊賣熱狗的小推車'},
- {id:'pigeon',emoji:'🕊️',name:'一隻鴿子',hint:'公園和廣場最多了'},
- {id:'subway',emoji:'🚇',name:'地鐵標誌',hint:'圓圓的、有數字或字母'},
- {id:'pretzel',emoji:'🥨',name:'椒鹽捲餅',hint:'路邊攤的鹹點心'},
- {id:'flag',emoji:'🇺🇸',name:'美國國旗',hint:'建築物上常常掛著'},
- {id:'skyscraper',emoji:'🏙️',name:'超高摩天大樓',hint:'抬頭看，高到看不到頂'},
- {id:'streetart',emoji:'🎨',name:'街頭塗鴉',hint:'牆上的彩色藝術'},
- {id:'squirrel',emoji:'🐿️',name:'一隻松鼠',hint:'中央公園裡跑來跑去'},
- {id:'bridge',emoji:'🌉',name:'一座大橋',hint:'布魯克林大橋最有名'},
- {id:'streetlamp',emoji:'🚦',name:'紅綠燈',hint:'過馬路時找找看'},
- {id:'icecream',emoji:'🍦',name:'冰淇淋車',hint:'夏天會播音樂的車'}
+ {id:'cap',day:1,name:'棒球帽',hint:'球場附近很多人戴'},
+ {id:'hotdog',day:1,name:'熱狗攤',hint:'路邊賣熱狗的小推車'},
+ {id:'taxi',day:1,name:'黃色計程車',hint:'紐約的招牌！街上到處都是'},
+ {id:'dinobone',day:2,name:'恐龍化石',hint:'博物館裡好大的骨頭'},
+ {id:'pigeon',day:2,name:'一隻鴿子',hint:'公園和廣場最多了'},
+ {id:'pretzel',day:2,name:'椒鹽捲餅',hint:'路邊攤的鹹點心'},
+ {id:'ferry',day:3,name:'渡輪',hint:'載你去看自由女神'},
+ {id:'flag',day:3,name:'美國國旗',hint:'建築物上常常掛著'},
+ {id:'bagel',day:3,name:'貝果',hint:'中間有洞的麵包'},
+ {id:'statue',day:4,name:'金色雕像',hint:'洛克菲勒中心前面金金的'},
+ {id:'skyscraper',day:4,name:'超高摩天大樓',hint:'抬頭看，高到看不到頂'},
+ {id:'streetlamp',day:4,name:'紅綠燈',hint:'過馬路前看一下'},
+ {id:'carousel',day:5,name:'旋轉木馬',hint:'遊樂園裡轉呀轉'},
+ {id:'icecream',day:5,name:'冰淇淋',hint:'天氣熱來一支'},
+ {id:'broadway',day:6,name:'百老匯招牌',hint:'亮晶晶的劇院招牌'},
+ {id:'subway',day:6,name:'地鐵標誌',hint:'圓圓的、有數字或字母'},
+ {id:'bridge',day:7,name:'大橋鋼索',hint:'布魯克林大橋上'},
+ {id:'streetart',day:7,name:'街頭塗鴉',hint:'牆上的彩色塗鴉'},
+ {id:'flower',day:8,name:'花草',hint:'高線公園的植物'},
+ {id:'squirrel',day:8,name:'松鼠',hint:'公園裡跑來跑去'},
 ];
 
 // ══ TRAVEL ENGLISH FLASHCARDS ════════════════════════════════
@@ -706,7 +731,12 @@ function renderKnowledge(){
       <div class="know-body">${k.body}</div>
     </div>`).join('');
 }
-function toggleKnow(i){ document.getElementById('kc-'+i).classList.toggle('open'); }
+function toggleKnow(i){
+  var card=document.getElementById('kc-'+i);
+  var wasOpen=card.classList.contains('open');
+  document.querySelectorAll('.know-card.open').forEach(function(x){x.classList.remove('open');});
+  if(!wasOpen){ card.classList.add('open'); }
+}
 
 // ══ QUIZ (multiple choice + scoring) ══════════════════════════
 let quizSet=[];        // array of 10 question indices
@@ -866,26 +896,55 @@ function renderFun(){
 // ── Scavenger hunt (per kid) ──
 function huntKey(){ return kk('nyc-hunt'); }
 function getHunt(){ try{return JSON.parse(storeGet(huntKey(),'[]'));}catch(e){return [];} }
+let huntPhotos={};
+let pendingHuntId=null;
+function huntPhotoKey(){ return kk('nyc-huntphoto'); }
 function renderHunt(){
   const pane=document.getElementById('fun-hunt');
   const found=getHunt();
-  pane.innerHTML=`<div class="hunt-progress">${kidNames[currentKid]} 找到了 ${found.length} / ${HUNT.length} 個！</div>`+
-    HUNT.map(h=>{
-      const isF=found.includes(h.id);
-      return `<div class="hunt-item${isF?' found':''}" onclick="toggleHunt('${h.id}')">
-        <span class="hunt-emoji">${huntArt(h.id)}</span>
-        <div class="hunt-body"><div class="hunt-name">${h.name}</div><div class="hunt-hint">${h.hint}</div></div>
-        <div class="hunt-check">${isF?'✓':''}</div>
-      </div>`;
-    }).join('');
+  const byDay={};
+  HUNT.forEach(function(h){ (byDay[h.day]=byDay[h.day]||[]).push(h); });
+  let html='<div class="hunt-progress">'+kidNames[currentKid]+' 找到了 '+found.length+' / '+HUNT.length+' 個！</div>';
+  html+='<div class="hunt-tip">每天有不同的尋寶目標，找到就拍張照完成任務！</div>';
+  Object.keys(byDay).sort(function(a,b){return a-b;}).forEach(function(day){
+    html+='<div class="hunt-day">Day '+day+'</div>';
+    byDay[day].forEach(function(h){
+      const isF=found.indexOf(h.id)>=0; const ph=huntPhotos[h.id];
+      html+='<div class="hunt-item'+(isF?' found':'')+'">'
+        +'<span class="hunt-emoji">'+(ph?'<img class="hunt-photo" src="'+ph+'">':huntArt(h.id))+'</span>'
+        +'<div class="hunt-body"><div class="hunt-name">'+h.name+'</div><div class="hunt-hint">'+h.hint+'</div></div>'
+        +(isF
+          ?'<button class="hunt-redo" onclick="unHunt(\''+h.id+'\')">✓ 完成</button>'
+          :'<button class="hunt-cam" onclick="huntCapture(\''+h.id+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;vertical-align:-3px"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.2"/></svg> 拍照</button>');
+      html+='</div>';
+    });
+  });
+  pane.innerHTML=html;
 }
-function toggleHunt(id){
-  let found=getHunt();
-  if(found.includes(id)){ found=found.filter(x=>x!==id); }
-  else { found.push(id); launchConfetti('#9B59B6'); }
+function huntCapture(id){
+  pendingHuntId=id;
+  const input=document.getElementById('photo-input');
+  input.value=''; input.onchange=handleHuntPhoto; input.click();
+}
+function handleHuntPhoto(e){
+  const file=e.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(ev){ const img=new Image(); img.onload=function(){
+    const cv=document.createElement('canvas'); const sz=Math.min(img.width,img.height);
+    cv.width=120; cv.height=120; cv.getContext('2d').drawImage(img,(img.width-sz)/2,(img.height-sz)/2,sz,sz,0,0,120,120);
+    huntPhotos[pendingHuntId]=cv.toDataURL('image/jpeg',0.6);
+    let found=getHunt(); if(found.indexOf(pendingHuntId)<0){ found.push(pendingHuntId); storeSet(huntKey(),JSON.stringify(found)); launchConfetti('#9B59B6'); }
+    storeSet(huntPhotoKey(),JSON.stringify(huntPhotos));
+    renderHunt();
+    if(getHunt().length===HUNT.length){ setTimeout(function(){ showModal('🎖️','尋寶大師！',kidNames[currentKid]+' 找到了全部 '+HUNT.length+' 個寶物，太厲害了！'); },350); }
+  }; img.src=ev.target.result; };
+  reader.readAsDataURL(file);
+}
+function unHunt(id){
+  let found=getHunt().filter(function(x){return x!==id;});
   storeSet(huntKey(),JSON.stringify(found));
+  delete huntPhotos[id]; storeSet(huntPhotoKey(),JSON.stringify(huntPhotos));
   renderHunt();
-  if(found.length===HUNT.length){ setTimeout(()=>showModal('🎖️','尋寶大師！',`${kidNames[currentKid]} 找到了全部 ${HUNT.length} 個寶物，太厲害了！`),300); }
 }
 
 // ── Flashcards ──
@@ -928,7 +987,7 @@ function renderPostcard(){
   const photoIds=Object.keys(photos);
   let picker='';
   if(photoIds.length===0){
-    picker=`<div class="post-pick-label">還沒有打卡照片！先去景點拍照打卡，就能做明信片囉 📸</div>`;
+    picker=`<div class="post-pick-label">還沒有打卡照片！先去景點拍照打卡，就能做明信片囉</div>`;
     pcPhoto=null;
   } else {
     if(!pcPhoto || !photos[pcPhoto]) pcPhoto=photoIds[0];
@@ -937,11 +996,12 @@ function renderPostcard(){
   }
   const img= (pcPhoto && photos[pcPhoto])
     ? `<img class="pc-img" src="${photos[pcPhoto]}">`
-    : `<div class="pc-img-empty">🗽 紐約明信片</div>`;
+    : `<div class="pc-img-empty">紐約明信片</div>`;
   pane.innerHTML=`
     ${picker}
     <div class="post-pick-label">② 寫一句話給家人朋友：</div>
     <textarea class="post-input" id="post-msg" placeholder="例如：阿公阿嬤，我在紐約看到好高的大樓！想念你們～" oninput="updatePostMsg()">${pcMsg}</textarea>
+    ${SPEECH_OK?`<button class="voice-btn" id="voice-btn-pc" onclick="toggleVoice('pc','postcard')"><span id="voice-ico-pc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-2px"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span> <span id="voice-txt-pc">語音輸入</span></button>`:''}
     <div class="post-pick-label">③ 你的明信片：</div>
     <div class="postcard" id="postcard-preview">
       ${img}
@@ -1031,7 +1091,7 @@ function switchTab(el,_unused,tab){
   document.getElementById('tab-'+t).classList.add('active');
 }
 
-function restartAll(){stamped=[];quizDone=[];photos={};journals={};quizSet=[];quizPos=0;quizPicks={};storeSet(kk('nyc-journals'),'{}');storeSet(kk('nyc-hunt'),'[]');save();navTo('home');}
+function restartAll(){stamped=[];quizDone=[];photos={};journals={};quizAns={};storeSet(kk('nyc-quizans'),'{}');quizSet=[];quizPos=0;quizPicks={};storeSet(kk('nyc-journals'),'{}');storeSet(kk('nyc-hunt'),'[]');save();navTo('home');}
 
 // ══ MODAL ════════════════════════════════════════════════════
 function showModal(e,title,text){
