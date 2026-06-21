@@ -466,7 +466,7 @@ function _shuffleOpts(q){
 }
 function buildSpotQuiz(id){
   const sp=SPOTS.find(s=>s.id===id);
-  const own=[].concat((sp&&Array.isArray(sp.quiz))?sp.quiz:[], (typeof SPOTQ_EXTRA!=='undefined'&&SPOTQ_EXTRA[id])?SPOTQ_EXTRA[id]:[]);
+  const own=[].concat((sp&&Array.isArray(sp.quiz))?sp.quiz:[], (typeof SPOTQ_EXTRA!=='undefined'&&SPOTQ_EXTRA[id])?SPOTQ_EXTRA[id]:[], (typeof SPOTQ_EXTRA2!=='undefined'&&SPOTQ_EXTRA2[id])?SPOTQ_EXTRA2[id]:[]);
   const eng=(typeof ENGQ!=='undefined')?ENGQ:[];
   const pickOwn=_qshuffle(own).slice(0,3).map(q=>_shuffleOpts(Object.assign({tag:'景點知識'},q)));
   const pickEng=_qshuffle(eng).slice(0,2).map(q=>_shuffleOpts(Object.assign({tag:'英文單字'},q)));
@@ -607,7 +607,23 @@ const FLASHCARDS=[
  {emoji:'🚓',en:'Police',phon:'/pəˈliːs/',zh:'警察'},
  {emoji:'🚌',en:'Bus',phon:'/bʌs/',zh:'公車'},
  {emoji:'🌳',en:'Park',phon:'/pɑːrk/',zh:'公園'},
- {emoji:'✈️',en:'Airport',phon:'/ˈerpɔːrt/',zh:'機場'}
+ {emoji:'✈️',en:'Airport',phon:'/ˈerpɔːrt/',zh:'機場'},
+ {emoji:'🏙️',en:'Skyscraper',phon:'/ˈskaɪskreɪpər/',zh:'摩天大樓'},
+ {emoji:'🏛️',en:'Museum',phon:'/mjuˈziːəm/',zh:'博物館'},
+ {emoji:'🌉',en:'Bridge',phon:'/brɪdʒ/',zh:'橋'},
+ {emoji:'⛴️',en:'Ferry',phon:'/ˈferi/',zh:'渡輪'},
+ {emoji:'🗽',en:'Statue',phon:'/ˈstætʃuː/',zh:'雕像'},
+ {emoji:'🎭',en:'Broadway',phon:'/ˈbrɔːdweɪ/',zh:'百老匯'},
+ {emoji:'🎁',en:'Souvenir',phon:'/ˌsuːvəˈnɪr/',zh:'紀念品'},
+ {emoji:'🛗',en:'Elevator',phon:'/ˈeləveɪtər/',zh:'電梯'},
+ {emoji:'🚉',en:'Station',phon:'/ˈsteɪʃn/',zh:'車站'},
+ {emoji:'🛣️',en:'Avenue',phon:'/ˈævənuː/',zh:'大道'},
+ {emoji:'🕊️',en:'Pigeon',phon:'/ˈpɪdʒɪn/',zh:'鴿子'},
+ {emoji:'🐿️',en:'Squirrel',phon:'/ˈskwɜːrəl/',zh:'松鼠'},
+ {emoji:'🥯',en:'Bagel',phon:'/ˈbeɪɡl/',zh:'貝果'},
+ {emoji:'🥨',en:'Pretzel',phon:'/ˈpretsl/',zh:'椒鹽脆餅'},
+ {emoji:'🌭',en:'Hot dog',phon:'/hɑːt dɔːɡ/',zh:'熱狗'},
+ {emoji:'🌆',en:'Skyline',phon:'/ˈskaɪlaɪn/',zh:'天際線'}
 ];
 const BORO_COL={'Manhattan':'#4E8FC4','Brooklyn':'#E5853C','Queens':'#69AD4E','Bronx':'#D55B58','Staten Island':'#9B6FB5'};
 const BORO_ID2={'Manhattan':'manhattan','Brooklyn':'brooklyn','Queens':'queens','Bronx':'bronx','Staten Island':'staten'};

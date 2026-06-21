@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.11.0
+- **版本：** V1.11.1
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -50,7 +50,7 @@
 | 6 分頁 + detail/celebrate | `.screen` / `showScreen()` | CSS `.screen.active` + 底部 nav |
 | 18 收集景點 / 12 尋寶 | `SPOTS[]` / `HUNT[]` | 對應陣列 |
 | 知識庫手風琴 | `toggleKnow` 先關其他 `.know-card.open` 再開本項 |
-| 景點挑戰（隨機計分）| `buildSpotQuiz(id)` 抽 3 題 `SPOTS.quiz+SPOTQ_EXTRA[id]` + 2 題 `ENGQ`，`_shuffleOpts` 打亂選項並重映 ans；`renderSpotQuiz`/`answerSpotQuiz`/`nextSpotQuestion`/`showSpotQuizResult`/`retrySpotQuiz` 一次一題計分；過關(≥4/5)→`quizDone.push(id)`（徽章門檻 q>=18 不變）。資料 `ENGQ`/`SPOTQ_EXTRA` 在 kids.data.js |
+| 景點挑戰（隨機計分）| `buildSpotQuiz(id)` 抽 3 題 `SPOTS.quiz+SPOTQ_EXTRA[id]+SPOTQ_EXTRA2[id]`（每景點 9 題池）+ 2 題 `ENGQ`，`_shuffleOpts` 打亂選項並重映 ans；`renderSpotQuiz`/`answerSpotQuiz`/`nextSpotQuestion`/`showSpotQuizResult`/`retrySpotQuiz` 一次一題計分；過關(≥4/5)→`quizDone.push(id)`（徽章門檻 q>=18 不變）。資料 `ENGQ`/`SPOTQ_EXTRA` 在 kids.data.js |
 | 分天尋寶＋拍照 | HUNT 加 `day`（20 個分 8 天）；`huntCapture`→`handleHuntPhoto`（複用 #photo-input，存 `huntPhotos` kk'nyc-huntphoto'）標記完成 |
 | 明信片語音 | `toggleVoice(k,mode)`；mode=postcard 時寫入 #post-msg |
 | 護照成就分享卡 | `buildCardSVG`（組 navy/金卡：頭像+進度+徽章+已收集地標）→ `svgToPng`（SVG→canvas→PNG）→ `shareCard`（navigator.share files / 下載 fallback），按鈕在成就畫面 |
@@ -198,6 +198,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.11.1 | **內容擴充**：①景點挑戰題目「高度相關擴展」——每景點再 +4 題緊扣該景點故事（新 `SPOTQ_EXTRA2`），題池 5→**9 題/景點**（原 quiz 2 + EXTRA 3 + EXTRA2 4），抽 3 更隨機更相關；`buildSpotQuiz` 的 own 池納入 EXTRA2。②英文字卡 +16 張紐約旅遊主題（Skyscraper/Museum/Bridge/Ferry/Statue/Broadway/Souvenir/Bagel/Pretzel/Hot dog/Skyline…），FLASHCARDS→40。煙霧 38/38。|
 | V1.11.0 | **三項**：①**修 bug**：互動地圖點 pin/行政區沒反應——`setPointerCapture` 讓合成 `click` 改派到 `<svg>`，子元素收不到（坑 #16）；改在手勢 `pointerup` 自做點擊判定（位移<10px+時間<600ms→`elementFromPoint`+`closest` 觸發 openDetail/showBoro/zoomPreset），`#usmap` 設 `touch-action:none`。②**英文單字題庫** `ENGQ`（28 題）+ 字卡 16→25。③**景點挑戰改隨機計分**：每次抽 5 題（3 該景點知識 + 2 英文單字，選項順序也打亂）一次一題、計分、像問答，過關(≥4/5)記入 `quizDone`；資料新增 `SPOTQ_EXTRA`（每景點 +3 題，依事實撰寫）。煙霧測試 36/36 + 地圖點擊事件模擬 5/5。|
 | V1.10.0 | **頭像新增髮型／配件**：髮型 16→22（長直髮〔含後層垂落〕、丸子頭、雙丸子、低雙馬尾、捲髮、短髮）；配件 6→10（金王冠、紅耳罩耳機、花朵髮夾、藍毛帽）。新增由 `AV_CATS` 的 `count` 自動帶入編輯器選項；front 層加進 `avHair`、長直髮/低雙馬尾的後層加進 `avHairBack`、配件加進 `avAcc`。另加 2 組預設造型（丸子頭+王冠、短髮+耳機）。全用既有色票、未引入新漸層 id（坑 #3）。煙霧測試 27/27 全綠、cairosvg montage 視覺確認。|
 | V1.9.1 | **修 bug**：V1.9.0 的 `huntPhotos` 用 `let` 宣告在尋寶區，被開頭 `loadKidState` 早期存取 → TDZ 例外 → init 中斷、多畫面空白。宣告移到頂層狀態區即修復。新增 `_smoketest.js`（DOM harness）為必跑煙霧測試（坑 #15）。|
@@ -237,4 +238,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.11.0 修互動地圖點擊失靈（pointer capture 吃掉合成 click，坑 #16，改 pointerup 自判定 tap）、新增英文單字題庫 ENGQ(28)+字卡、景點挑戰改成隨機 5 題（3 景點知識+2 英文）計分像問答（SPOTQ_EXTRA 每景點+3 題）；煙霧 36/36、地圖事件模擬 5/5。
+V1.11.1 把景點挑戰題庫擴成每景點 9 題（新增 SPOTQ_EXTRA2，每景點 +4 題緊扣故事）、再加 16 張紐約旅遊英文字卡（FLASHCARDS→40）；承接 V1.11.0 的地圖點擊修復（坑 #16）、ENGQ 題庫、景點挑戰隨機 5 題（3 景點知識+2 英文）計分。煙霧 38/38、地圖事件模擬 5/5。
