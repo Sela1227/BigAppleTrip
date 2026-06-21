@@ -58,7 +58,7 @@ function renderKidSwitcher(){
     <button class="kid-chip${k===currentKid?' active':''}" onclick="switchKid(${k})">
       <span class="kid-av">${buildAvatar(kidAvatars[k],30)}</span><span class="kid-nm">${kidNames[k]}</span>
     </button>`).join('')+
-    `<button class="kid-edit-btn" onclick="openKidEdit(${currentKid})" title="編輯">✏️</button>`;
+    `<button class="kid-edit-btn" onclick="openKidEdit(${currentKid})" title="編輯"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M13.5 6.5l3 3"/></svg></button>`;
 }
 // ══ AVATAR (custom face builder) ══════════════════════════════
 const AV_SKIN=['#FCE3C8','#F7CDA1','#EAB384','#CE9263','#A06E47'];
@@ -315,11 +315,11 @@ function renderJournal(){
   if(typeof entry==='object'&&entry!==null) entry=entry[0]||entry[currentKid]||''; // migrate old 2-slot
   const saved=entry||'';
   const voiceBtn=SPEECH_OK
-    ? `<button class="voice-btn" id="voice-btn-0" onclick="toggleVoice(0)"><span id="voice-ico-0">🎤</span> <span id="voice-txt-0">語音輸入</span></button>`
+    ? `<button class="voice-btn" id="voice-btn-0" onclick="toggleVoice(0)"><span id="voice-ico-0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-2px"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span> <span id="voice-txt-0">語音輸入</span></button>`
     : `<div class="voice-note">（這個瀏覽器不支援語音輸入，可以用打字的喔）</div>`;
   pane.innerHTML=`
     ${photo?`<img class="journal-photo" src="${photo}" alt="">`:''}
-    <div class="journal-label">✍️ ${kidNames[currentKid]} 在 ${s.name} 的旅遊心得</div>
+    <div class="journal-label">${kidNames[currentKid]} 在 ${s.name} 的旅遊心得</div>
     <textarea class="journal-text" id="journal-text-0" placeholder="今天看到了什麼？最喜歡哪裡？有什麼好玩的事？寫下來或用說的吧！" oninput="saveJournal(0)">${saved}</textarea>
     ${voiceBtn}
     <div class="journal-saved" id="journal-saved-0">${saved?'已自動儲存 ✓':''}</div>`;
@@ -362,8 +362,8 @@ function setVoiceUI(on){
   const ico=document.getElementById('voice-ico-'+activeSlot);
   const txt=document.getElementById('voice-txt-'+activeSlot);
   if(!btn)return;
-  if(on){ btn.classList.add('listening'); if(ico)ico.textContent='🔴'; if(txt)txt.textContent='聽你說…（再按停止）'; }
-  else { btn.classList.remove('listening'); if(ico)ico.textContent='🎤'; if(txt)txt.textContent='語音輸入'; }
+  if(on){ btn.classList.add('listening'); if(ico)ico.innerHTML='<svg viewBox="0 0 24 24" fill="#E5503A" style="width:1em;height:1em;vertical-align:-2px"><circle cx="12" cy="12" r="7"/></svg>'; if(txt)txt.textContent='聽你說…（再按停止）'; }
+  else { btn.classList.remove('listening'); if(ico)ico.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-2px"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>'; if(txt)txt.textContent='語音輸入'; }
 }
 
 function renderStampZone(isStamped){
@@ -379,7 +379,7 @@ function renderStampZone(isStamped){
     zone.innerHTML=`<div class="photo-preview-wrap">
       <img class="photo-thumb" src="${pendingPhotoData}" id="photo-thumb-img">
       <div class="photo-preview-info">
-        <p>📸 照片拍好了！</p>
+        <p>照片拍好了！</p>
         <span>準備蓋上 ${s.name} 的印章</span><br>
         <button class="photo-retake" onclick="retakePhoto()">重新拍照</button>
       </div>
@@ -390,7 +390,7 @@ function renderStampZone(isStamped){
   } else {
     zone.innerHTML=`<div class="photo-prompt">
       <p>先拍一張打卡紀念照，才能蓋章喔！📸</p>
-      <button class="photo-btn" onclick="openCamera()">📷 拍打卡照</button>
+      <button class="photo-btn" onclick="openCamera()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.05em;height:1.05em;vertical-align:-3px"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.2"/></svg> 拍打卡照</button>
     </div>`;
   }
 }
@@ -837,13 +837,13 @@ function renderCountdown(){
   const days=Math.round((trip-d0)/86400000);
   el.style.display='flex';
   if(days>0){
-    el.innerHTML=`<span class="cd-emoji">✈️</span><div class="cd-text"><div class="cd-big">還有 <span class="cd-num">${days}</span> 天就要出發去紐約！</div><div class="cd-sub">7 月 4 日出發 · 好好期待吧！</div></div>`;
+    el.innerHTML=`<span class="cd-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:42px;height:42px"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></span><div class="cd-text"><div class="cd-big">還有 <span class="cd-num">${days}</span> 天就要出發去紐約！</div><div class="cd-sub">7 月 4 日出發 · 好好期待吧！</div></div>`;
   } else if(days===0){
-    el.innerHTML=`<span class="cd-emoji">🎉</span><div class="cd-text"><div class="cd-big">就是今天！出發去紐約囉！</div><div class="cd-sub">展開大冒險 🗽</div></div>`;
+    el.innerHTML=`<span class="cd-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:42px;height:42px"><path d="M3 21l5-14 9 9zM14 6l1-2M18 8l2-1M17 3l.5-1M21 11l1-.5M19 5l1.5-1.5"/></svg></span><div class="cd-text"><div class="cd-big">就是今天！出發去紐約囉！</div><div class="cd-sub">展開大冒險 🗽</div></div>`;
   } else if(days>=-9){
-    el.innerHTML=`<span class="cd-emoji">🗽</span><div class="cd-text"><div class="cd-big">正在紐約探險中！</div><div class="cd-sub">把看到的、玩到的都記錄下來吧！</div></div>`;
+    el.innerHTML=`<span class="cd-emoji"><svg viewBox="0 0 24 24" fill="#fff" style="width:42px;height:42px"><path d="M12 2c-1 2-3 3-3 5a3 3 0 0 0 6 0c0-2-2-3-3-5z"/><rect x="11" y="10" width="2" height="9"/><path d="M8 20h8l-1 2H9z"/></svg></span><div class="cd-text"><div class="cd-big">正在紐約探險中！</div><div class="cd-sub">把看到的、玩到的都記錄下來吧！</div></div>`;
   } else {
-    el.innerHTML=`<span class="cd-emoji">📸</span><div class="cd-text"><div class="cd-big">紐約之旅的美好回憶</div><div class="cd-sub">隨時回來看看你的旅遊護照！</div></div>`;
+    el.innerHTML=`<span class="cd-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:42px;height:42px;vertical-align:-3px"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.2"/></svg></span><div class="cd-text"><div class="cd-big">紐約之旅的美好回憶</div><div class="cd-sub">隨時回來看看你的旅遊護照！</div></div>`;
   }
 }
 
@@ -869,7 +869,7 @@ function getHunt(){ try{return JSON.parse(storeGet(huntKey(),'[]'));}catch(e){re
 function renderHunt(){
   const pane=document.getElementById('fun-hunt');
   const found=getHunt();
-  pane.innerHTML=`<div class="hunt-progress">🔍 ${kidNames[currentKid]} 找到了 ${found.length} / ${HUNT.length} 個！</div>`+
+  pane.innerHTML=`<div class="hunt-progress">${kidNames[currentKid]} 找到了 ${found.length} / ${HUNT.length} 個！</div>`+
     HUNT.map(h=>{
       const isF=found.includes(h.id);
       return `<div class="hunt-item${isF?' found':''}" onclick="toggleHunt('${h.id}')">
@@ -899,7 +899,7 @@ function renderCards(){
       <div class="fc-en">${c.en}</div>
       <div class="fc-phon">${c.phon}</div>
       <div class="fc-zh">${c.zh}</div>
-      <button class="fc-speak" onclick="event.stopPropagation();speakCard()">🔊 聽發音</button>
+      <button class="fc-speak" onclick="event.stopPropagation();speakCard()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;vertical-align:-2px"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 8.5a4 4 0 0 1 0 7"/></svg> 聽發音</button>
     </div>
     <div class="fc-nav">
       <button class="fc-navbtn" onclick="fcPrev()">← 上一張</button>

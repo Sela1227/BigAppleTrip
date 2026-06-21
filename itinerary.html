@@ -216,6 +216,14 @@ footer {
 .topbar .topbar-sub{font-size:.68rem;color:rgba(255,255,255,.7);margin-top:1px;font-weight:600}
 .topbar-switch{display:flex;align-items:center;gap:3px;background:#F4B942;color:#15315C;border-radius:18px;padding:6px 11px 6px 13px;font-size:.8rem;font-weight:900;text-decoration:none;flex-shrink:0}
 .topbar-switch svg{width:14px;height:14px}
+
+.stickytop{position:sticky;top:0;z-index:50}
+.topbar{position:static!important;box-shadow:none!important}
+.daynav{display:flex;gap:6px;overflow-x:auto;background:#173153;padding:8px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;box-shadow:0 3px 10px rgba(27,58,107,.22)}
+.daynav::-webkit-scrollbar{display:none}
+.daychip{flex-shrink:0;color:rgba(255,255,255,.78);text-decoration:none;font-size:.8rem;font-weight:800;padding:5px 12px;border-radius:14px;background:rgba(255,255,255,.1);white-space:nowrap}
+.daychip.active{background:#F4B942;color:#15315C}
+.day-card{scroll-margin-top:108px}
 </style>
 </head>
 <body>
@@ -248,14 +256,15 @@ footer {
 </svg>
 
 <!-- ─── PAGE HEADER ─── -->
-<div class="topbar">
+<div class="stickytop"><div class="topbar">
   <a href="index.html" class="topbar-home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a>
   <div class="topbar-mid">
-    <div class="topbar-title">🗽 紐約行程</div>
+    <div class="topbar-title">紐約行程</div>
     <div class="topbar-sub">2026 · 8 天家庭旅遊</div>
   </div>
   <a href="kids.html" class="topbar-switch">探險<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a>
 </div>
+<div class="daynav" id="daynav"><a href="#day-4" class="daychip" data-day="4">抵達</a><a href="#day-5" class="daychip" data-day="5">D1</a><a href="#day-6" class="daychip" data-day="6">D2</a><a href="#day-7" class="daychip" data-day="7">D3</a><a href="#day-8" class="daychip" data-day="8">D4</a><a href="#day-9" class="daychip" data-day="9">D5</a><a href="#day-10" class="daychip" data-day="10">D6</a><a href="#day-11" class="daychip" data-day="11">D7</a><a href="#day-12" class="daychip" data-day="12">D8</a></div></div>
 <div class="ph">
   <div class="ph-label">Family Travel · 2 大 2 小</div>
   <div class="ph-title">New York</div>
@@ -287,7 +296,7 @@ footer {
 </div>
 
 <!-- ═══ ARRIVAL · 7/4 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-4">
   <div class="day-head">
     <div class="date-box"><div class="date-num">4</div><div class="date-wd">SAT · 7月</div></div>
     <div class="day-info"><div class="day-title">抵達紐約</div><div class="day-sub">2026-07-04 · Arrival Day</div></div>
@@ -329,7 +338,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 1 · 7/5 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-5">
   <div class="day-head">
     <div class="date-box"><div class="date-num">5</div><div class="date-wd">SAT · 7月</div></div>
     <div class="day-info"><div class="day-title">Yankee Stadium</div><div class="day-sub">2026-07-05 · Day 1</div></div>
@@ -392,7 +401,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 2 · 7/6 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-6">
   <div class="day-head">
     <div class="date-box"><div class="date-num">6</div><div class="date-wd">SUN · 7月</div></div>
     <div class="day-info"><div class="day-title">Museum Day</div><div class="day-sub">2026-07-06 · Day 2 · AMNH → Met → Central Park</div></div>
@@ -472,7 +481,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 3 · 7/7 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-7">
   <div class="day-head">
     <div class="date-box"><div class="date-num">7</div><div class="date-wd">MON · 7月</div></div>
     <div class="day-info"><div class="day-title">Landmarks</div><div class="day-sub">2026-07-07 · Day 3 · 自由女神 → 9/11</div></div>
@@ -555,7 +564,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 4 · 7/8 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-8">
   <div class="day-head">
     <div class="date-box"><div class="date-num">8</div><div class="date-wd">TUE · 7月</div></div>
     <div class="day-info"><div class="day-title">Midtown Classic</div><div class="day-sub">2026-07-08 · Day 4 · 步行為主</div></div>
@@ -634,7 +643,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 5 · 7/9 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-9">
   <div class="day-head">
     <div class="date-box"><div class="date-num">9</div><div class="date-wd">WED · 7月</div></div>
     <div class="day-info"><div class="day-title">American Dream Mall</div><div class="day-sub">2026-07-09 · Day 5 · 水樂園日 · 帶泳衣！</div></div>
@@ -729,7 +738,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 6 · 7/10 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-10">
   <div class="day-head">
     <div class="date-box"><div class="date-num">10</div><div class="date-wd">THU · 7月</div></div>
     <div class="day-info"><div class="day-title">Keens + Lion King</div><div class="day-sub">2026-07-10 · Day 6 · 重頭戲在晚上</div></div>
@@ -806,7 +815,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 7 · 7/11 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-11">
   <div class="day-head">
     <div class="date-box"><div class="date-num">11</div><div class="date-wd">FRI · 7月</div></div>
     <div class="day-info"><div class="day-title">Village + Brooklyn</div><div class="day-sub">2026-07-11 · Day 7 · 文青漫步</div></div>
@@ -902,7 +911,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 8 · 7/12 ═══ -->
-<div class="day-card">
+<div class="day-card" id="day-12">
   <div class="day-head">
     <div class="date-box"><div class="date-num">12</div><div class="date-wd">SAT · 7月</div></div>
     <div class="day-info"><div class="day-title">West Side → JFK</div><div class="day-sub">2026-07-12 · Day 8 · 由北往南 · 21:00 出發機場</div></div>
@@ -1070,5 +1079,14 @@ try{
 }catch(e){}
 try{ if('serviceWorker' in navigator && location.protocol==='https:'){ navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(()=>{}); } }catch(e){}
 </script>
-</body>
+<script>
+(function(){
+  var isiOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(isiOS){document.querySelectorAll('a.map-link').forEach(function(a){var m=a.href.match(/[?&]query=([^&]+)/);if(m){a.href='https://maps.apple.com/?q='+m[1];}});}
+  // active day chip on scroll
+  var chips=[].slice.call(document.querySelectorAll('.daychip'));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;chips.forEach(function(c){c.classList.toggle('active', c.getAttribute('href')==='#'+id);});var ac=document.querySelector('.daychip.active');if(ac&&ac.parentNode){var p=ac.parentNode;p.scrollTo({left:ac.offsetLeft-80,behavior:'smooth'});}}});},{rootMargin:'-120px 0px -65% 0px'});
+  document.querySelectorAll('.day-card').forEach(function(d){io.observe(d);});
+})();
+</script></body>
 </html>

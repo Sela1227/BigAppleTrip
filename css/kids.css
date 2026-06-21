@@ -23,8 +23,8 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* ── HOME ── */
 #home{padding:12px 13px 70px}
 .passport-cover{background:linear-gradient(135deg,var(--navy) 0%,#2A5298 100%);border-radius:16px;padding:18px 18px;margin-bottom:12px;display:flex;align-items:center;gap:13px;position:relative}
-.passport-cover::after{content:'🗽';position:absolute;right:12px;bottom:6px;font-size:52px;opacity:.1;transform:rotate(-10deg);pointer-events:none}
-.pci{font-size:2rem;flex-shrink:0}.pct h2{font-size:1rem;font-weight:900;color:#fff;line-height:1.4;padding-top:2px}.pct p{font-size:.75rem;color:rgba(255,255,255,.72);font-weight:600;margin-top:3px;line-height:1.45}
+
+.pci{width:46px;height:46px;flex-shrink:0;display:flex;align-items:center;justify-content:center}.pct h2{font-size:1rem;font-weight:900;color:#fff;line-height:1.4;padding-top:2px}.pct p{font-size:.75rem;color:rgba(255,255,255,.72);font-weight:600;margin-top:3px;line-height:1.45}
 .prog-bar{margin-top:9px;background:rgba(255,255,255,.18);border-radius:10px;height:7px;overflow:hidden}
 .prog-fill{background:var(--gold);height:100%;border-radius:10px;transition:width .5s cubic-bezier(.34,1.56,.64,1)}
 .sec-label{font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin:12px 2px 9px}
@@ -64,7 +64,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 .fact-t{font-size:.88rem;font-weight:600;line-height:1.55;color:var(--text)}
 .quiz-card{background:var(--card);border-radius:15px;padding:16px 14px;box-shadow:0 2px 7px rgba(0,0,0,.06)}
 .quiz-q{font-size:.97rem;font-weight:800;color:var(--text);margin-bottom:13px;line-height:1.4}
-.quiz-q::before{content:'❓ '}
+
 .quiz-opt{background:var(--bg);border:2px solid #E0DCCC;border-radius:11px;padding:11px 13px;margin-bottom:8px;cursor:pointer;font-size:.88rem;font-weight:700;color:var(--text);transition:all .2s;display:flex;align-items:center;gap:9px}
 .quiz-opt:active{transform:scale(.97)}
 .quiz-opt.correct{background:#E8F5E9;border-color:#4CAF50;color:#2E7D32}
@@ -100,7 +100,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* ── MAP ── */
 #map{padding:12px 13px 70px}
 .map-intro{background:linear-gradient(135deg,#1B6637 0%,#2E8B57 100%);border-radius:16px;padding:14px 18px;margin-bottom:12px;color:#fff;position:relative;min-height:62px;display:flex;flex-direction:column;justify-content:center}
-.map-intro::after{content:'🗺️';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:40px;opacity:.15;pointer-events:none}
+
 .map-intro h2{font-size:1.05rem;font-weight:900;margin-bottom:3px;line-height:1.35}
 .map-intro p{font-size:.78rem;opacity:.85;font-weight:600;line-height:1.45;padding-right:46px}
 
@@ -142,7 +142,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* ── KNOWLEDGE BASE ── */
 #explore{padding:12px 13px 70px}
 .know-intro{background:linear-gradient(135deg,#2C5F8A 0%,#1B3A6B 100%);border-radius:16px;padding:14px 18px;margin-bottom:14px;color:#fff;position:relative;min-height:62px;display:flex;flex-direction:column;justify-content:center}
-.know-intro::after{content:'📚';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:40px;opacity:.16;pointer-events:none}
+
 .know-intro h2{font-size:1.05rem;font-weight:900;margin-bottom:3px;line-height:1.35}
 .know-intro p{font-size:.78rem;opacity:.85;font-weight:600;line-height:1.45;padding-right:46px}
 .know-card{background:var(--card);border-radius:15px;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 7px rgba(0,0,0,.06)}
@@ -159,7 +159,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* ── QUIZ intro ── */
 #quiz{padding:12px 13px 70px}
 .quiz-intro{background:linear-gradient(135deg,#7B3A0F 0%,#C0852A 100%);border-radius:16px;padding:14px 18px;margin-bottom:14px;color:#fff;position:relative;min-height:62px}
-.quiz-intro::after{content:'❓';position:absolute;right:16px;top:16px;font-size:40px;opacity:.18;pointer-events:none}
+
 .quiz-intro h2{font-size:1.05rem;font-weight:900;margin-bottom:3px;line-height:1.35}
 .quiz-intro p{font-size:.78rem;opacity:.85;font-weight:600;line-height:1.45;padding-right:46px;margin-bottom:8px}
 .quiz-scorebar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(255,255,255,.15);border-radius:10px;padding:7px 12px;margin-bottom:10px}
@@ -185,7 +185,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* ── EXPLORE ── */
 #explore{padding:12px 13px 70px}
 .trivia-intro{background:linear-gradient(135deg,#2C5F8A 0%,#1B3A6B 100%);border-radius:16px;padding:14px 18px;margin-bottom:14px;color:#fff;position:relative;min-height:62px}
-.trivia-intro::after{content:'🗽';position:absolute;right:14px;top:18px;font-size:42px;opacity:.13;pointer-events:none}
+
 .trivia-intro h2{font-size:1.05rem;font-weight:900;margin-bottom:3px;line-height:1.35}
 .trivia-intro p{font-size:.78rem;opacity:.8;font-weight:600;line-height:1.45;padding-right:46px}
 .trivia-nav{display:flex;gap:8px;align-items:center;margin-top:12px}
@@ -204,7 +204,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* ── ACHIEVEMENTS ── */
 #achieve{padding:12px 13px 70px}
 .ach-header{background:linear-gradient(135deg,#7B3A0F 0%,#B8820A 100%);border-radius:16px;padding:18px 20px;margin-bottom:14px;color:#fff;position:relative;display:flex;align-items:center;gap:16px}
-.ach-header::after{content:'🏆';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:46px;opacity:.16;pointer-events:none}
+
 .ach-big{flex-shrink:0;text-align:center;background:rgba(255,255,255,.14);border-radius:14px;padding:8px 14px;min-width:78px}
 .big-stamp-count{font-size:1.9rem;font-weight:900;color:var(--gold);display:block;line-height:1.1}
 .ach-big-label{font-size:.62rem;font-weight:700;opacity:.8;letter-spacing:.06em}
@@ -270,7 +270,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 
 /* COUNTDOWN */
 .countdown-banner{background:linear-gradient(135deg,#E5503A 0%,#F4B942 100%);border-radius:14px;padding:12px 16px;margin-bottom:10px;color:#fff;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(229,80,58,.25)}
-.cd-emoji{font-size:2rem;flex-shrink:0}
+.cd-emoji{font-size:2rem;flex-shrink:0;display:flex;align-items:center}
 .cd-text{flex:1;min-width:0}
 .cd-big{font-size:1.05rem;font-weight:900;line-height:1.25}
 .cd-sub{font-size:.74rem;font-weight:600;opacity:.9;margin-top:1px}
@@ -289,7 +289,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* FUN HUB */
 #fun{padding:12px 13px 70px}
 .fun-intro{background:linear-gradient(135deg,#9B59B6 0%,#E5503A 100%);border-radius:16px;padding:14px 18px;margin-bottom:12px;color:#fff;position:relative;min-height:62px;display:flex;flex-direction:column;justify-content:center}
-.fun-intro::after{content:'🎡';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:40px;opacity:.16;pointer-events:none}
+
 .fun-intro h2{font-size:1.05rem;font-weight:900;margin-bottom:3px;line-height:1.35}
 .fun-intro p{font-size:.78rem;opacity:.85;font-weight:600;line-height:1.45;padding-right:46px}
 .fun-tabs{display:flex;gap:6px;margin-bottom:14px}
