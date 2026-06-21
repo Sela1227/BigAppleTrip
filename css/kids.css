@@ -234,7 +234,7 @@ html,body{height:100%;font-family:'Nunito','PingFang TC','Microsoft JhengHei','N
 /* BOTTOM NAV */
 .bottom-nav{background:var(--card);border-top:1px solid #E8E4D8;display:flex;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom)}
 .nav-btn{flex:1;min-height:50px;padding:8px 2px 6px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:inherit}
-.nav-icon{font-size:1.2rem}
+.nav-icon{width:23px;height:23px;color:#9A97A8;display:flex}.nav-icon svg{width:100%;height:100%;display:block}.nav-btn.active .nav-icon{color:var(--navy)}
 .nav-label{font-size:.58rem;font-weight:800;color:var(--text2);letter-spacing:0}
 .nav-btn.active .nav-label{color:var(--navy)}
 .nav-btn:active{background:rgba(0,0,0,.04)}

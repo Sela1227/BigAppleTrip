@@ -29,7 +29,7 @@ a.card{display:flex;align-items:center;gap:16px;text-decoration:none;color:inher
   border-radius:20px;padding:20px 18px;backdrop-filter:blur(8px);transition:transform .15s,background .15s}
 a.card:active{transform:scale(.98)}
 a.card:hover{background:rgba(255,255,255,.16)}
-.card .emoji{font-size:2.6rem;flex-shrink:0;width:58px;text-align:center}
+.card .emoji{flex-shrink:0;width:58px;display:flex;align-items:center;justify-content:center}.card .emoji svg{width:50px;height:50px}
 .card .t{flex:1}
 .card .t h2{font-size:1.2rem;font-weight:900;margin-bottom:3px}
 .card .t span{font-size:.85rem;opacity:.78;font-weight:700;line-height:1.4;display:block}
@@ -46,12 +46,12 @@ a.card:hover{background:rgba(255,255,255,.16)}
   </div>
   <div class="cards">
     <a class="card" href="./itinerary.html">
-      <span class="emoji">🗺️</span>
+      <span class="emoji"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="0" fill="none"/><path d="M34 22 18 28v54l16-6 32 10 16-6V26l-16 6-32-10z" fill="#FCEFD2"/><path d="M34 22v54M66 32v54" stroke="#F4B942" stroke-width="3" fill="none"/><path d="M24 40h6M24 52h6M40 44h18M40 56h14M72 46h6M72 58h6" stroke="#F4B942" stroke-width="3" stroke-linecap="round"/></svg></span>
       <span class="t"><h2>旅遊行程</h2><span>8 天完整行程 · 景點 · 地圖導航 · 訂位資訊</span></span>
       <span class="arrow">→</span>
     </a>
     <a class="card" href="./kids.html">
-      <span class="emoji">🧒</span>
+      <span class="emoji"><svg viewBox="0 0 100 100"><circle cx="50" cy="34" r="15" fill="#FCEFD2"/><path d="M26 84c0-14 11-24 24-24s24 10 24 24z" fill="#FCEFD2"/><circle cx="44" cy="33" r="2.4" fill="#1B3A6B"/><circle cx="56" cy="33" r="2.4" fill="#1B3A6B"/><path d="M45 40q5 4 10 0" stroke="#1B3A6B" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M35 24q15-10 30 0" stroke="#F4B942" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span>
       <span class="t"><h2>小小探險家</h2><span>蓋章護照 · 知識問答 · 捏臉頭像 · 尋寶任務</span></span>
       <span class="arrow">→</span>
     </a>
