@@ -124,7 +124,7 @@ function avHair(i,c){return [
  `<path d="M12,62 C10,33 20,15 50,14 C80,15 90,33 88,62 C86,50 80,46 73,47 C64,40 36,40 27,47 C20,46 14,50 12,62 Z" fill="${c}"/><ellipse cx="50" cy="12" rx="9.5" ry="8.5" fill="${c}"/><rect x="42" y="19" width="16" height="4" rx="2" fill="${c}"/>`,
  `<path d="M13,60 C11,33 21,15 50,14 C79,15 89,33 87,60 C85,49 79,45 72,46 C63,39 37,39 28,46 C21,45 15,49 13,60 Z" fill="${c}"/><circle cx="25" cy="20" r="8.5" fill="${c}"/><circle cx="75" cy="20" r="8.5" fill="${c}"/>`,
  `<path d="M13,62 C11,33 21,15 50,14 C79,15 89,33 87,62 C85,50 79,46 72,47 C63,40 37,40 28,47 C21,46 15,50 13,62 Z" fill="${c}"/>`,
- `<path d="M50,5 C27,5 11,21 11,46 C11,53 14,59 19,62 C9,59 6,47 9,38 C4,45 7,59 17,65 C12,70 19,76 26,73 C23,50 31,40 50,40 C69,40 77,50 74,73 C81,76 88,70 83,65 C93,59 96,45 91,38 C94,47 91,59 81,62 C86,59 89,53 89,46 C89,21 73,5 50,5 Z" fill="${c}"/>`,
+ `<path d="M13,58 C12,30 23,14 50,14 C77,14 88,30 87,58 C85,47 79,43 72,45 C63,38 37,38 28,45 C21,43 15,47 13,58 Z" fill="${c}"/><g fill="${c}"><circle cx="50" cy="13" r="9.5"/><circle cx="34" cy="16" r="8.5"/><circle cx="66" cy="16" r="8.5"/><circle cx="22" cy="27" r="8"/><circle cx="78" cy="27" r="8"/><circle cx="16" cy="41" r="7.5"/><circle cx="84" cy="41" r="7.5"/><circle cx="43" cy="11" r="7"/><circle cx="57" cy="11" r="7"/></g>`,
  `<path d="M16,50 C15,30 24,18 50,17 C76,18 85,30 84,50 C82,40 74,35 50,35 C26,35 18,40 16,50 Z" fill="${c}"/>`
 ][i]||'';}
 function avEye1(cx){return `<ellipse cx="${cx}" cy="59" rx="7" ry="8.8" fill="#fff" stroke="#2a2018" stroke-width="1.4"/><circle cx="${cx}" cy="60" r="5.4" fill="#46301f"/><circle cx="${cx}" cy="60" r="3.1" fill="#14100a"/>`;}
@@ -183,23 +183,23 @@ function buildAvatar(cfg,size){
     +avHairBack(cfg.hair||0,`url(#hr${uid})`)+`<ellipse cx="14" cy="60" rx="6.5" ry="7.5" fill="${skin}"/><ellipse cx="86" cy="60" rx="6.5" ry="7.5" fill="${skin}"/><circle cx="13" cy="60" r="2.3" fill="${sh}" opacity="0.5"/><circle cx="87" cy="60" r="2.3" fill="${sh}" opacity="0.5"/>`
     +avFace(cfg.face||0,uid)
     +`<path d="M22,40 Q50,31 78,40 Q50,43 22,40 Z" fill="#000" opacity="0.05"/>`
-    +`<ellipse cx="31" cy="76" rx="6" ry="3.8" fill="#F5A0B0" opacity="0.42"/><ellipse cx="69" cy="76" rx="6" ry="3.8" fill="#F5A0B0" opacity="0.42"/>`
+    +`<ellipse cx="31" cy="77" rx="5" ry="3" fill="#F0A8B2" opacity="0.2"/><ellipse cx="69" cy="77" rx="5" ry="3" fill="#F0A8B2" opacity="0.2"/>`
     +avHair(cfg.hair||0,`url(#hr${uid})`)+`<g transform="translate(0,-2.5)">`+avBrow(cfg.brow||0,avDarken(hc,0.12))+avEyes(cfg.eyes||0)+avAcc(cfg.acc||0,hc)+`</g><g transform="translate(0,6.5)">`+avNose(cfg.nose||0)+avMouth(cfg.mouth||0)+`</g>`
     +`</svg>`;
 }
 
 // ── Face-builder editor ──
 const AV_PRESETS=[
- {face:2,skin:1,hair:0,hairColor:0,brow:0,eyes:0,nose:2,mouth:0,acc:0},
- {face:0,skin:1,hair:7,hairColor:3,brow:1,eyes:2,nose:2,mouth:0,acc:3},
- {face:1,skin:0,hair:8,hairColor:6,brow:5,eyes:1,nose:2,mouth:0,acc:0},
- {face:3,skin:2,hair:13,hairColor:0,brow:3,eyes:0,nose:2,mouth:1,acc:1},
- {face:0,skin:3,hair:9,hairColor:4,brow:1,eyes:6,nose:2,mouth:6,acc:0},
- {face:2,skin:2,hair:11,hairColor:4,brow:2,eyes:8,nose:4,mouth:5,acc:2},
- {face:1,skin:1,hair:14,hairColor:5,brow:6,eyes:3,nose:2,mouth:0,acc:5},
- {face:4,skin:1,hair:5,hairColor:1,brow:0,eyes:11,nose:2,mouth:7,acc:0},
- {face:0,skin:1,hair:17,hairColor:6,brow:1,eyes:2,nose:2,mouth:4,acc:6},
- {face:1,skin:2,hair:21,hairColor:0,brow:0,eyes:0,nose:2,mouth:0,acc:7}
+ {face:0,skin:1,hair:21,hairColor:0,brow:0,eyes:15,nose:1,mouth:3,acc:2},
+ {face:1,skin:2,hair:11,hairColor:4,brow:5,eyes:0,nose:2,mouth:0,acc:7},
+ {face:2,skin:0,hair:7,hairColor:6,brow:0,eyes:0,nose:1,mouth:6,acc:1},
+ {face:0,skin:3,hair:13,hairColor:0,brow:6,eyes:14,nose:2,mouth:7,acc:0},
+ {face:3,skin:1,hair:16,hairColor:1,brow:4,eyes:14,nose:2,mouth:0,acc:0},
+ {face:1,skin:2,hair:9,hairColor:5,brow:0,eyes:0,nose:2,mouth:3,acc:9},
+ {face:0,skin:1,hair:5,hairColor:0,brow:2,eyes:13,nose:2,mouth:3,acc:0},
+ {face:2,skin:2,hair:20,hairColor:0,brow:1,eyes:0,nose:2,mouth:0,acc:0},
+ {face:4,skin:3,hair:17,hairColor:6,brow:0,eyes:14,nose:2,mouth:6,acc:4},
+ {face:1,skin:1,hair:8,hairColor:4,brow:5,eyes:11,nose:2,mouth:3,acc:0}
 ];
 function applyPreset(i){ editCfg=Object.assign({},AV_PRESETS[i]); renderAvOptions(); renderAvPreview(); renderAvPresets(); }
 function renderAvPresets(){

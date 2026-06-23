@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.11.1
+- **版本：** V1.11.4
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -198,6 +198,9 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.11.4 | **行程頁加「候補景點（可替換）」卡**（itinerary.html，預訂清單後、footer 前）：方便取捨替換，含 Woodbury Common Premium Outlets（名牌 outlet，註明 1651 Broadway 上車/先上網買票/可換 Day 4 白天）＋ Summit One Vanderbilt／Intrepid 無畏號／Coney Island／FAO Schwarz+LEGO／中央公園動物園，每項標注區域・所需時間・可換哪天。沿用既有 info-card 樣式與 i-bag/i-sky/i-plane/i-swim/i-shop/i-park 圖示。只動 itinerary.html。|
+| V1.11.3 | **整合 OMNY 交通卡資訊到主線**（itinerary.html）：此內容原先在另一對話誤做在舊分支 V1.9.3，本版併入最新主線。①概覽卡交通行更新：移除已停售的「7-Day Unlimited MetroCard」→「市區交通 · 地鐵／公車用 OMNY 嗶卡，每趟 $3」。②在「抵達」區塊前新增「地鐵這樣搭 · 2 大 2 小」info-card（4 行：OMNY 嗶卡用法/小孩 112cm 票/每人各用一支付方式嗶滿 12 趟該週免費/2 小時轉乘+AirTrain 另計等小提醒）。只動 itinerary.html，沿用既有卡片樣式與 #i-train/#i-info/#i-star/#i-check 圖示。|
+| V1.11.2 | **頭像優化**（依 SELA 回饋）：①重畫捲髮 `avHair` 索引 20（原本一坨凹凸怪塊→圓潤捲球帽：基底髮帽+沿輪廓 9 顆捲球）。②**降低娃娃感**：`buildAvatar` 固定腮紅由 `#F5A0B0 opacity .42 rx6` 調淡為 `#F0A8B2 opacity .2 rx5`。③`AV_PRESETS` 10 組快速造型全換成較有型、不幼的組合（太陽眼鏡/耳機/毛帽/龐克頭/俐落短髮/酷眼神/大沉穩眼），移除星星眼+大笑嘴+皇冠+花朵等過於孩子氣的組合。cairosvg 視覺驗證、煙霧 38/38。|
 | V1.11.1 | **內容擴充**：①景點挑戰題目「高度相關擴展」——每景點再 +4 題緊扣該景點故事（新 `SPOTQ_EXTRA2`），題池 5→**9 題/景點**（原 quiz 2 + EXTRA 3 + EXTRA2 4），抽 3 更隨機更相關；`buildSpotQuiz` 的 own 池納入 EXTRA2。②英文字卡 +16 張紐約旅遊主題（Skyscraper/Museum/Bridge/Ferry/Statue/Broadway/Souvenir/Bagel/Pretzel/Hot dog/Skyline…），FLASHCARDS→40。煙霧 38/38。|
 | V1.11.0 | **三項**：①**修 bug**：互動地圖點 pin/行政區沒反應——`setPointerCapture` 讓合成 `click` 改派到 `<svg>`，子元素收不到（坑 #16）；改在手勢 `pointerup` 自做點擊判定（位移<10px+時間<600ms→`elementFromPoint`+`closest` 觸發 openDetail/showBoro/zoomPreset），`#usmap` 設 `touch-action:none`。②**英文單字題庫** `ENGQ`（28 題）+ 字卡 16→25。③**景點挑戰改隨機計分**：每次抽 5 題（3 該景點知識 + 2 英文單字，選項順序也打亂）一次一題、計分、像問答，過關(≥4/5)記入 `quizDone`；資料新增 `SPOTQ_EXTRA`（每景點 +3 題，依事實撰寫）。煙霧測試 36/36 + 地圖點擊事件模擬 5/5。|
 | V1.10.0 | **頭像新增髮型／配件**：髮型 16→22（長直髮〔含後層垂落〕、丸子頭、雙丸子、低雙馬尾、捲髮、短髮）；配件 6→10（金王冠、紅耳罩耳機、花朵髮夾、藍毛帽）。新增由 `AV_CATS` 的 `count` 自動帶入編輯器選項；front 層加進 `avHair`、長直髮/低雙馬尾的後層加進 `avHairBack`、配件加進 `avAcc`。另加 2 組預設造型（丸子頭+王冠、短髮+耳機）。全用既有色票、未引入新漸層 id（坑 #3）。煙霧測試 27/27 全綠、cairosvg montage 視覺確認。|
@@ -238,4 +241,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.11.1 把景點挑戰題庫擴成每景點 9 題（新增 SPOTQ_EXTRA2，每景點 +4 題緊扣故事）、再加 16 張紐約旅遊英文字卡（FLASHCARDS→40）；承接 V1.11.0 的地圖點擊修復（坑 #16）、ENGQ 題庫、景點挑戰隨機 5 題（3 景點知識+2 英文）計分。煙霧 38/38、地圖事件模擬 5/5。
+V1.11.4 在行程頁加「候補景點（可替換）」卡（含 Woodbury Common 等家庭向備選，標注可換哪天），方便取捨。承接 V1.11.3 OMNY 卡整合、V1.11.2 頭像優化、V1.11.1 景點題庫擴充、V1.11.0 地圖修復+景點挑戰計分。
