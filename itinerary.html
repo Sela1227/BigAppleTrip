@@ -175,6 +175,7 @@ svg { display:inline-block; vertical-align:middle; fill:none; stroke:currentColo
 .rt-pre  { background:var(--warn-bg);  color:var(--warn);  }
 .rt-free { background:var(--act-bg);   color:var(--primary-l); }
 .rt-tip  { background:var(--trans-bg); color:var(--trans); }
+.rt-done { background:var(--trans-bg); color:var(--trans); font-weight:700; }
 
 /* ─── INFO PANEL ─── */
 .info-btn {
@@ -254,6 +255,9 @@ footer {
 .cl-item{transition:opacity .15s}
 .cl-item:active{opacity:.6}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+.view{display:none}
+.view.on{display:block}
+.daynav .daychip{cursor:pointer}
 </style>
 </head>
 <body>
@@ -294,7 +298,7 @@ footer {
   </div>
   <a href="kids.html" class="topbar-switch">探險<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a>
 </div>
-<div class="daynav" id="daynav"><a href="#day-4" class="daychip" data-day="4">抵達</a><a href="#day-5" class="daychip" data-day="5">D1</a><a href="#day-6" class="daychip" data-day="6">D2</a><a href="#day-7" class="daychip" data-day="7">D3</a><a href="#day-8" class="daychip" data-day="8">D4</a><a href="#day-9" class="daychip" data-day="9">D5</a><a href="#day-10" class="daychip" data-day="10">D6</a><a href="#day-11" class="daychip" data-day="11">D7</a><a href="#day-12" class="daychip" data-day="12">D8</a></div></div>
+<div class="daynav" id="daynav"><a href="#" class="daychip" data-day="4">抵達</a><a href="#" class="daychip" data-day="5">D1</a><a href="#" class="daychip" data-day="6">D2</a><a href="#" class="daychip" data-day="7">D3</a><a href="#" class="daychip" data-day="8">D4</a><a href="#" class="daychip" data-day="9">D5</a><a href="#" class="daychip" data-day="10">D6</a><a href="#" class="daychip" data-day="11">D7</a><a href="#" class="daychip" data-day="12">D8</a><a href="#" class="daychip" data-day="list">清單</a></div></div>
 <div class="ph">
   <div class="ph-label">Family Travel · 2 大 2 小</div>
   <div class="ph-title">New York</div>
@@ -302,7 +306,7 @@ footer {
 </div>
 
 <!-- ─── INFO CARD ─── -->
-<div class="info-card">
+<div class="info-card view" data-view="4">
   <div class="ic-title">行程概覽</div>
   <div class="ic-row"><svg><use href="#i-hotel"/></svg><div><b>M Social Hotel New York Times Square</b><br>226 West 52nd Street, NY 10019<br>Check-in 7/4 16:00 起 · Check-out 7/12 11:00 前</div></div>
   <div class="ic-row"><svg><use href="#i-plane"/></svg><div>
@@ -326,7 +330,7 @@ footer {
 </div>
 
 <!-- ─── SUBWAY / OMNY 濃縮指南 ─── -->
-<div class="info-card">
+<div class="info-card view" data-view="4">
   <div class="ic-title">地鐵這樣搭 · 2 大 2 小</div>
   <div class="ic-row"><svg><use href="#i-train"/></svg><div><b>全部用 OMNY 嗶卡</b>（MetroCard 已停用）。感應式信用卡、手機 Apple&nbsp;Pay／Google&nbsp;Pay，或現場買的 OMNY 卡都行，每趟 <b>$3</b>，只在進站嗶、出站不用。</div></div>
   <div class="ic-row"><svg><use href="#i-info"/></svg><div><b>小孩票</b>：未滿 112&nbsp;cm 免費（走閘門下方），每位大人最多帶 3 個；超過 112&nbsp;cm 就付全票 $3——8 歲多半要付。<br><span style="color:var(--text-3)">（$1 家庭票是 Metro-North 通勤鐵路的優惠，地鐵沒有。）</span></div></div>
@@ -335,7 +339,7 @@ footer {
 </div>
 
 <!-- ═══ ARRIVAL · 7/4 ═══ -->
-<div class="day-card" id="day-4">
+<div class="day-card view" id="day-4" data-view="4">
   <div class="day-head">
     <div class="date-box"><div class="date-num">4</div><div class="date-wd">SAT · 7月</div></div>
     <div class="day-info"><div class="day-title">抵達紐約</div><div class="day-sub">2026-07-04 · Arrival Day</div></div>
@@ -377,38 +381,50 @@ footer {
 </div>
 
 <!-- ═══ DAY 1 · 7/5 ═══ -->
-<div class="day-card" id="day-5">
+<div class="day-card view" id="day-5" data-view="5">
   <div class="day-head">
     <div class="date-box"><div class="date-num">5</div><div class="date-wd">SUN · 7月</div></div>
     <div class="day-info"><div class="day-title">Yankee Stadium</div><div class="day-sub">2026-07-05 · Day 1</div></div>
   </div>
 
+  <div class="sec s-act"><svg><use href="#i-star"/></svg>時差日 · 睡飽再出發</div>
+  <div class="row r-note">
+    <div class="row-t">上午</div>
+    <div class="row-i"><svg><use href="#i-info"/></svg></div>
+    <div class="row-b"><div class="row-name">前一晚才落地，上午慢慢來</div><div class="row-desc">在時代廣場附近吃早午餐、補時差，不用趕</div></div>
+  </div>
   <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往球場</div>
   <div class="row r-trans">
-    <div class="row-t">08:45</div>
+    <div class="row-t">11:00</div>
     <div class="row-i"><svg><use href="#i-train"/></svg></div>
-    <div class="row-b"><div class="row-name">飯店出發，搭 D 線前往 Bronx</div><div class="row-desc">Times Square → 161st St-Yankee Stadium · 約 30 分鐘</div></div>
+    <div class="row-b"><div class="row-name">飯店出發，搭 D 線前往 Bronx</div><div class="row-desc">Times Square → 161st St-Yankee Stadium · 約 25–30 分鐘</div></div>
   </div>
 
-  <div class="sec s-act"><svg><use href="#i-star"/></svg>球賽</div>
+  <div class="sec s-act"><svg><use href="#i-star"/></svg>球賽 · 洋基 vs 雙城</div>
   <div class="row r-act">
-    <div class="row-t">09:20</div>
+    <div class="row-t">11:45</div>
     <div class="row-i"><svg><use href="#i-camera"/></svg></div>
     <div class="row-b">
-      <div class="row-name">Yankee Stadium — Monument Park 導覽<a href="https://www.google.com/maps/place/?q=place_id:ChIJcWnnWiz0wokRCB6aVdnDQEk" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
-      <div class="row-desc">1 E 161st St, Bronx · 比賽前 1 小時入場</div>
+      <div class="row-name">Yankee Stadium — 先衝 Monument Park<a href="https://www.google.com/maps/place/?q=place_id:ChIJcWnnWiz0wokRCB6aVdnDQEk" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">1 E 161st St, Bronx · 開門約 11:35（賽前 2 小時）· Monument Park 先到先看</div>
+      <span class="rtag rt-done">✓ 已訂票</span>
       <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
     </div>
   </div>
   <div class="info-panel">
-    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">1 E 161st St, Bronx, NY 10451</div></div>
-    <div class="ip-row"><div class="ip-label">交通</div><div class="ip-text">地鐵 B/D/4 線，161st St-Yankee Stadium 站</div></div>
-    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">Monument Park（球員紀念碑）賽前開放，提早入場值得</div></div>
+    <div class="ip-row"><div class="ip-label">票券</div><div class="ip-text">✓ 已訂 · 7/5（日）13:35 vs 雙城 · 420B 區 11 排 14–17 號（4 張）· Order# 1071159453</div></div>
+    <div class="ip-row"><div class="ip-label">座位</div><div class="ip-text">400 層上層看台、四人連號；午後日場較曬，帽子防曬水壺</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">Monument Park 賽前約 45 分鐘關閉，一進場先去</div></div>
   </div>
   <div class="row r-food">
-    <div class="row-t">12:00</div>
+    <div class="row-t">12:45</div>
     <div class="row-i"><svg><use href="#i-food"/></svg></div>
-    <div class="row-b"><div class="row-name">午餐 — 球場美食</div><div class="row-desc">美式球場 · Yankee Stadium 內</div></div>
+    <div class="row-b"><div class="row-name">午餐 — 球場美食</div><div class="row-desc">美式球場 · Yankee Stadium 內（熱狗、雞肉條）</div></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">13:35</div>
+    <div class="row-i"><svg><use href="#i-star"/></svg></div>
+    <div class="row-b"><div class="row-name">比賽開打 — 洋基 vs 明尼蘇達雙城</div><div class="row-desc">約 16:30 結束 · 七局伸展全場合唱「New York, New York」</div></div>
   </div>
   <div class="row r-trans">
     <div class="row-t">賽後</div>
@@ -440,7 +456,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 2 · 7/6 ═══ -->
-<div class="day-card" id="day-6">
+<div class="day-card view" id="day-6" data-view="6">
   <div class="day-head">
     <div class="date-box"><div class="date-num">6</div><div class="date-wd">MON · 7月</div></div>
     <div class="day-info"><div class="day-title">Museum Day</div><div class="day-sub">2026-07-06 · Day 2 · AMNH → Met → Central Park</div></div>
@@ -481,15 +497,15 @@ footer {
     <div class="row-i"><svg><use href="#i-museum"/></svg></div>
     <div class="row-b">
       <div class="row-name">The Metropolitan Museum of Art<a href="https://www.google.com/maps/place/?q=place_id:ChIJb8Jg9pZYwokR-qHGtvSkLzs" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
-      <div class="row-desc">埃及廳 · Temple of Dendur · 1000 5th Ave</div>
-      <span class="rtag rt-tip">週三公休，今日週日正常</span>
+      <div class="row-desc">精華路線：丹鐸神廟＋盔甲廳＋頂樓花園 · 1000 5th Ave</div>
+      <span class="rtag rt-tip">週三公休，今日週一正常</span>
       <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
     </div>
   </div>
   <div class="info-panel">
-    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">挑重點：埃及廳 Temple of Dendur + 希臘羅馬廳，1.5–2 小時</div></div>
-    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">成人 $30，孩童免費（12歲以下）</div></div>
-    <div class="ip-row"><div class="ip-label">注意</div><div class="ip-text"><b>週三公休</b>，7/6 為週日無問題</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">挑精華～1.5 小時：丹鐸神廟（埃及）＋盔甲廳（騎士盔甲，小孩最愛）＋頂樓花園俯瞰中央公園；孩子累了可直接跳過</div></div>
+    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">外國訪客全票約 $30，12 歲以下免費</div></div>
+    <div class="ip-row"><div class="ip-label">注意</div><div class="ip-text"><b>週三公休</b>，7/6 為週一正常開放（週一開到 17:00）</div></div>
   </div>
   <div class="row r-act">
     <div class="row-t">15:30</div>
@@ -521,7 +537,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 3 · 7/7 ═══ -->
-<div class="day-card" id="day-7">
+<div class="day-card view" id="day-7" data-view="7">
   <div class="day-head">
     <div class="date-box"><div class="date-num">7</div><div class="date-wd">TUE · 7月</div></div>
     <div class="day-info"><div class="day-title">Landmarks</div><div class="day-sub">2026-07-07 · Day 3 · 自由女神 → 9/11</div></div>
@@ -591,6 +607,18 @@ footer {
     <div class="ip-row"><div class="ip-label">耗時</div><div class="ip-text">博物館 2–3 小時；紀念池外觀免費</div></div>
   </div>
 
+  <div class="sec s-act"><svg><use href="#i-walk"/></svg>順走 · 下城（有體力再走）</div>
+  <div class="row r-act">
+    <div class="row-t">隨走</div>
+    <div class="row-i"><svg><use href="#i-star"/></svg></div>
+    <div class="row-b"><div class="row-name">Oculus（世貿車站）<a href="https://www.google.com/maps/search/?api=1&query=Oculus+World+Trade+Center+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">就在 9/11 旁 · 純白肋骨狀建築、挑高大廳超好拍</div><span class="rtag rt-free">免費</span></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">隨走</div>
+    <div class="row-i"><svg><use href="#i-walk"/></svg></div>
+    <div class="row-b"><div class="row-name">華爾街 + 銅牛 Charging Bull<a href="https://www.google.com/maps/search/?api=1&query=Charging+Bull+Wall+Street+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">9/11 往南走 5–10 分 · 銅牛拍照、聯邦廳、Stone Street 石板老街</div><span class="rtag rt-free">免費</span></div>
+  </div>
+
   <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
   <div class="row r-food">
     <div class="row-t">19:00</div>
@@ -606,10 +634,10 @@ footer {
 </div>
 
 <!-- ═══ DAY 4 · 7/8 ═══ -->
-<div class="day-card" id="day-8">
+<div class="day-card view" id="day-8" data-view="8">
   <div class="day-head">
     <div class="date-box"><div class="date-num">8</div><div class="date-wd">WED · 7月</div></div>
-    <div class="day-info"><div class="day-title">Midtown Classic</div><div class="day-sub">2026-07-08 · Day 4 · 步行為主</div></div>
+    <div class="day-info"><div class="day-title">Midtown Classic</div><div class="day-sub">2026-07-08 · Day 4 · 中城＋SUMMIT</div></div>
   </div>
 
   <div class="sec s-act"><svg><use href="#i-walk"/></svg>上午步行</div>
@@ -646,19 +674,19 @@ footer {
     <div class="row-b"><div class="row-name">Grand Central Terminal — 穹頂大廳<a href="https://www.google.com/maps/search/?api=1&query=Grand+Central+Terminal+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">42nd St & Park Ave · 免費參觀 · 仰頭看星空穹頂</div><span class="rtag rt-free">免費</span></div>
   </div>
   <div class="row r-act">
-    <div class="row-t">16:00</div>
+    <div class="row-t">15:00</div>
     <div class="row-i"><svg><use href="#i-sky"/></svg></div>
     <div class="row-b">
-      <div class="row-name">Top of the Rock 觀景台<a href="https://www.google.com/maps/search/?api=1&query=Top+of+the+Rock+30+Rockefeller+Plaza+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
-      <div class="row-desc">30 Rockefeller Plaza · 訂黃昏場，可看到日落</div>
+      <div class="row-name">SUMMIT One Vanderbilt 觀景台<a href="https://www.google.com/maps/search/?api=1&query=SUMMIT+One+Vanderbilt+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">就在中央車站旁 · 鏡子房間＋外傾玻璃地板，小孩超愛</div>
       <span class="rtag rt-pre">提前網購</span>
       <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
     </div>
   </div>
   <div class="info-panel">
-    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">俯瞰 Empire State Building 的角度，比 Edge 更經典</div></div>
-    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">成人 $40，孩童 $34</div></div>
-    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">訂日落前 1 小時的場次，光線最好</div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">整層鏡面房間、銀色氣球房，Levitation 伸出大樓外的透明玻璃地板</div></div>
+    <div class="ip-row"><div class="ip-label">位置</div><div class="ip-text">緊鄰中央車站，逛完穹頂大廳走過去即達，動線完美</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">summitov.com 先訂時段，夏季售完快；傍晚到夜景都很美</div></div>
   </div>
 
   <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
@@ -685,7 +713,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 5 · 7/9 ═══ -->
-<div class="day-card" id="day-9">
+<div class="day-card view" id="day-9" data-view="9">
   <div class="day-head">
     <div class="date-box"><div class="date-num">9</div><div class="date-wd">THU · 7月</div></div>
     <div class="day-info"><div class="day-title">American Dream Mall</div><div class="day-sub">2026-07-09 · Day 5 · 水樂園日 · 帶泳衣！</div></div>
@@ -780,7 +808,7 @@ footer {
 </div>
 
 <!-- ═══ DAY 6 · 7/10 ═══ -->
-<div class="day-card" id="day-10">
+<div class="day-card view" id="day-10" data-view="10">
   <div class="day-head">
     <div class="date-box"><div class="date-num">10</div><div class="date-wd">FRI · 7月</div></div>
     <div class="day-info"><div class="day-title">Keens + Lion King</div><div class="day-sub">2026-07-10 · Day 6 · 重頭戲在晚上</div></div>
@@ -794,6 +822,21 @@ footer {
   </div>
   <div class="row r-act">
     <div class="row-t">10:00</div>
+    <div class="row-i"><svg><use href="#i-star"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">RiseNY — 飛行劇院＋紐約展<a href="https://www.google.com/maps/search/?api=1&query=RiseNY+160+West+45th+Street+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">160 W 45th St · 室內冷氣 · 飛行體驗會飛過自由女神、洋基球場、布魯克林大橋 · 約 1 小時</div>
+      <span class="rtag rt-pre">提前網購</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">7 個展區（時尚／音樂／百老匯…）＋懸空 4D 飛行劇院，小孩超愛</div></div>
+    <div class="ip-row"><div class="ip-label">時間</div><div class="ip-text">每天 10:00 開，約 60–90 分；riseny.com 先訂時段</div></div>
+    <div class="ip-row"><div class="ip-label">位置</div><div class="ip-text">時代廣場、飯店步行可達，室內躲熱好選擇</div></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">11:15</div>
     <div class="row-i"><svg><use href="#i-museum"/></svg></div>
     <div class="row-b"><div class="row-name">紐約公共圖書館<a href="https://www.google.com/maps/search/?api=1&query=New+York+Public+Library+5th+Ave+42nd+St" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">5th Ave & 42nd St · 大理石閱覽室 · 免費入場</div><span class="rtag rt-free">免費</span></div>
   </div>
@@ -857,10 +900,10 @@ footer {
 </div>
 
 <!-- ═══ DAY 7 · 7/11 ═══ -->
-<div class="day-card" id="day-11">
+<div class="day-card view" id="day-11" data-view="11">
   <div class="day-head">
     <div class="date-box"><div class="date-num">11</div><div class="date-wd">SAT · 7月</div></div>
-    <div class="day-info"><div class="day-title">Village + Brooklyn</div><div class="day-sub">2026-07-11 · Day 7 · 文青漫步</div></div>
+    <div class="day-info"><div class="day-title">Downtown → Brooklyn</div><div class="day-sub">2026-07-11 · Day 7 · 村→SoHo→中國城→過橋</div></div>
   </div>
 
   <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Greenwich Village</div>
@@ -886,38 +929,58 @@ footer {
     <div class="ip-row"><div class="ip-label">推薦</div><div class="ip-text">Joe Coffee / Partners Coffee 品杯咖啡 · 早晨光線最好</div></div>
   </div>
 
-  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Williamsburg</div>
+  <div class="sec s-act"><svg><use href="#i-walk"/></svg>SoHo</div>
   <div class="row r-trans">
-    <div class="row-t">11:30</div>
-    <div class="row-i"><svg><use href="#i-train"/></svg></div>
-    <div class="row-b"><div class="row-name">搭 L 線至 Bedford Ave（Williamsburg）</div></div>
+    <div class="row-t">10:30</div>
+    <div class="row-i"><svg><use href="#i-walk"/></svg></div>
+    <div class="row-b"><div class="row-name">往南散步到 SoHo</div><div class="row-desc">華盛頓廣場走 10–15 分 · 鑄鐵老街、櫥窗、選品店</div></div>
   </div>
-
-  <div class="sec s-food"><svg><use href="#i-food"/></svg>午餐</div>
-  <div class="row r-food">
-    <div class="row-t">12:00</div>
-    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+  <div class="row r-act">
+    <div class="row-t">11:00</div>
+    <div class="row-i"><svg><use href="#i-star"/></svg></div>
     <div class="row-b">
-      <div class="row-name">午餐 — L'Industrie Pizzeria<a href="https://www.google.com/maps/place/?q=place_id:ChIJQ-hJIuBbwokRRUdquw_5w5U" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
-      <div class="row-desc">精品薄皮 Pizza · 254 S 2nd St, Williamsburg</div>
+      <div class="row-name">冰淇淋博物館 Museum of Ice Cream<a href="https://www.google.com/maps/search/?api=1&query=Museum+of+Ice+Cream+558+Broadway+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">558 Broadway, SoHo · 彩糖池、全紐約最長室內溜滑梯、無限冰淇淋 · 小孩必殺 · 約 1–1.5 小時</div>
+      <span class="rtag rt-pre">提前網購</span>
       <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
     </div>
   </div>
   <div class="info-panel">
-    <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text">Burrata Pizza · Fig & Bacon — 全紐約評分最高之一</div></div>
-    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">開門即到，排隊快；外帶也可</div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">2026/2 重新開幕，三層 14 展區：彩糖池、冰淇淋地鐵、溜滑梯、無限冰淇淋試吃</div></div>
+    <div class="ip-row"><div class="ip-label">時間</div><div class="ip-text">約 1–1.5 小時；museumoficecream.com 先訂時段（旺季易售完）</div></div>
   </div>
 
-  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 DUMBO</div>
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>午餐 · 中國城</div>
   <div class="row r-trans">
-    <div class="row-t">13:30</div>
-    <div class="row-i"><svg><use href="#i-train"/></svg></div>
-    <div class="row-b"><div class="row-name">搭 F 線至 York St（DUMBO）</div></div>
+    <div class="row-t">12:30</div>
+    <div class="row-i"><svg><use href="#i-walk"/></svg></div>
+    <div class="row-b"><div class="row-name">SoHo 走到中國城</div><div class="row-desc">約 10 分鐘 · Mulberry／Canal／哥倫布公園／Doyers 老街</div></div>
+  </div>
+  <div class="row r-food">
+    <div class="row-t">12:45</div>
+    <div class="row-i"><svg><use href="#i-food"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">午餐 — Nom Wah Tea Parlor（飲茶點心）<a href="https://www.google.com/maps/search/?api=1&query=Nom+Wah+Tea+Parlor+Doyers+Street+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">中式 · 13 Doyers St · 1920 年代全紐約最老點心店，蝦餃燒賣，小盤多樣適合小孩</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text">蝦餃、燒賣、原味蛋捲、流沙包</div></div>
+    <div class="ip-row"><div class="ip-label">替代</div><div class="ip-text">想吃小籠包可改 Joe's Shanghai；簡單就雲吞麵／燒臘飯</div></div>
+    <div class="ip-row"><div class="ip-label">順遊</div><div class="ip-text">飯後逛 Doyers 彎街、買蛋塔／珍奶，感受中國城氣氛</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-bridge"/></svg>走過布魯克林大橋</div>
+  <div class="row r-act">
+    <div class="row-t">13:45</div>
+    <div class="row-i"><svg><use href="#i-bridge"/></svg></div>
+    <div class="row-b"><div class="row-name">步行布魯克林大橋 → DUMBO<a href="https://www.google.com/maps/search/?api=1&query=Brooklyn+Bridge+Pedestrian+Entrance+Manhattan" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">中國城往南到橋入口約 10 分 · 走橋約 25–30 分 · 橋上天際線經典必走</div><span class="rtag rt-free">免費</span></div>
   </div>
 
   <div class="sec s-act"><svg><use href="#i-bridge"/></svg>Brooklyn</div>
   <div class="row r-act">
-    <div class="row-t">14:00</div>
+    <div class="row-t">14:30</div>
     <div class="row-i"><svg><use href="#i-bridge"/></svg></div>
     <div class="row-b"><div class="row-name">Brooklyn Bridge Park<a href="https://www.google.com/maps/place/?q=place_id:ChIJjaFpo0ZawokRBcOFUZ13CaE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">拍橋景 · 草坪奔跑 · Manhattan 天際線最佳視角</div><span class="rtag rt-free">免費</span></div>
   </div>
@@ -927,15 +990,15 @@ footer {
     <div class="row-t">18:00</div>
     <div class="row-i"><svg><use href="#i-food"/></svg></div>
     <div class="row-b">
-      <div class="row-name">晚餐 — Gran Electrica<a href="https://www.google.com/maps/search/?api=1&query=Gran+Electrica+5+Front+St+DUMBO+Brooklyn" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
-      <div class="row-desc">墨西哥菜 · DUMBO 就地解決 · 露天位置可看橋景</div>
+      <div class="row-name">晚餐 — Time Out Market DUMBO<a href="https://www.google.com/maps/search/?api=1&query=Time+Out+Market+DUMBO+Brooklyn" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">美食市集 · DUMBO 河邊 · 多家名店一次選，小孩各點各的 · 頂樓看橋景</div>
       <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
     </div>
   </div>
   <div class="info-panel">
-    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">5 Front St, DUMBO, Brooklyn</div></div>
-    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">露天座位可看 Manhattan Bridge，夏日傍晚氛圍極佳</div></div>
-    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">推薦 Tacos al Pastor + Guacamole</div></div>
+    <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">55 Water St, DUMBO, Brooklyn（河濱）</div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">集結布魯克林多家名店的美食市集，漢堡／海鮮／甜點任選、不撞菜系；頂樓平台正對布魯克林大橋</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">傍晚上頂樓看夕陽下的大橋，再搭地鐵回 Times Square</div></div>
   </div>
 
   <div class="sec s-trans"><svg><use href="#i-train"/></svg>返回</div>
@@ -953,10 +1016,10 @@ footer {
 </div>
 
 <!-- ═══ DAY 8 · 7/12 ═══ -->
-<div class="day-card" id="day-12">
+<div class="day-card view" id="day-12" data-view="12">
   <div class="day-head">
     <div class="date-box"><div class="date-num">12</div><div class="date-wd">SUN · 7月</div></div>
-    <div class="day-info"><div class="day-title">Summit + West Side → JFK</div><div class="day-sub">2026-07-12 · Day 8 · 中城 Summit ＋ 西區 · 21:00 出發機場</div></div>
+    <div class="day-info"><div class="day-title">West Side → JFK</div><div class="day-sub">2026-07-12 · Day 8 · 西區輕鬆收尾 · 21:00 出發機場</div></div>
   </div>
 
   <div class="sec s-note"><svg><use href="#i-bag"/></svg>退房</div>
@@ -966,25 +1029,9 @@ footer {
     <div class="row-b"><div class="row-name">Check out，行李寄放飯店</div><div class="row-desc">確認行李可寄放至 20:30 取件</div></div>
   </div>
 
-  <div class="sec s-act"><svg><use href="#i-sky"/></svg>Summit ＋ West Side 連線</div>
+  <div class="sec s-act"><svg><use href="#i-walk"/></svg>西區散步</div>
   <div class="row r-act">
-    <div class="row-t">09:00</div>
-    <div class="row-i"><svg><use href="#i-sky"/></svg></div>
-    <div class="row-b">
-      <div class="row-name">Summit One Vanderbilt 觀景台<a href="https://www.google.com/maps/search/?api=1&query=Summit+One+Vanderbilt+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
-      <div class="row-desc">One Vanderbilt（Grand Central 旁）· 鏡面房＋氣球房，小孩必玩 · 約 1.5–2 小時</div>
-      <span class="rtag rt-pre">提前網購 summitov.com</span>
-      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
-    </div>
-  </div>
-  <div class="info-panel">
-    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">三層沉浸式：鏡面房、整室飄浮銀色氣球（小孩必瘋）、Levitation 玻璃台、Central Park／帝國大廈視野；<b>室內恆溫</b>，七月不怕曬</div></div>
-    <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">成人約 $48、兒童較低（依時段浮動，以官網為準）；玻璃電梯 Ascent 為加購</div></div>
-    <div class="ip-row"><div class="ip-label">交通</div><div class="ip-text">逛完從 Grand Central 搭 <b>7 號線直達 34 St-Hudson Yards（終點站）</b>，出站即 High Line 北端，接下面行程</div></div>
-    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">夏季常售完先訂時段；怕高可待室內、跳過 Levitation 玻璃台，氣球房一樣好玩</div></div>
-  </div>
-  <div class="row r-act">
-    <div class="row-t">11:00</div>
+    <div class="row-t">10:00</div>
     <div class="row-i"><svg><use href="#i-walk"/></svg></div>
     <div class="row-b"><div class="row-name">High Line — 34th St 北端入口<a href="https://www.google.com/maps/place/?q=place_id:ChIJ5bQPhMdZwokRkTwKhVxhP1g" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">7 號線 Hudson Yards 出站即達 · 由北往南步行至 14th St · 免費 · 約 1 小時</div><span class="rtag rt-free">免費</span></div>
   </div>
@@ -1077,8 +1124,12 @@ footer {
 </div>
 
 <!-- ─── CHECKLIST ─── -->
-<div class="checklist-card">
+<div class="checklist-card view" data-view="list">
   <div class="cl-title">出發前預訂清單</div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box done"></div>
+    <div><div class="cl-label">洋基 vs 雙城 球票</div><div class="cl-sub">✓ 已訂 · 7/5（日）13:35 · 420B 區 11 排 14–17 號（4 張）· Order# 1071159453</div></div>
+  </div>
   <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
     <div class="cl-box done"></div>
     <div><div class="cl-label">自由女神渡輪票</div><div class="cl-sub">✓ 官方 Statue City Cruises · 基座票 · 7/7 · 登船 8:30 · #79051393</div></div>
@@ -1093,11 +1144,15 @@ footer {
   </div>
   <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
     <div class="cl-box"></div>
-    <div><div class="cl-label">Summit One Vanderbilt 門票</div><div class="cl-sub">7/12 · summitov.com · 夏季售完快，先訂時段</div></div>
+    <div><div class="cl-label">SUMMIT One Vanderbilt 門票</div><div class="cl-sub">7/8（Day 4）· summitov.com · 夏季售完快，先訂時段</div></div>
   </div>
   <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
     <div class="cl-box"></div>
-    <div><div class="cl-label">Top of the Rock 門票</div><div class="cl-sub">7/8 黃昏場 · rockefellercenter.com</div></div>
+    <div><div class="cl-label">RiseNY 門票</div><div class="cl-sub">7/10（Day 6 上午）· riseny.com · 先訂時段</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">冰淇淋博物館 Museum of Ice Cream</div><div class="cl-sub">7/11（Day 7）· museumoficecream.com · 旺季易售完</div></div>
   </div>
   <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
     <div class="cl-box"></div>
@@ -1113,17 +1168,17 @@ footer {
   </div>
   <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
     <div class="cl-box"></div>
-    <div><div class="cl-label">大都會博物館 The Met 票</div><div class="cl-sub">7/6 · metmuseum.org · 外國訪客全票、12 歲以下免費 · 可現場買，線上選時段較免排隊</div></div>
+    <div><div class="cl-label">大都會博物館 The Met 票</div><div class="cl-sub">7/6（Day 2，精華約 1.5hr）· metmuseum.org · 12 歲以下免費 · 可現場買，線上選時段較免排隊</div></div>
   </div>
 </div>
 
 <!-- ─── 候補景點（可替換）─── -->
-<div class="info-card">
+<div class="info-card view" data-view="list">
   <div class="ic-title">候補景點 · 方便取捨替換</div>
-  <div class="ic-row"><svg><use href="#i-bag"/></svg><div><b>Woodbury Common Premium Outlets</b>（名牌 outlet · 整天）<br>曼哈頓北邊車程約 1～1.5 小時，250+ 品牌、有 Shake Shack 與兒童遊戲區。<br><span style="color:var(--text-3)">建議：可換 <b>Day 4（7/8）</b>白天，傍晚再補 Top of the Rock 看日落＋第五大道。1651&nbsp;Broadway（W&nbsp;51st，飯店旁）搭 Woodbury Bus，車票先上 woodburybus.com／CoachUSA.com 買，現場不售票。</span></div></div>
-  <div class="ic-row"><svg><use href="#i-sky"/></svg><div><b>Edge at Hudson Yards</b>（戶外玻璃天台 · 1～1.5 小時）<br>西半球最高戶外觀景台，玻璃地板＋外傾玻璃牆，刺激好拍，就在 High Line 北端。<br><span style="color:var(--text-3)">建議：偏好戶外高空刺激、不怕高的話，可換回 Day 8 的 Summit。</span></div></div>
+  <div class="ic-row"><svg><use href="#i-bag"/></svg><div><b>Woodbury Common Premium Outlets</b>（名牌 outlet · 整天）<br>曼哈頓北邊車程約 1～1.5 小時，250+ 品牌、有 Shake Shack 與兒童遊戲區。<br><span style="color:var(--text-3)">建議：整天購物，小孩較易膩，列為純備案。1651&nbsp;Broadway（W&nbsp;51st，飯店旁）搭 Woodbury Bus，車票先上 woodburybus.com／CoachUSA.com 買，現場不售票。</span></div></div>
+  <div class="ic-row"><svg><use href="#i-sky"/></svg><div><b>Edge at Hudson Yards</b>（戶外玻璃天台 · 1～1.5 小時）<br>西半球最高戶外觀景台，玻璃地板＋外傾玻璃牆，刺激好拍，就在 High Line 北端。<br><span style="color:var(--text-3)">建議：偏好戶外高空刺激、不怕高的話，可替換 Day 4 的 SUMMIT。</span></div></div>
   <div class="ic-row"><svg><use href="#i-plane"/></svg><div><b>Intrepid 無畏號海空暨太空博物館</b>（半天）<br>航空母艦＋太空梭＋潛艇，小孩超愛。西邊 Pier&nbsp;86，離飯店近。<br><span style="color:var(--text-3)">建議：可加進任何西區半天，例如 Day 8 上午。</span></div></div>
-  <div class="ic-row"><svg><use href="#i-swim"/></svg><div><b>Coney Island 康尼島</b>（整天 · 夏天限定）<br>海灘＋復古遊樂園＋Nathan's 熱狗，布魯克林南端。<br><span style="color:var(--text-3)">建議：另一種「玩樂日」，可與 Day 5 American Dream 取捨。</span></div></div>
+  <div class="ic-row"><svg><use href="#i-swim"/></svg><div><b>Coney Island 康尼島</b>（整天 · 夏天限定）<br>海灘＋復古遊樂園＋Nathan's 熱狗，布魯克林南端。<br><span style="color:var(--text-3)">建議：另一種戶外玩樂日（海灘＋遊樂園）；Day 5 已定室內水樂園，此為純備案。</span></div></div>
   <div class="ic-row"><svg><use href="#i-shop"/></svg><div><b>FAO Schwarz ＋ LEGO 旗艦店</b>（1 小時）<br>經典大玩具店，小孩最愛，第五大道、走路可到。<br><span style="color:var(--text-3)">建議：任何傍晚順路補進去。</span></div></div>
   <div class="ic-row" style="border-bottom:none"><svg><use href="#i-park"/></svg><div><b>中央公園動物園 Central Park Zoo</b>（1～1.5 小時）<br>小型動物園（《馬達加斯加》原型），就在中央公園內。<br><span style="color:var(--text-3)">建議：可直接加進 Day 2 中央公園的行程。</span></div></div>
 </div>
@@ -1149,10 +1204,18 @@ try{ if('serviceWorker' in navigator && location.protocol==='https:'){ navigator
 (function(){
   var isiOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
   if(isiOS){document.querySelectorAll('a.map-link').forEach(function(a){var m=a.href.match(/[?&]query=([^&]+)/);if(m){a.href='https://maps.apple.com/?q='+m[1];}});}
-  // active day chip on scroll
+  // 每天斷開：點哪天只顯示那天（非連續滾動）
   var chips=[].slice.call(document.querySelectorAll('.daychip'));
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;chips.forEach(function(c){c.classList.toggle('active', c.getAttribute('href')==='#'+id);});var ac=document.querySelector('.daychip.active');if(ac&&ac.parentNode){var p=ac.parentNode;p.scrollTo({left:ac.offsetLeft-80,behavior:'smooth'});}}});},{rootMargin:'-120px 0px -65% 0px'});
-  document.querySelectorAll('.day-card').forEach(function(d){io.observe(d);});
+  var views=[].slice.call(document.querySelectorAll('.view'));
+  function show(v){
+    views.forEach(function(el){el.classList.toggle('on', el.getAttribute('data-view')===v);});
+    chips.forEach(function(c){c.classList.toggle('active', c.getAttribute('data-day')===v);});
+    var ac=document.querySelector('.daychip.active');
+    if(ac&&ac.parentNode){ac.parentNode.scrollTo({left:ac.offsetLeft-80,behavior:'smooth'});}
+    window.scrollTo(0,0);
+  }
+  chips.forEach(function(c){c.addEventListener('click',function(e){e.preventDefault();show(c.getAttribute('data-day'));});});
+  show('4');
 })();
 </script></body>
 </html>
