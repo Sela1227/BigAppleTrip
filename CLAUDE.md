@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.11.4
+- **版本：** V1.11.9
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -198,6 +198,11 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.11.9 | **AMNH 標記已訂**（itinerary.html）：使用者上傳 AMNH 確認信（Monday July 06 2026）。預訂清單「自然史博物館 AMNH」改 cl-box done＋sub「✓ 已訂 7/6（週一）· tickets.amnh.org」；Day 2 AMNH 活動列加 rtag「✓ 已訂 7/6」。已訂項現為 3（自由女神、獅子王、AMNH）。只動 itinerary.html。|
+| V1.11.8 | **Day 8 觀景台 Edge → Summit One Vanderbilt**（itinerary.html，依使用者需求、Summit 對 8 歲較好玩）：因 Summit 在中城 Grand Central、Edge 在西區 Hudson Yards，重排動線為 09:00 Summit →（7 號線直達 34 St-Hudson Yards）→ 11:00 High Line → Little Island → Chelsea Market；day-sub 改「中城 Summit ＋ 西區」、section 改「Summit ＋ West Side 連線」；詳細資訊放鏡面/氣球房/室內恆溫/7 號線轉乘/怕高可跳 Levitation。預訂清單 Edge→Summit（summitov.com）。候補卡反向：Summit 移出、Edge 改列為候補。只動 itinerary.html。|
+| V1.11.7 | **Day 3 登船時間校正＋查核日期＋補預訂票**（itinerary.html）：①官方基座票 Boarding Time **8:30**（非先到先上）——出發改 07:00、登船 08:30，詳細資訊註明 8:30 為準。②**修正系統性星期錯誤**：7/5 起每天都標慢一天，已對正（7/7 實為**週二** TUE，非 MON）。③9/11 那條原註「週二公休、7/7 週一」錯誤——改為「7/7 是週二，9/11 博物館 2026 多數週二有開、訂票時確認 7/7 有時段；戶外紀念池免費」。④預訂清單新增 **9/11 博物館 / 自然史 AMNH / 大都會 Met** 三個 timed 票（皆建議線上先訂）。⑤頁尾年份 2025→2026。只動 itinerary.html。|
+| V1.11.6 | **Day 3 自由女神更新為官方基座票**（itinerary.html）：使用者改買官方 Statue City Cruises Pedestal Reserve、7/7 9:00 場、確認碼 #79051393（大人2+兒童2）。出發 07:00→**07:45**、上島 08:30→**09:00（含基座）**、Ellis 10:15→**11:00**；詳細資訊改為官方票券/確認碼/中文導覽/取票（護照+信用卡）/基座二次安檢提醒；預訂清單該條打勾。只動 itinerary.html。|
+| V1.11.5 | **Day 3 自由女神時間校正**（itinerary.html）：配合實際訂的 GetYourGuide 7/7 上午 8:00 場（8:00 為進安檢時間、第一班船約 8:30）。飯店出發 08:00→**07:00**、渡輪 09:00→**08:30**、Ellis Island 11:00→**10:15**；詳細資訊改為票券說明＋早起/帶水帽零食/控制 3 小時提醒；預訂清單票券備註改為「7/7 8:00 場 · GetYourGuide（先預訂後付款）」。只動 itinerary.html。|
 | V1.11.4 | **行程頁加「候補景點（可替換）」卡**（itinerary.html，預訂清單後、footer 前）：方便取捨替換，含 Woodbury Common Premium Outlets（名牌 outlet，註明 1651 Broadway 上車/先上網買票/可換 Day 4 白天）＋ Summit One Vanderbilt／Intrepid 無畏號／Coney Island／FAO Schwarz+LEGO／中央公園動物園，每項標注區域・所需時間・可換哪天。沿用既有 info-card 樣式與 i-bag/i-sky/i-plane/i-swim/i-shop/i-park 圖示。只動 itinerary.html。|
 | V1.11.3 | **整合 OMNY 交通卡資訊到主線**（itinerary.html）：此內容原先在另一對話誤做在舊分支 V1.9.3，本版併入最新主線。①概覽卡交通行更新：移除已停售的「7-Day Unlimited MetroCard」→「市區交通 · 地鐵／公車用 OMNY 嗶卡，每趟 $3」。②在「抵達」區塊前新增「地鐵這樣搭 · 2 大 2 小」info-card（4 行：OMNY 嗶卡用法/小孩 112cm 票/每人各用一支付方式嗶滿 12 趟該週免費/2 小時轉乘+AirTrain 另計等小提醒）。只動 itinerary.html，沿用既有卡片樣式與 #i-train/#i-info/#i-star/#i-check 圖示。|
 | V1.11.2 | **頭像優化**（依 SELA 回饋）：①重畫捲髮 `avHair` 索引 20（原本一坨凹凸怪塊→圓潤捲球帽：基底髮帽+沿輪廓 9 顆捲球）。②**降低娃娃感**：`buildAvatar` 固定腮紅由 `#F5A0B0 opacity .42 rx6` 調淡為 `#F0A8B2 opacity .2 rx5`。③`AV_PRESETS` 10 組快速造型全換成較有型、不幼的組合（太陽眼鏡/耳機/毛帽/龐克頭/俐落短髮/酷眼神/大沉穩眼），移除星星眼+大笑嘴+皇冠+花朵等過於孩子氣的組合。cairosvg 視覺驗證、煙霧 38/38。|
@@ -241,4 +246,4 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 ## 九、一句話總結
 
-V1.11.4 在行程頁加「候補景點（可替換）」卡（含 Woodbury Common 等家庭向備選，標注可換哪天），方便取捨。承接 V1.11.3 OMNY 卡整合、V1.11.2 頭像優化、V1.11.1 景點題庫擴充、V1.11.0 地圖修復+景點挑戰計分。
+V1.11.9 把 AMNH 標記為已訂（7/6 週一）。承接 V1.11.8 Day8 Edge→Summit、V1.11.7 登船/星期校正/預訂票等。已訂：自由女神基座、獅子王、AMNH；待訂：Keens、Top of the Rock、DreamWorks、9/11、The Met、Summit。
