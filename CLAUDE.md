@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.12.0
+- **版本：** V1.12.1
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -198,6 +198,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.12.1 | **修兩個收尾問題**：①**Service Worker 重寫**（`sw.js` v1→v2）：原本 network-first 無逾時，慢網／剛部署 CDN 冷時 fetch 會掛數分鐘才回退快取，導致 `kids.css` 載入慢、靠 flexbox 定位的 `.bottom-nav` 底部導航列「晚好幾分鐘才出現」。改為 **install 預快取 app shell + stale-while-revalidate**（先回快取瞬間渲染、背景更新；跨源請求不攔截），並 skipWaiting+clients.claim。順手移除三頁已無用的 Google Fonts(Nunito) render-blocking 連結（已改系統字）。部署後關閉重開 PWA 一次讓新 SW 生效。②**兒童景點收集連動行程**：行程 Day8 Edge→Summit，但兒童 `SPOTS`/`SPOTQ`/`SPOTQ_EXTRA`/`MAPDATA` pin/`PIN_NAME`/一張字卡仍是 Edge，已全部同步成 Summit（保留內部 id key `edge` 以免動到所有 key，只改顯示內容：name 改「Summit 觀景台」、icon 🔭→🪞、story/facts/quiz 改鏡子房/銀色氣球/Levitation 玻璃地板/中央車站旁、pin 座標東移近 Grand Central）。煙霧 38/38。|
 | V1.12.0 | **UI 全面 Apple 化改版**（三頁＋kids.css，純樣式層、不動結構/內容）：①字體改系統字（itinerary/index 用 SF Pro、kids 用 SF Rounded）。②色盤改 Apple 系統色：冷灰底 #F2F2F7＋純白卡＋髮絲分隔線 rgba(60,60,67,.x)＋系統分類色（藍/橙/綠/靛/紅/紫），文字灰階改 #1C1C1E/#636366/#8E8E93。③導覽列毛玻璃（backdrop-filter saturate+blur，stickytop 承載、topbar/daynav 透明）。④卡片去邊框改柔和陰影＋16px 大圓角；膠囊標籤/按鈕（border-radius 980px）；勾選框 20px/6px。⑤新增**深色模式**（@media prefers-color-scheme:dark 覆寫 token）與 prefers-reduced-motion、互動 :active 態。token 化讓全頁連動。zip 檔名空格點格式。|
 | V1.11.9 | **AMNH 標記已訂**（itinerary.html）：使用者上傳 AMNH 確認信（Monday July 06 2026）。預訂清單「自然史博物館 AMNH」改 cl-box done＋sub「✓ 已訂 7/6（週一）· tickets.amnh.org」；Day 2 AMNH 活動列加 rtag「✓ 已訂 7/6」。已訂項現為 3（自由女神、獅子王、AMNH）。只動 itinerary.html。|
 | V1.11.8 | **Day 8 觀景台 Edge → Summit One Vanderbilt**（itinerary.html，依使用者需求、Summit 對 8 歲較好玩）：因 Summit 在中城 Grand Central、Edge 在西區 Hudson Yards，重排動線為 09:00 Summit →（7 號線直達 34 St-Hudson Yards）→ 11:00 High Line → Little Island → Chelsea Market；day-sub 改「中城 Summit ＋ 西區」、section 改「Summit ＋ West Side 連線」；詳細資訊放鏡面/氣球房/室內恆溫/7 號線轉乘/怕高可跳 Levitation。預訂清單 Edge→Summit（summitov.com）。候補卡反向：Summit 移出、Edge 改列為候補。只動 itinerary.html。|
@@ -248,3 +249,15 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 ## 九、一句話總結
 
 V1.12.0 把全 app UI 以 Apple 設計語彙重做（系統字體、Apple 色盤、毛玻璃導覽、柔和陰影大圓角、膠囊元件、深色模式），純樣式層、不動內容。承接 V1.11.9 AMNH 已訂等。
+
+
+## 景點同步規則（行程↔兒童收集，務必遵守）
+
+當 `itinerary.html` 更換/新增/移除任一景點時，**兒童「景點收集」必須同步檢查更新**，否則兩邊會脫鉤（如 V1.12.1 修的 Edge→Summit）。需同步的位置：
+1. `js/kids.data.js` → `SPOTS` 該景點物件：`name`/`icon`/`color`/`short`/`story`/`facts`/`quiz`。
+2. `js/kids.data.js` → `SPOTQ` 與 `SPOTQ_EXTRA?` 中該景點的問答池（key 同景點 id）。
+3. `js/kids.data.js` → `SPOT_ART` 該景點徽章 SVG（若造型需貼合新景點才改；泛用造型可留）。
+4. `js/kids.js` → `MAPDATA.pins` 該景點座標（換地點要移到正確位置）。
+5. `js/kids.js` → `PIN_NAME` 該景點顯示名。
+6. `js/kids.js` 內任何字卡/敘述硬編到該景點名稱處（grep 景點舊名確認）。
+**降風險作法**：保留內部 id key（如 `edge`）不變，只改人可見內容，避免同步動到 SPOT_ART/SPOTQ/MAPDATA/PIN_NAME 的所有 key。改完跑 `node _smoketest.js`（應 38/38）。
