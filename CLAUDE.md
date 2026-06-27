@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.12.2
+- **版本：** V1.12.5
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -198,6 +198,9 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.12.5 | **每日即時天氣**（itinerary.html）：每天卡片 day-head 下方加一條天氣列 `.wxbar`（9 天各一，data-date=該日）。底部新增 `<script>` client 端 fetch **Open-Meteo**（免金鑰、CORS OK、座標 40.758/-73.9855、攝氏、timezone America/New_York、start/end 2026-07-04~12），取 weather_code/最高最低溫/降雨機率，WMO 碼→emoji＋中文（晴/多雲/雷雨…），渲染為「⛅ 局部多雲 30°/23° ☔10%」。隨日期逼近自動更新（forecast 16 天內才有值，超出顯示「尚未涵蓋此日」）；fetch 失敗／離線降級顯示「七月紐約約 29–31°、悶熱、午後易雷陣雨」。SW v2 跨源不攔截，離線走降級。node mock 驗證解析正確、煙霧 38/38。只動 itinerary.html。|
+| V1.12.4 | **D5 交通改叫車**（itinerary.html）：使用者選 Uber／Lyft。①**修正過時巴士**：原寫「NJ Transit Bus 351」其實 351 是 Coach USA 只在 MetLife 球賽日跑的車；直達快線現為 **#355**（Port Authority 305 號門），且 **7/9 週四 #355 平日僅 10:00、12:30 兩班、回程僅 19:00／21:30**。②去/回程巴士全改 **Uber／Lyft 門到門**（約 30 分、單程估 $40–60）；去程 info-panel 說明為何叫車＋上車點＋#355 省錢備案。③配合昨晚 SUMMIT 晚場，早上改睡飽：09:30 備行李 → 10:00 叫車 → 10:45 抵達接 Mall 11:00 開門。④回程可直接叫到 Hudson Yards 吃晚餐（Mercado Little Spain）；概覽卡 351→叫車／#355、Mercado 交通註同步。只動 itinerary.html。|
+| V1.12.3 | **SUMMIT 已訂日落場 → D4 重排為日落壓軸**（itinerary.html）：使用者訂到 **7/8 19:00 日落場、Entry Only**（不含 Ascent）。D4 由「15:00 SUMMIT」改為日落壓軸版：12:30 午餐後 → 14:00 回飯店午後休息（備戰晚場，附 FAO Schwarz 選項）→ 17:00 提早晚餐 Carmine's → 18:30 中央車站穹頂（SUMMIT 入口、往西進 transit hall）→ 19:00 SUMMIT（日落約 20:28，白天→夕陽→夜景一次收）→ 夜景步行回飯店。SUMMIT 標 `rt-done`「✓ 已訂 · 7/8 19:00 · Entry Only」，info-panel 加票券/入口/太陽眼鏡提醒；day-sub 改「中城 → SUMMIT 日落場」。訂票清單 SUMMIT 打勾。已訂項現為 4（自由女神、獅子王、AMNH、洋基）＋ SUMMIT。只動 itinerary.html。|
 | V1.12.2 | **行程頁大改版＋「每天斷開」分頁**（itinerary.html 為主、kids.data.js 一處）：①**分頁機制**：行程頁由連續滾動改為點 daynav 只顯示該天（`.view{display:none}/.view.on{display:block}` + 點擊 `show(v)` 切換，取代原 IntersectionObserver 捲動高亮）；新增「清單」頁（訂票清單＋候補景點獨立成頁）；抵達頁含行程概覽＋地鐵卡（data-view="4"）。day-card 9 個各帶 `view`+`data-view`，共 13 個 view。②**內容大改**：D1 洋基重排（時差日、11:00 出發、Monument Park 11:45、13:35 vs 雙城、`rt-done`✓已訂票 420B 11排14-17 Order#1071159453）；D2 大都會改「精華」（丹鐸神廟＋盔甲廳＋頂樓~1.5hr，孩子累可跳；**修正 7/6 週日→週一**）；D3 加 Oculus＋華爾街銅牛（免費彈性段「有體力再走」）；D4 移除 Top of the Rock、改 SUMMIT One Vanderbilt（接中央車站，15:00）；D6 加 RiseNY（飛行劇院上午 10:00）；D7 重塑（村→SoHo＋冰淇淋博物館→中國城 Nom Wah 飲茶午餐→走布魯克林大橋→DUMBO；晚餐墨西哥撞菜系 Gran Electrica→換 Time Out Market）；D8 移除 Summit、改西區輕鬆收尾。③訂票清單：洋基✓、移除 ToR、Summit 改 D4、加 RiseNY/冰淇淋博物館待訂、Met 註精華。④兒童 `edge`(Summit) day:8→4、date 7/12→7/8 同步。煙霧 38/38。|
 | V1.12.1 | **修兩個收尾問題**：①**Service Worker 重寫**（`sw.js` v1→v2）：原本 network-first 無逾時，慢網／剛部署 CDN 冷時 fetch 會掛數分鐘才回退快取，導致 `kids.css` 載入慢、靠 flexbox 定位的 `.bottom-nav` 底部導航列「晚好幾分鐘才出現」。改為 **install 預快取 app shell + stale-while-revalidate**（先回快取瞬間渲染、背景更新；跨源請求不攔截），並 skipWaiting+clients.claim。順手移除三頁已無用的 Google Fonts(Nunito) render-blocking 連結（已改系統字）。部署後關閉重開 PWA 一次讓新 SW 生效。②**兒童景點收集連動行程**：行程 Day8 Edge→Summit，但兒童 `SPOTS`/`SPOTQ`/`SPOTQ_EXTRA`/`MAPDATA` pin/`PIN_NAME`/一張字卡仍是 Edge，已全部同步成 Summit（保留內部 id key `edge` 以免動到所有 key，只改顯示內容：name 改「Summit 觀景台」、icon 🔭→🪞、story/facts/quiz 改鏡子房/銀色氣球/Levitation 玻璃地板/中央車站旁、pin 座標東移近 Grand Central）。煙霧 38/38。|
 | V1.12.0 | **UI 全面 Apple 化改版**（三頁＋kids.css，純樣式層、不動結構/內容）：①字體改系統字（itinerary/index 用 SF Pro、kids 用 SF Rounded）。②色盤改 Apple 系統色：冷灰底 #F2F2F7＋純白卡＋髮絲分隔線 rgba(60,60,67,.x)＋系統分類色（藍/橙/綠/靛/紅/紫），文字灰階改 #1C1C1E/#636366/#8E8E93。③導覽列毛玻璃（backdrop-filter saturate+blur，stickytop 承載、topbar/daynav 透明）。④卡片去邊框改柔和陰影＋16px 大圓角；膠囊標籤/按鈕（border-radius 980px）；勾選框 20px/6px。⑤新增**深色模式**（@media prefers-color-scheme:dark 覆寫 token）與 prefers-reduced-motion、互動 :active 態。token 化讓全頁連動。zip 檔名空格點格式。|

@@ -258,6 +258,14 @@ footer {
 .view{display:none}
 .view.on{display:block}
 .daynav .daychip{cursor:pointer}
+.wxbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 16px;background:var(--trans-bg);border-bottom:1px solid var(--line);font-size:13px;color:var(--text)}
+.wxbar .wx-ic{font-size:17px;line-height:1}
+.wxbar .wx-tx{font-weight:600}
+.wxbar .wx-tp{font-weight:700}
+.wxbar .wx-hi{color:var(--food)}
+.wxbar .wx-lo{color:var(--act)}
+.wxbar .wx-rn{color:var(--act);font-weight:600}
+.wxbar .wx-na,.wxbar .wx-load{color:var(--note);font-weight:500;font-size:12px;opacity:.85}
 </style>
 </head>
 <body>
@@ -314,7 +322,7 @@ footer {
     <b>回程 BR31</b> · EVA AIR · 7/13 JFK T1 <b>01:25</b> 出發 → TPE T2 05:20 抵達（7/14）<a href="https://www.google.com/maps/search/?api=1&query=Taiwan+Taoyuan+International+Airport+Terminal+2" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>T2 地圖</a><br>
     行李各 2PC · FF# 3305763694
   </div></div>
-  <div class="ic-row"><svg><use href="#i-train"/></svg><div><b>市區交通</b> · 地鐵／公車用 OMNY 嗶卡，每趟 $3（買法見下方卡）<br>American Dream Mall：Port Authority 搭 NJ Transit Bus 351</div></div>
+  <div class="ic-row"><svg><use href="#i-train"/></svg><div><b>市區交通</b> · 地鐵／公車用 OMNY 嗶卡，每趟 $3（買法見下方卡）<br>American Dream（Day 5）：建議 Uber／Lyft 直達（門到門約 30 分）；省錢可搭 NJ Transit #355 快線（平日僅 10:00、12:30 兩班）</div></div>
   <div class="ic-row" style="padding-bottom:4px;border-bottom:none;">
     <svg><use href="#i-info"/></svg>
     <div>
@@ -344,6 +352,7 @@ footer {
     <div class="date-box"><div class="date-num">4</div><div class="date-wd">SAT · 7月</div></div>
     <div class="day-info"><div class="day-title">抵達紐約</div><div class="day-sub">2026-07-04 · Arrival Day</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-04"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-trans" style="border-left-color:#2E8B57;color:#2E8B57;background:#D8ECE0;"><svg><use href="#i-plane"/></svg>去程航班</div>
   <div class="row r-trans">
@@ -386,6 +395,7 @@ footer {
     <div class="date-box"><div class="date-num">5</div><div class="date-wd">SUN · 7月</div></div>
     <div class="day-info"><div class="day-title">Yankee Stadium</div><div class="day-sub">2026-07-05 · Day 1</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-05"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-act"><svg><use href="#i-star"/></svg>時差日 · 睡飽再出發</div>
   <div class="row r-note">
@@ -461,6 +471,7 @@ footer {
     <div class="date-box"><div class="date-num">6</div><div class="date-wd">MON · 7月</div></div>
     <div class="day-info"><div class="day-title">Museum Day</div><div class="day-sub">2026-07-06 · Day 2 · AMNH → Met → Central Park</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-06"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Upper West Side</div>
   <div class="row r-trans">
@@ -542,6 +553,7 @@ footer {
     <div class="date-box"><div class="date-num">7</div><div class="date-wd">TUE · 7月</div></div>
     <div class="day-info"><div class="day-title">Landmarks</div><div class="day-sub">2026-07-07 · Day 3 · 自由女神 → 9/11</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-07"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Battery Park</div>
   <div class="row r-trans">
@@ -637,8 +649,9 @@ footer {
 <div class="day-card view" id="day-8" data-view="8">
   <div class="day-head">
     <div class="date-box"><div class="date-num">8</div><div class="date-wd">WED · 7月</div></div>
-    <div class="day-info"><div class="day-title">Midtown Classic</div><div class="day-sub">2026-07-08 · Day 4 · 中城＋SUMMIT</div></div>
+    <div class="day-info"><div class="day-title">Midtown Classic</div><div class="day-sub">2026-07-08 · Day 4 · 中城 → SUMMIT 日落場</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-08"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-act"><svg><use href="#i-walk"/></svg>上午步行</div>
   <div class="row r-act">
@@ -667,47 +680,55 @@ footer {
     <div class="ip-row"><div class="ip-label">價格</div><div class="ip-text">每個 Taco $5–7，快速便宜</div></div>
   </div>
 
-  <div class="sec s-act"><svg><use href="#i-museum"/></svg>下午</div>
-  <div class="row r-act">
+  <div class="sec s-note"><svg><use href="#i-clock"/></svg>午後休息</div>
+  <div class="row r-note">
     <div class="row-t">14:00</div>
-    <div class="row-i"><svg><use href="#i-museum"/></svg></div>
-    <div class="row-b"><div class="row-name">Grand Central Terminal — 穹頂大廳<a href="https://www.google.com/maps/search/?api=1&query=Grand+Central+Terminal+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">42nd St & Park Ave · 免費參觀 · 仰頭看星空穹頂</div><span class="rtag rt-free">免費</span></div>
-  </div>
-  <div class="row r-act">
-    <div class="row-t">15:00</div>
-    <div class="row-i"><svg><use href="#i-sky"/></svg></div>
-    <div class="row-b">
-      <div class="row-name">SUMMIT One Vanderbilt 觀景台<a href="https://www.google.com/maps/search/?api=1&query=SUMMIT+One+Vanderbilt+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
-      <div class="row-desc">就在中央車站旁 · 鏡子房間＋外傾玻璃地板，小孩超愛</div>
-      <span class="rtag rt-pre">提前網購</span>
-      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
-    </div>
-  </div>
-  <div class="info-panel">
-    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">整層鏡面房間、銀色氣球房，Levitation 伸出大樓外的透明玻璃地板</div></div>
-    <div class="ip-row"><div class="ip-label">位置</div><div class="ip-text">緊鄰中央車站，逛完穹頂大廳走過去即達，動線完美</div></div>
-    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">summitov.com 先訂時段，夏季售完快；傍晚到夜景都很美</div></div>
+    <div class="row-i"><svg><use href="#i-hotel"/></svg></div>
+    <div class="row-b"><div class="row-name">回飯店午後休息，備戰晚上 SUMMIT 日落場</div><div class="row-desc">今晚玩到約 21:00，小孩先補眠；有體力可順逛第五大道 FAO Schwarz 玩具店</div></div>
   </div>
 
-  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
+  <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐（提早）</div>
   <div class="row r-food">
-    <div class="row-t">19:00</div>
+    <div class="row-t">17:00</div>
     <div class="row-i"><svg><use href="#i-food"/></svg></div>
     <div class="row-b">
       <div class="row-name">晚餐 — Carmine's<a href="https://www.google.com/maps/search/?api=1&query=Carmines+Italian+200+W+44th+St+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
-      <div class="row-desc">義式家庭份量 · 200 W 44th St · 步行可達</div>
+      <div class="row-desc">義式家庭份量 · 200 W 44th St · 提早吃，吃完往東去 SUMMIT</div>
       <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
     </div>
   </div>
   <div class="info-panel">
     <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">Southern Italian，份量超大（設計給桌共食），適合家庭</div></div>
     <div class="ip-row"><div class="ip-label">招牌</div><div class="ip-text">Rigatoni · Veal Parmigiana</div></div>
-    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">建議提前訂位或開門就到</div></div>
+    <div class="ip-row"><div class="ip-label">建議</div><div class="ip-text">提早約 17:00 吃，留時間走到 Grand Central 上 SUMMIT</div></div>
+  </div>
+
+  <div class="sec s-act"><svg><use href="#i-sky"/></svg>SUMMIT 日落場 · 壓軸</div>
+  <div class="row r-act">
+    <div class="row-t">18:30</div>
+    <div class="row-i"><svg><use href="#i-museum"/></svg></div>
+    <div class="row-b"><div class="row-name">Grand Central Terminal — 穹頂大廳<a href="https://www.google.com/maps/search/?api=1&query=Grand+Central+Terminal+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">42nd St & Park Ave · SUMMIT 入口就在這（往西進 transit hall）· 先仰頭看星空穹頂</div><span class="rtag rt-free">免費</span></div>
+  </div>
+  <div class="row r-act">
+    <div class="row-t">19:00</div>
+    <div class="row-i"><svg><use href="#i-sky"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">SUMMIT One Vanderbilt 觀景台<a href="https://www.google.com/maps/search/?api=1&query=SUMMIT+One+Vanderbilt+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">日落約 20:28 · 白天視野→夕陽→藍調→夜景一次收 · 鏡子房＋銀色氣球房＋玻璃地板</div>
+      <span class="rtag rt-done">✓ 已訂 · 7/8 19:00 · Entry Only</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">票券</div><div class="ip-text">✓ 已訂 · 2026/7/8 · <b>19:00 入場（日落場）</b> · Entry Only（不含 Ascent 玻璃電梯）· 2 大 2 小</div></div>
+    <div class="ip-row"><div class="ip-label">入口</div><div class="ip-text">在 Vanderbilt 大道下方，從中央車站大廳往西進 transit hall；<b>不能走 One Vanderbilt 大樓正門</b></div></div>
+    <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">整層鏡面房間、銀色氣球房，Levitation 伸出大樓外的透明玻璃地板</div></div>
+    <div class="ip-row"><div class="ip-label">提醒</div><div class="ip-text">反光地板多、光線強 → 帶太陽眼鏡、穿長褲／好走的鞋（禁細高跟）；玩到約 21:00</div></div>
   </div>
 
   <div class="hotel-strip">
     <svg><use href="#i-hotel"/></svg>
-    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">Carmine's 步行 5 分鐘回飯店</div></div>
+    <div class="hs-body"><div class="hs-name">M Social Hotel New York Times Square</div><div class="hs-detail">SUMMIT 夜景收尾 · 步行／一站地鐵回飯店</div></div>
     <span class="hbadge hb-stay">住宿中</span>
   </div>
 </div>
@@ -718,29 +739,34 @@ footer {
     <div class="date-box"><div class="date-num">9</div><div class="date-wd">THU · 7月</div></div>
     <div class="day-info"><div class="day-title">American Dream Mall</div><div class="day-sub">2026-07-09 · Day 5 · 水樂園日 · 帶泳衣！</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-09"><span class="wx-load">天氣載入中…</span></div>
 
-  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 NJ</div>
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 NJ · 叫車</div>
   <div class="row r-note">
-    <div class="row-t">08:30</div>
+    <div class="row-t">09:30</div>
     <div class="row-i"><svg><use href="#i-bag"/></svg></div>
-    <div class="row-b"><div class="row-name">準備行李：泳衣 + 換洗衣物 + 防水袋</div></div>
+    <div class="row-b"><div class="row-name">準備行李：泳衣 + 換洗衣物 + 防水袋</div><div class="row-desc">昨晚 SUMMIT 玩到晚，今早睡飽再出發</div></div>
   </div>
   <div class="row r-trans">
-    <div class="row-t">08:45</div>
-    <div class="row-i"><svg><use href="#i-walk"/></svg></div>
-    <div class="row-b"><div class="row-name">步行至 Port Authority Bus Terminal<a href="https://www.google.com/maps/search/?api=1&query=Port+Authority+Bus+Terminal+New+York" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">飯店步行 5 分鐘 · 42nd St & 8th Ave</div></div>
-  </div>
-  <div class="row r-trans">
-    <div class="row-t">09:00</div>
+    <div class="row-t">10:00</div>
     <div class="row-i"><svg><use href="#i-train"/></svg></div>
-    <div class="row-b"><div class="row-name">NJ Transit Bus 351 → American Dream Mall</div><div class="row-desc">約 30 分鐘 · 09:30 抵達</div></div>
+    <div class="row-b">
+      <div class="row-name">飯店門口叫 Uber／Lyft → American Dream<a href="https://www.google.com/maps/place/?q=place_id:ChIJ3U3JLY35wokRfD602TzR6EE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">門到門約 30 分鐘 · 約 10:30 抵達 · 單程估 $40–60 · 帶溼泳具最方便、時間自由</div>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">為何叫車</div><div class="ip-text">7/9 是週四，NJ Transit #355 快線平日只有 10:00、12:30 兩班、回程僅 19:00／21:30，被時刻表綁死；叫車門到門、想幾點走幾點走，帶小孩＋溼泳具最實際</div></div>
+    <div class="ip-row"><div class="ip-label">上車點</div><div class="ip-text">去程飯店門口（226 W 52nd St）直接叫；回程在 American Dream 入口外的 rideshare 上車區叫</div></div>
+    <div class="ip-row"><div class="ip-label">省錢備案</div><div class="ip-text">想省錢可改 #355（Port Authority 305 號門、10:00 出發），但回程綁 19:00／21:30</div></div>
   </div>
 
   <div class="sec s-act"><svg><use href="#i-swim"/></svg>Mall 全天</div>
   <div class="row r-act">
-    <div class="row-t">09:30</div>
+    <div class="row-t">10:45</div>
     <div class="row-i"><svg><use href="#i-shop"/></svg></div>
-    <div class="row-b"><div class="row-name">American Dream Mall 等候開門<a href="https://www.google.com/maps/place/?q=place_id:ChIJ3U3JLY35wokRfD602TzR6EE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">East Rutherford, NJ · Mall 11:00 開門</div></div>
+    <div class="row-b"><div class="row-name">抵達 American Dream<a href="https://www.google.com/maps/place/?q=place_id:ChIJ3U3JLY35wokRfD602TzR6EE" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div><div class="row-desc">East Rutherford, NJ · Mall 11:00 開門，剛好接上</div></div>
   </div>
   <div class="row r-act">
     <div class="row-t">11:00</div>
@@ -777,11 +803,11 @@ footer {
     <div class="ip-row"><div class="ip-label">票價</div><div class="ip-text">約 $40–60/人，夏季需提前預訂</div></div>
   </div>
 
-  <div class="sec s-trans"><svg><use href="#i-train"/></svg>返回 Times Square</div>
+  <div class="sec s-trans"><svg><use href="#i-train"/></svg>返回 · 叫車</div>
   <div class="row r-trans">
     <div class="row-t">17:30</div>
     <div class="row-i"><svg><use href="#i-train"/></svg></div>
-    <div class="row-b"><div class="row-name">搭 NJ Transit Bus 返回 Port Authority</div><div class="row-desc">約 30 分鐘返回 Manhattan</div></div>
+    <div class="row-b"><div class="row-name">American Dream 叫 Uber／Lyft 回曼哈頓</div><div class="row-desc">玩累就走、不必等班次 · 可直接叫到 Hudson Yards 吃晚餐（約 30 分）</div></div>
   </div>
 
   <div class="sec s-food"><svg><use href="#i-food"/></svg>晚餐</div>
@@ -797,7 +823,7 @@ footer {
   <div class="info-panel">
     <div class="ip-row"><div class="ip-label">地址</div><div class="ip-text">10 Hudson Yards, 10th Floor</div></div>
     <div class="ip-row"><div class="ip-label">特色</div><div class="ip-text">西班牙美食市集風格，多種 Tapas 共食，適合家庭</div></div>
-    <div class="ip-row"><div class="ip-label">交通</div><div class="ip-text">Port Authority 搭 7 線一站至 Hudson Yards 即可</div></div>
+    <div class="ip-row"><div class="ip-label">交通</div><div class="ip-text">從 American Dream 叫車可直接到 Hudson Yards；飯後搭 7 線一站回 Times Square</div></div>
   </div>
 
   <div class="hotel-strip">
@@ -813,6 +839,7 @@ footer {
     <div class="date-box"><div class="date-num">10</div><div class="date-wd">FRI · 7月</div></div>
     <div class="day-info"><div class="day-title">Keens + Lion King</div><div class="day-sub">2026-07-10 · Day 6 · 重頭戲在晚上</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-10"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-act"><svg><use href="#i-park"/></svg>輕鬆上午</div>
   <div class="row r-act">
@@ -905,6 +932,7 @@ footer {
     <div class="date-box"><div class="date-num">11</div><div class="date-wd">SAT · 7月</div></div>
     <div class="day-info"><div class="day-title">Downtown → Brooklyn</div><div class="day-sub">2026-07-11 · Day 7 · 村→SoHo→中國城→過橋</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-11"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-trans"><svg><use href="#i-train"/></svg>前往 Greenwich Village</div>
   <div class="row r-trans">
@@ -1021,6 +1049,7 @@ footer {
     <div class="date-box"><div class="date-num">12</div><div class="date-wd">SUN · 7月</div></div>
     <div class="day-info"><div class="day-title">West Side → JFK</div><div class="day-sub">2026-07-12 · Day 8 · 西區輕鬆收尾 · 21:00 出發機場</div></div>
   </div>
+  <div class="wxbar" data-date="2026-07-12"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-note"><svg><use href="#i-bag"/></svg>退房</div>
   <div class="row r-note">
@@ -1143,8 +1172,8 @@ footer {
     <div><div class="cl-label">Keens Steakhouse 訂位</div><div class="cl-sub">7/10 晚餐 · keenssteakhouse.com · 必須提前</div></div>
   </div>
   <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
-    <div class="cl-box"></div>
-    <div><div class="cl-label">SUMMIT One Vanderbilt 門票</div><div class="cl-sub">7/8（Day 4）· summitov.com · 夏季售完快，先訂時段</div></div>
+    <div class="cl-box done"></div>
+    <div><div class="cl-label">SUMMIT One Vanderbilt 門票</div><div class="cl-sub">✓ 已訂 · 7/8 19:00 日落場 · Entry Only · summitov.com</div></div>
   </div>
   <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
     <div class="cl-box"></div>
@@ -1217,5 +1246,31 @@ try{ if('serviceWorker' in navigator && location.protocol==='https:'){ navigator
   chips.forEach(function(c){c.addEventListener('click',function(e){e.preventDefault();show(c.getAttribute('data-day'));});});
   show('4');
 })();
-</script></body>
+</script><script>
+/* 每日天氣（Open-Meteo，免金鑰；隨日期逼近自動更新） */
+(function(){
+  var bars=[].slice.call(document.querySelectorAll('.wxbar'));
+  if(!bars.length) return;
+  var WMO={0:['\u2600\ufe0f','\u6674'],1:['\ud83c\udf24\ufe0f','\u5927\u81f4\u6674'],2:['\u26c5','\u5c40\u90e8\u591a\u96f2'],3:['\u2601\ufe0f','\u9670\u5929'],45:['\ud83c\udf2b\ufe0f','\u6709\u9727'],48:['\ud83c\udf2b\ufe0f','\u6709\u9727'],51:['\ud83c\udf26\ufe0f','\u6bdb\u6bdb\u96e8'],53:['\ud83c\udf26\ufe0f','\u6bdb\u6bdb\u96e8'],55:['\ud83c\udf26\ufe0f','\u6bdb\u6bdb\u96e8'],61:['\ud83c\udf27\ufe0f','\u5c0f\u96e8'],63:['\ud83c\udf27\ufe0f','\u4e2d\u96e8'],65:['\ud83c\udf27\ufe0f','\u5927\u96e8'],80:['\ud83c\udf26\ufe0f','\u9663\u96e8'],81:['\ud83c\udf26\ufe0f','\u9663\u96e8'],82:['\u26c8\ufe0f','\u5f37\u9663\u96e8'],95:['\u26c8\ufe0f','\u96f7\u96e8'],96:['\u26c8\ufe0f','\u96f7\u96e8\u51b0\u96f9'],99:['\u26c8\ufe0f','\u96f7\u96e8\u51b0\u96f9']};
+  var url='https://api.open-meteo.com/v1/forecast?latitude=40.758&longitude=-73.9855'
+    +'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
+    +'&temperature_unit=celsius&timezone=America%2FNew_York&start_date=2026-07-04&end_date=2026-07-12';
+  fetch(url).then(function(r){return r.json();}).then(function(d){
+    if(!d||!d.daily) throw 0;
+    var D=d.daily,m={};
+    for(var i=0;i<D.time.length;i++){m[D.time[i]]={wc:D.weather_code[i],hi:D.temperature_2m_max[i],lo:D.temperature_2m_min[i],pp:D.precipitation_probability_max[i]};}
+    bars.forEach(function(b){
+      var w=m[b.getAttribute('data-date')];
+      if(!w){b.innerHTML='<span class="wx-na">\u5929\u6c23\u9810\u5831\u5c1a\u672a\u6db5\u84cb\u6b64\u65e5</span>';return;}
+      var ic=WMO[w.wc]||['\ud83c\udf21\ufe0f','\u2014'];
+      var rain=(w.pp==null?'':'<span class="wx-rn">\u2614 '+w.pp+'%</span>');
+      b.innerHTML='<span class="wx-ic">'+ic[0]+'</span><span class="wx-tx">'+ic[1]+'</span>'
+        +'<span class="wx-tp"><span class="wx-hi">'+Math.round(w.hi)+'\u00b0</span> / <span class="wx-lo">'+Math.round(w.lo)+'\u00b0</span></span>'+rain;
+    });
+  }).catch(function(){
+    bars.forEach(function(b){b.innerHTML='<span class="wx-na">\u5929\u6c23\u9700\u9023\u7db2\u66f4\u65b0 \u00b7 \u4e03\u6708\u7d10\u7d04\u7d04 29\u201331\u00b0\u3001\u609c\u71b1\u3001\u5348\u5f8c\u6613\u96f7\u9663\u96e8</span>';});
+  });
+})();
+</script>
+</body>
 </html>
