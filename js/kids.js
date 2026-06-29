@@ -14,11 +14,12 @@ function storeSet(key,val){
 
 // ══ STATE ═════════════════════════════════════════════════════
 let kidNames=JSON.parse(storeGet('nyc-kidnames','["寶貝 1","寶貝 2"]'));
-let kidAvatars=JSON.parse(storeGet('nyc-kidavatars','[{"robot":0},{"robot":7}]'));
-// migrate: 舊版人臉設定 → 機器人索引（無 robot 鍵就給預設機器人）
+let kidAvatars=JSON.parse(storeGet('nyc-kidavatars','[{"color":"1e88e5","eyes":"happy","mouth":"smile01","top":"antenna","face":"round01","sides":"round"},{"color":"e53935","eyes":"hearts","mouth":"smile02","top":"bulb01","face":"square01","sides":"antenna01"}]'));
+// migrate: 舊版（人臉 {face,...} 或套圖 {robot:n}）→ 機器人組合設定
 kidAvatars=kidAvatars.map((a,i)=>{
-  if(a&&typeof a.robot==='number') return {robot:a.robot};
-  return {robot:(i===0)?0:7};
+  if(a&&a.color&&a.eyes) return a;
+  return (i===0)?{color:"1e88e5",eyes:"happy",mouth:"smile01",top:"antenna",face:"round01",sides:"round"}
+               :{color:"e53935",eyes:"hearts",mouth:"smile02",top:"bulb01",face:"square01",sides:"antenna01"};
 });
 let currentKid=parseInt(storeGet('nyc-curkid','0'))||0;
 const SPEECH_OK=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
@@ -62,48 +63,81 @@ function renderKidSwitcher(){
     </button>`).join('')+
     `<button class="kid-edit-btn" onclick="openKidEdit(${currentKid})" title="編輯"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M13.5 6.5l3 3"/></svg></button>`;
 }
-// ══ AVATAR (機器人實驗室 — DiceBear bottts，預產於 kids.data.js 的 ROBOTS) ══
+// ══ AVATAR (機器人實驗室 — DiceBear bottts 即時組合；產生器 js/dicebear-bottts.min.js) ══
 let _avuid=0;
+function _uniqIds(svg){
+  const u='a'+(_avuid++)+'_';
+  const ids=[...new Set((svg.match(/id="([^"]+)"/g)||[]).map(m=>m.slice(4,-1)))];
+  for(const id of ids){
+    const e=id.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    svg=svg.replace(new RegExp('id="'+e+'"','g'),'id="'+u+id+'"')
+           .replace(new RegExp('url\\(#'+e+'\\)','g'),'url(#'+u+id+')')
+           .replace(new RegExp('href="#'+e+'"','g'),'href="#'+u+id+'"');
+  }
+  return svg;
+}
+function _genBottts(cfg){
+  const L=window.DiceBearBottts;
+  const o={seed:'nyc',size:180,textureProbability:0,topProbability:100,
+    baseColor:[cfg.color||'1e88e5'],eyes:[cfg.eyes||'round'],mouth:[cfg.mouth||'smile01'],
+    top:[cfg.top||'antenna'],face:[cfg.face||'round01'],sides:[cfg.sides||'round']};
+  let svg=L.createAvatar(L.bottts,o).toString().replace(/<metadata[\s\S]*?<\/metadata>/,'');
+  let inner=svg.replace(/^[\s\S]*?<svg[^>]*>/,'').replace(/<\/svg>\s*$/,'').trim();
+  return '<g transform="scale(0.555556)">'+_uniqIds(inner)+'</g>';
+}
+function _fallbackRobot(s){
+  return '<svg viewBox="0 0 100 100" width="'+s+'" height="'+s+'" class="avatar-svg" style="vertical-align:middle"><line x1="50" y1="26" x2="50" y2="15" stroke="#9AB0BC" stroke-width="3"/><circle cx="50" cy="13" r="4" fill="#F0A93B"/><rect x="22" y="26" width="56" height="50" rx="12" fill="#7E97A6"/><rect x="33" y="42" width="13" height="13" rx="3.5" fill="#1F3A66"/><rect x="54" y="42" width="13" height="13" rx="3.5" fill="#1F3A66"/><rect x="38" y="64" width="24" height="5" rx="2.5" fill="#1F3A66"/></svg>';
+}
 function buildAvatar(cfg,size){
   cfg=cfg||{}; const s=size||34;
-  const list=(typeof ROBOTS!=='undefined'&&ROBOTS.length)?ROBOTS:[''];
-  let idx=cfg.robot|0; idx=((idx%list.length)+list.length)%list.length;
-  const inner=(list[idx]||'').replace(/AVID/g,'a'+(_avuid++)+'_');
-  return '<svg viewBox="0 0 100 100" width="'+s+'" height="'+s+'" class="avatar-svg" style="vertical-align:middle">'+inner+'</svg>';
+  if(typeof window==='undefined'||!window.DiceBearBottts) return _fallbackRobot(s);
+  return '<svg viewBox="0 0 100 100" width="'+s+'" height="'+s+'" class="avatar-svg" style="vertical-align:middle">'+_genBottts(cfg)+'</svg>';
 }
 
-// ── Robot lab editor ──
-let editRobot=0, currentKidEdit=0;
+// ── Robot lab editor（即時組合）──
+const ROBOT_CATS=[['color','顏色'],['eyes','眼睛'],['mouth','嘴巴'],['top','天線'],['face','臉型'],['sides','側邊']];
+const ROBOT_OPTS={color:ROBOT_COLORS,eyes:ROBOT_EYES,mouth:ROBOT_MOUTHS,top:ROBOT_TOPS,face:ROBOT_FACES,sides:ROBOT_SIDES};
+let editCfg={}, editCat='color', currentKidEdit=0;
 function openKidEdit(k){
   currentKidEdit=k;
-  editRobot=(kidAvatars[k]&&typeof kidAvatars[k].robot==='number')?kidAvatars[k].robot:0;
+  const d={color:'1e88e5',eyes:'happy',mouth:'smile01',top:'antenna',face:'round01',sides:'round'};
+  editCfg=Object.assign({},d,kidAvatars[k]||{}); editCat='color';
   const ni=document.getElementById('kid-name-input'); if(ni) ni.value=kidNames[k];
-  renderRobotGrid(); renderAvPreview();
+  renderRobotCats(); renderRobotOptions(); renderAvPreview();
   document.getElementById('kid-modal').classList.add('open');
 }
 function renderAvPreview(){
-  const p=document.getElementById('avatar-preview'); if(p) p.innerHTML=buildAvatar({robot:editRobot},104);
+  const p=document.getElementById('avatar-preview'); if(p) p.innerHTML=buildAvatar(editCfg,104);
 }
-function renderRobotGrid(){
-  const box=document.getElementById('robot-grid'); if(!box)return;
-  let h='';
-  for(let i=0;i<ROBOTS.length;i++){
-    h+='<button class="av-opt2'+(i===editRobot?' sel':'')+'" onclick="pickRobot('+i+')">'+buildAvatar({robot:i},50)+'</button>';
+function renderRobotCats(){
+  const t=document.getElementById('av-cat-tabs'); if(!t)return;
+  t.innerHTML=ROBOT_CATS.map(c=>'<button class="av-cat'+(c[0]===editCat?' active':'')+'" onclick="setRobotCat(\''+c[0]+'\')">'+c[1]+'</button>').join('');
+}
+function setRobotCat(cat){ editCat=cat; renderRobotCats(); renderRobotOptions(); }
+function renderRobotOptions(){
+  const box=document.getElementById('av-options'); if(!box)return;
+  const opts=ROBOT_OPTS[editCat]||[]; let h='';
+  for(const v of opts){
+    const sel=(editCfg[editCat]===v);
+    if(editCat==='color'){
+      h+='<button class="av-opt2'+(sel?' sel':'')+'" onclick="setRobotPart(\'color\',\''+v+'\')"><span class="av-sw" style="background:#'+v+'"></span></button>';
+    } else {
+      const tmp=Object.assign({},editCfg); tmp[editCat]=v;
+      h+='<button class="av-opt2'+(sel?' sel':'')+'" onclick="setRobotPart(\''+editCat+'\',\''+v+'\')">'+buildAvatar(tmp,46)+'</button>';
+    }
   }
   box.innerHTML=h;
 }
-function pickRobot(i){ editRobot=i; renderRobotGrid(); renderAvPreview(); }
+function setRobotPart(key,v){ editCfg[key]=v; renderRobotOptions(); renderAvPreview(); }
 function randomRobot(){
-  if(ROBOTS.length<2)return;
-  let r; do{ r=Math.floor(Math.random()*ROBOTS.length); }while(r===editRobot);
-  editRobot=r; renderRobotGrid(); renderAvPreview();
-  const g=document.getElementById('robot-grid'); if(g){const sel=g.querySelector('.av-opt2.sel'); if(sel&&sel.scrollIntoView)sel.scrollIntoView({block:'nearest'});}
+  for(const c of ROBOT_CATS){ const o=ROBOT_OPTS[c[0]]; editCfg[c[0]]=o[Math.floor(Math.random()*o.length)]; }
+  renderRobotCats(); renderRobotOptions(); renderAvPreview();
 }
 function saveKidEdit(){
   const ni=document.getElementById('kid-name-input');
   const nm=(ni&&ni.value.trim())||('寶貝 '+(currentKidEdit+1));
   kidNames[currentKidEdit]=nm;
-  kidAvatars[currentKidEdit]={robot:editRobot};
+  kidAvatars[currentKidEdit]=Object.assign({},editCfg);
   storeSet('nyc-kidnames',JSON.stringify(kidNames));
   storeSet('nyc-kidavatars',JSON.stringify(kidAvatars));
   document.getElementById('kid-modal').classList.remove('open');

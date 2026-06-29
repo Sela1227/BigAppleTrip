@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.15.0
+- **版本：** V1.16.0
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -198,6 +198,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.16.0 | **兒童頁機器人改「即時組合」**（取代 V1.15.0 的 24 顆套圖；SELA 要小孩能自己組合）。esbuild 把 `@dicebear/core`+`bottts` 打包成 IIFE `js/dicebear-bottts.min.js`（79KB，`window.DiceBearBottts={createAvatar,bottts}`），於 `kids.data.js` 前載入、加進 `sw.js` precache（cache `v2→v3`，離線可用）。`buildAvatar(cfg)` 改即時 `_genBottts`（createAvatar→去 metadata→剝 svg→`_uniqIds` 每呼叫唯一前綴→包 `scale(0.5556)` g→viewBox-100 svg）；無 lib（node 煙霧）走 `_fallbackRobot` 內嵌占位。捏臉視窗改 **6 分類即時組合器**（顏色/眼睛/嘴巴/天線/臉型/側邊，沿用 `.av-cat-tabs/.av-cat/.av-options/.av-opt2/.av-sw`）＋隨機鈕。`kidAvatars` 模型 `{robot:n}→{color,eyes,mouth,top,face,sides}`＋遷移。移除 24 顆 `ROBOTS`（−104KB），加 `ROBOT_*` 部位選項陣列。bottts 部位 enum：eyes14/mouth9/top9/face6/sides7+顏色。煙霧改測組合器函式，38/38。產生管線＋兩位寶貝預設皆 node+cairosvg 驗證。⚠ 兒童頁 wkhtml 仍渲不出，customizer 互動需真機確認。b+1。|
 | V1.15.0 | **兒童頁頭像改用 DiceBear bottts 機器人**（取代手刻人臉捏臉；SELA 決定改機器人組合）。離線用 `@dicebear/core` 預產 24 顆 bottts（顏色分散）→ 正規化到 100-viewBox（原 180）→ 內部 id 加可替換前綴 `AVID`（`buildAvatar` 每次呼叫換成 `a{uid}_`，解同頁多顆 id 衝突＝坑 #3）→ 存進 `kids.data.js` 的 `ROBOTS`。`buildAvatar(cfg)` 改回傳 `ROBOTS[cfg.robot]`；捏臉視窗改「機器人實驗室」（沿用 `.av-options/.av-opt2` 格線＋隨機鈕），移除全部 `AV_*` 人臉資料/部位函式/9 分類編輯器。`kidAvatars` 模型 `{face,...}→{robot:n}`＋舊設定遷移。煙霧該項改測 robot lab，38/38。順帶移除舊 modal 的「神秘灰條」與「9 顆膠囊」（先前 Apple 批評點）。**bottts 授權**：Pablo Stanley，free for personal & commercial use，視窗已致謝。⚠ 坑：兒童頁 `100dvh+overflow+fixed modal` 用 wkhtml 渲不出（35px），但 bottts SVG 在 cairosvg 可驗、出貨版 buildAvatar 輸出已 node+cairosvg 確認。kids.data.js +~104KB。b+1。|
 | V1.14.2 | **修對稱度：段落標題對齊行程列格線**（itinerary.html）。原問題：段落標題（圖示＋文字）在最左、但每列的時間/圖示/內容是另一套右移欄位，畫面有兩套不對齊的左邊界。做法：43 個段落標題文字包進 `<span class="sec-l">`，`.sec` 由 flex 改成與 `.row` 相同的三欄 grid（`46px 24px 1fr`）——圖示放 col2（與列圖示同一條軸）、標題放 col3（與列內容同左邊界）、時間欄 col1 留空；移除 `.s-*` 的 border-left（相位改由 tint 底＋彩色圖示/文字表示）。`.row` grid 未動。⚠ 註記新坑：**wkhtmltoimage 不支援 CSS Grid**，故 grid 版面無法用 wkhtml 驗證、需真機確認（真機 Safari/Chrome 正常）。煙霧 38/38。c+1。|
 | V1.14.1 | **修正：行程頁固定淺色、不跟隨系統深色模式**（itinerary.html）。回報：系統開深色模式時行程頁仍是黑底——因 itinerary 內有 `@media (prefers-color-scheme: dark)` 會覆蓋成深色（V1.14.0 只改了淺色模式樣子）。做法：移除該 dark 覆蓋區塊（換成防回歸註解）＋ head 加 `<meta name="color-scheme" content="light">`，行程頁恆為淺色。index/kids 本就無此區塊、不受影響。三頁 UI 版號同步 v1.14.1。煙霧 38/38。c+1。|

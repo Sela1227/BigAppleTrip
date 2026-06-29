@@ -1,10 +1,10 @@
 // Service worker — 紐約家庭之旅 / 探險家
 // 策略：app shell 預快取 + stale-while-revalidate（先回快取、瞬間渲染，背景再更新）
 // 解決「剛部署 / 慢網時，因 network-first 無逾時，CSS 載入慢導致底部導航列晚出現」
-const C = 'nyc-trip-v2';
+const C = 'nyc-trip-v3';
 const SHELL = [
   './', './index.html', './itinerary.html', './kids.html',
-  './css/kids.css', './js/kids.data.js', './js/kids.js'
+  './css/kids.css', './js/dicebear-bottts.min.js', './js/kids.data.js', './js/kids.js'
 ];
 self.addEventListener('install', e => {
   e.waitUntil(
