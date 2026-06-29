@@ -2,6 +2,7 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
+<meta name="color-scheme" content="light">
 <link rel="icon" type="image/svg+xml" href="favicon/app-icon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -59,22 +60,7 @@
   --shadow-card: 0 1px 1px rgba(0,0,0,.03), 0 6px 20px rgba(0,0,0,.05);
   --bar-bg:   rgba(255,255,255,.80);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:#000; --bg-2:#1C1C1E; --card:#1C1C1E; --card-2:#2C2C2E; --card-3:#3A3A3C;
-    --line:rgba(255,255,255,.14); --line-l:rgba(255,255,255,.08);
-    --text:#fff; --text-2:#AEAEB2; --text-3:#8E8E93; --text-mute:#5C5C60;
-    --primary:#0A84FF; --primary-d:#0A2540; --primary-l:#5AA9FF;
-    --act:#5AA9FF;  --act-bg:rgba(10,132,255,.16);  --act-bg2:rgba(10,132,255,.24);
-    --food:#FFA33D; --food-bg:rgba(255,159,10,.15);  --food-bg2:rgba(255,159,10,.22);
-    --trans:#4FD267;--trans-bg:rgba(52,199,89,.15);  --trans-bg2:rgba(52,199,89,.22);
-    --note:#9B9BE8; --note-bg:rgba(94,92,230,.20);
-    --warn:#FF6961; --warn-bg:rgba(255,69,58,.20);
-    --hotel:#C99BE6;--hotel-bg:rgba(175,82,222,.20);
-    --shadow-card: 0 1px 1px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.5);
-    --bar-bg:rgba(18,18,20,.72);
-  }
-}
+/* 行程頁固定淺色（SELA 指定）：不跟隨系統深色模式，故移除 prefers-color-scheme:dark 覆蓋，勿再加回 */
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: rgba(78,143,196,.15); }
 html { font-size: 16px; }
 body {
@@ -313,7 +299,7 @@ footer {
   <a href="index.html" class="topbar-home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a>
   <div class="topbar-mid">
     <div class="topbar-title">紐約行程</div>
-    <div class="topbar-sub">2026 · 8 天家庭旅遊 · v1.14.0</div>
+    <div class="topbar-sub">2026 · 8 天家庭旅遊 · v1.14.1</div>
   </div>
   <a href="kids.html" class="topbar-switch">探險<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a>
 </div>

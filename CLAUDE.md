@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.14.0
+- **版本：** V1.14.1
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -198,6 +198,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.14.1 | **修正：行程頁固定淺色、不跟隨系統深色模式**（itinerary.html）。回報：系統開深色模式時行程頁仍是黑底——因 itinerary 內有 `@media (prefers-color-scheme: dark)` 會覆蓋成深色（V1.14.0 只改了淺色模式樣子）。做法：移除該 dark 覆蓋區塊（換成防回歸註解）＋ head 加 `<meta name="color-scheme" content="light">`，行程頁恆為淺色。index/kids 本就無此區塊、不受影響。三頁 UI 版號同步 v1.14.1。煙霧 38/38。c+1。|
 | V1.14.0 | **行程頁改淺色系 + Apple 視覺重整**（itinerary.html）：SELA 主動要求行程頁改淺色。①深色元件轉淺：置頂 bar 改白色霧面（`--bar-bg` rgba(255,255,255,.80)）、day-head 由深藍漸層改淺灰底＋navy 日期數字、topbar/daynav 文字底色全轉淺（用語意變數 --text/--card-3，深色模式自動適應）。②accent 紀律：active daychip 由橘 `--accent` 改系統藍 `--act`，橘色僅留給「探險」跨頁閘門鈕。③時間軸連接脊：row-i 撐滿高度＋`::before` 垂直線＋圖示白底圓形節點；列改白底（移除整片色帶，色彩交給圖示與 section header，更 deference）；section header 改較淡 tint。三頁 UI 版號同步 v1.14.0。煙霧 38/38。動 5 檔 → b+1。未做：概覽/地鐵卡漸進揭露（留待下次，需動 markup/JS）。|
 | V1.13.0 | **首次對齊 SELA Starter Kit V1.21.0**（里程碑）：依坑 #40「鐵律／建議／順便／不做」四級選擇性對齊。🔴 三頁 UI 補上可見版本號 `v1.13.0`（index hero／itinerary・kids topbar-sub，與 zip 版號同步，SPEC §10.6）。新增本檔「Kit 衝突仲裁區塊」明記：配色保留既有 navy（不改 Kit 北歐霧藍/SELA 橘，依 colors.md 既有專案配色鐵律）、品牌用自家 app-icon＋README footer SELA 歸屬（雙軌）。更新 SELA-handoff.md（首次對齊里程碑）。已符合免動：.gitignore 對齊範本、0 console.log、data-* 分離、branch-serve 無 build、zip 命名、三位版號。動 6 檔 → b+1。|
 | V1.12.10 | **D5 改 Intrepid 航艦日**（取消水樂園、不去康尼島）（itinerary.html）：使用者決定不去 DreamWorks 水樂園、也不要康尼島。D5 整天改寫為 **Intrepid 海空暨太空博物館**（Pier 86，航母甲板/戰機 F-14·SR-71/太空梭 Enterprise/潛艇 Growler/Exploreum 兒童廳，11:00 約 3hr；查證週四 10:00-17:00、成人$32/童(5-12)$23、4D 模擬器另$11）→ Hell's Kitchen 9 大道泰式午餐（Pure Thai，新菜系）→ Hudson Yards The Shops+Vessel 下午室內躲熱 → 保留 Mercado Little Spain 西班牙晚餐（時間 18:30→18:00、交通註修正）。**連帶清理**：①概覽卡移除 American Dream 交通句；②訂票清單 DreamWorks 票→Intrepid 票；③候補卡移除已否決的 Coney Island 整列；④購物清單因不再去紐澤西（免稅消失）→ 頂部 note 改「紐約加 8.875% 稅」、買鞋地點改紐約店家（DSW/Foot Locker/Nordstrom Rack/Macy's）、**Hopara 2 ✅→➖**（加稅僅小贏~240）、**Stinson ➖→❌**（加稅台灣較便宜）、Clifton ❌ 不變。煙霧 38/38。只動 itinerary.html。|
