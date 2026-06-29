@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.12.5
+- **版本：** V1.12.9
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -198,6 +198,10 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.12.9 | **機場接送（肯驛 SmartTicket）**（itinerary.html）：①抵達日(7/4) 去程航班最前插入**送機** 15:00 台中西屯→桃園（訂單 **F15321514**、✓已訂 rt-done），info-panel 含訂單/時間/司機資訊/客戶＋**⚠航廈提醒**：票卡誤寫「第1航廈」，但長榮 BR32 在桃園實際 **T2**（已查證 EVA 桃園全部航班、赴美線皆 T2），請告知司機停 T2。②最後一天(D8) 回程 BR31 01:25 起飛列後插入**接機** 05:20 桃園 T2→台中西屯（✓已訂、回國接機、抵達前 6hr 提供司機）。客戶 林*儒 0932***248。兩列皆 rt-done。只動 itinerary.html。|
+| V1.12.8 | **購物清單獨立成頁＋AI 建議分類**（itinerary.html）：①daynav 新增「購物」chip（data-day=shop）；購物清單從「清單」頁（list）拆出，獨立為 **shop 頁**（已比價卡改名「已比價·鞋＋家電」=HOKA×3＋Dyson）。②新增「AI 建議·值得買分類」卡：6 類 pill tags（美國價格優勢 Coach/Tory Burch/Kate Spade/Ralph Lauren/Levi's/NB/Brooks、紐約限定 TJ環保袋/洋基帽/Levain/Fishs Eddy、Costco超市、保健品、電子、文創）＋**順路買動線提示**（洋基帽→D1球場、The Met→D2、TJ→72nd分店、精品→Woodbury、零食保健→Costco East Harlem）。③新增「必買 Top 10」可勾選卡。新增 `.shop-cat/.shop-tags` CSS。view 分布：shop=3、list=2。show() 通用邏輯免改。只動 itinerary.html。|
+| V1.12.7 | **購物清單加 Dyson Supersonic r 吹風機**（itinerary.html）：卡片改名「購物清單」（不限鞋）。台 NT$14,900 vs 美 $550起（dyson.com Amber silk $549.99、Best Buy $649.99，≈NT$17,500+）→ **❌ 台灣便宜約 2,600+**；且吹風機屬電器**免稅不適用**（紐澤西仍課 6.625%、紐約 8.875%）、美規 **120/127V**（台 110V）、**美國保固不跨台**，三輸建議台灣買。資料：ETtoday(台價)、dyson.com／Best Buy(美價)。只動 itinerary.html。|
+| V1.12.6 | **購物清單**（itinerary.html）：清單頁新增「購物清單 · HOKA 鞋」卡（class view data-view="list"，可勾選 cl-item）。三雙鞋台灣 vs 美國官網價＋換算對比（匯率 1USD≈31.8NTD，2026/6/26）＋划算結論：**Hopara 2** 台NT$5,080／美$140（≈4,450）✅美國省~600；**Stinson EVO GTX** 台6,280／美~$190（≈6,040）➖持平；**Clifton 9 GTX** 台5,080／美$165（≈5,250）❌台灣略便宜。關鍵提示：在 **American Dream（Day5）買免營業稅**（紐澤西鞋類免稅、紐約 8.875%）。新增 `.cl-note` 樣式（淺藍 info box）。清單頁現 3 卡（訂票／購物／候補）。資料來源 hoka.com 官網價。只動 itinerary.html。|
 | V1.12.5 | **每日即時天氣**（itinerary.html）：每天卡片 day-head 下方加一條天氣列 `.wxbar`（9 天各一，data-date=該日）。底部新增 `<script>` client 端 fetch **Open-Meteo**（免金鑰、CORS OK、座標 40.758/-73.9855、攝氏、timezone America/New_York、start/end 2026-07-04~12），取 weather_code/最高最低溫/降雨機率，WMO 碼→emoji＋中文（晴/多雲/雷雨…），渲染為「⛅ 局部多雲 30°/23° ☔10%」。隨日期逼近自動更新（forecast 16 天內才有值，超出顯示「尚未涵蓋此日」）；fetch 失敗／離線降級顯示「七月紐約約 29–31°、悶熱、午後易雷陣雨」。SW v2 跨源不攔截，離線走降級。node mock 驗證解析正確、煙霧 38/38。只動 itinerary.html。|
 | V1.12.4 | **D5 交通改叫車**（itinerary.html）：使用者選 Uber／Lyft。①**修正過時巴士**：原寫「NJ Transit Bus 351」其實 351 是 Coach USA 只在 MetLife 球賽日跑的車；直達快線現為 **#355**（Port Authority 305 號門），且 **7/9 週四 #355 平日僅 10:00、12:30 兩班、回程僅 19:00／21:30**。②去/回程巴士全改 **Uber／Lyft 門到門**（約 30 分、單程估 $40–60）；去程 info-panel 說明為何叫車＋上車點＋#355 省錢備案。③配合昨晚 SUMMIT 晚場，早上改睡飽：09:30 備行李 → 10:00 叫車 → 10:45 抵達接 Mall 11:00 開門。④回程可直接叫到 Hudson Yards 吃晚餐（Mercado Little Spain）；概覽卡 351→叫車／#355、Mercado 交通註同步。只動 itinerary.html。|
 | V1.12.3 | **SUMMIT 已訂日落場 → D4 重排為日落壓軸**（itinerary.html）：使用者訂到 **7/8 19:00 日落場、Entry Only**（不含 Ascent）。D4 由「15:00 SUMMIT」改為日落壓軸版：12:30 午餐後 → 14:00 回飯店午後休息（備戰晚場，附 FAO Schwarz 選項）→ 17:00 提早晚餐 Carmine's → 18:30 中央車站穹頂（SUMMIT 入口、往西進 transit hall）→ 19:00 SUMMIT（日落約 20:28，白天→夕陽→夜景一次收）→ 夜景步行回飯店。SUMMIT 標 `rt-done`「✓ 已訂 · 7/8 19:00 · Entry Only」，info-panel 加票券/入口/太陽眼鏡提醒；day-sub 改「中城 → SUMMIT 日落場」。訂票清單 SUMMIT 打勾。已訂項現為 4（自由女神、獅子王、AMNH、洋基）＋ SUMMIT。只動 itinerary.html。|

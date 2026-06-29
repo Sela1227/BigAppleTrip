@@ -266,6 +266,14 @@ footer {
 .wxbar .wx-lo{color:var(--act)}
 .wxbar .wx-rn{color:var(--act);font-weight:600}
 .wxbar .wx-na,.wxbar .wx-load{color:var(--note);font-weight:500;font-size:12px;opacity:.85}
+.cl-note{font-size:.74rem;color:var(--text-2);line-height:1.55;background:var(--act-bg);border-radius:10px;padding:9px 11px;margin:2px 0 12px}
+.cl-note:last-child{margin:10px 0 0}
+.shop-cat{padding:10px 0;border-bottom:1px solid var(--line-l)}
+.shop-cat:last-of-type{border-bottom:none}
+.shop-cat-h{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.shop-cat-d{font-size:.74rem;color:var(--text-2);margin-bottom:7px}
+.shop-tags{display:flex;flex-wrap:wrap;gap:6px}
+.shop-tags span{font-size:.76rem;background:var(--act-bg);color:var(--text);padding:4px 9px;border-radius:20px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -306,7 +314,7 @@ footer {
   </div>
   <a href="kids.html" class="topbar-switch">探險<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a>
 </div>
-<div class="daynav" id="daynav"><a href="#" class="daychip" data-day="4">抵達</a><a href="#" class="daychip" data-day="5">D1</a><a href="#" class="daychip" data-day="6">D2</a><a href="#" class="daychip" data-day="7">D3</a><a href="#" class="daychip" data-day="8">D4</a><a href="#" class="daychip" data-day="9">D5</a><a href="#" class="daychip" data-day="10">D6</a><a href="#" class="daychip" data-day="11">D7</a><a href="#" class="daychip" data-day="12">D8</a><a href="#" class="daychip" data-day="list">清單</a></div></div>
+<div class="daynav" id="daynav"><a href="#" class="daychip" data-day="4">抵達</a><a href="#" class="daychip" data-day="5">D1</a><a href="#" class="daychip" data-day="6">D2</a><a href="#" class="daychip" data-day="7">D3</a><a href="#" class="daychip" data-day="8">D4</a><a href="#" class="daychip" data-day="9">D5</a><a href="#" class="daychip" data-day="10">D6</a><a href="#" class="daychip" data-day="11">D7</a><a href="#" class="daychip" data-day="12">D8</a><a href="#" class="daychip" data-day="list">清單</a><a href="#" class="daychip" data-day="shop">購物</a></div></div>
 <div class="ph">
   <div class="ph-label">Family Travel · 2 大 2 小</div>
   <div class="ph-title">New York</div>
@@ -355,6 +363,23 @@ footer {
   <div class="wxbar" data-date="2026-07-04"><span class="wx-load">天氣載入中…</span></div>
 
   <div class="sec s-trans" style="border-left-color:#2E8B57;color:#2E8B57;background:#D8ECE0;"><svg><use href="#i-plane"/></svg>去程航班</div>
+  <div class="row r-trans">
+    <div class="row-t">15:00</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">肯驛機場接送 — 台中西屯 → 桃園 T2<a href="https://www.google.com/maps/search/?api=1&query=Taiwan+Taoyuan+International+Airport+Terminal+2" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>T2 地圖</a></div>
+      <div class="row-desc">15:00 搭車 · 送機到桃園機場 · 訂單 F15321514</div>
+      <span class="rtag rt-done">✓ 已訂</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">訂單</div><div class="ip-text">肯驛 SmartTicket · 出國送機 · 訂單編號 F15321514</div></div>
+    <div class="ip-row"><div class="ip-label">時間</div><div class="ip-text">2026/7/4 15:00 台中市西屯區搭車 → 桃園機場（車程約 1.5 小時）</div></div>
+    <div class="ip-row"><div class="ip-label">⚠ 航廈</div><div class="ip-text">票卡寫「第1航廈」有誤——長榮 BR32 在桃園是<b>第2航廈</b>報到，請告知司機停 <b>T2</b>，或向肯驛確認更正</div></div>
+    <div class="ip-row"><div class="ip-label">司機資訊</div><div class="ip-text">出國前一天（7/3）晚上 6 點後提供司機姓名／電話／車牌</div></div>
+    <div class="ip-row"><div class="ip-label">客戶</div><div class="ip-text">林*儒 · 0932***248</div></div>
+  </div>
   <div class="row r-trans">
     <div class="row-t">19:10</div>
     <div class="row-i"><svg><use href="#i-plane"/></svg></div>
@@ -1144,6 +1169,22 @@ footer {
       <div class="row-desc">Class W · 抵達桃園 T2 05:20（7/14）· 再見，紐約 ✈</div>
     </div>
   </div>
+  <div class="row r-trans">
+    <div class="row-t">05:20</div>
+    <div class="row-i"><svg><use href="#i-train"/></svg></div>
+    <div class="row-b">
+      <div class="row-name">肯驛機場接送 — 桃園 T2 → 台中西屯<a href="https://www.google.com/maps/search/?api=1&query=Taichung+Xitun+District+Taichung+City+Taiwan" target="_blank" rel="noopener" class="map-link"><svg><use href="#i-map"/></svg>地圖</a></div>
+      <div class="row-desc">7/14 BR31 抵達桃園 T2 後接機 → 台中市西屯區 · 回國接機</div>
+      <span class="rtag rt-done">✓ 已訂</span>
+      <button class="info-btn" onclick="toggleInfo(this)">詳細資訊</button>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="ip-row"><div class="ip-label">訂單</div><div class="ip-text">肯驛 SmartTicket · 回國接機 · 桃園 T2 → 台中市西屯區</div></div>
+    <div class="ip-row"><div class="ip-label">航班</div><div class="ip-text">BR31 · 2026/7/14 05:20 抵達桃園第2航廈（過海關、提行李後出關搭車）</div></div>
+    <div class="ip-row"><div class="ip-label">司機資訊</div><div class="ip-text">航班抵達前 6 小時提供司機姓名／電話／車牌，留意票卡更新</div></div>
+    <div class="ip-row"><div class="ip-label">客戶</div><div class="ip-text">林*儒 · 0932***248</div></div>
+  </div>
 
   <div class="hotel-strip">
     <svg><use href="#i-hotel"/></svg>
@@ -1198,6 +1239,106 @@ footer {
   <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
     <div class="cl-box"></div>
     <div><div class="cl-label">大都會博物館 The Met 票</div><div class="cl-sub">7/6（Day 2，精華約 1.5hr）· metmuseum.org · 12 歲以下免費 · 可現場買，線上選時段較免排隊</div></div>
+  </div>
+</div>
+
+<!-- ─── 購物清單（獨立頁 shop）─── -->
+<div class="checklist-card view" data-view="shop">
+  <div class="cl-title">已比價 · 鞋＋家電</div>
+  <div class="cl-note">💡 在 <b>American Dream（Day 5）</b>買最划算：紐澤西<b>鞋類免營業稅</b>（紐約要加 8.875%）。匯率約 <b>1 USD≈31.8 NTD</b>；美國價為官網定價、未稅。</div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">Hopara 2 · 水陸涼鞋　<b style="color:var(--trans)">✅ 美國划算</b></div><div class="cl-sub">台 NT$5,080 ／ 美 $140（≈NT$4,450）· 省約 600（~12%），常有特價更便宜</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">Stinson EVO GTX · GORE-TEX 防水　<b style="color:var(--food)">➖ 持平</b></div><div class="cl-sub">台 NT$6,280 ／ 美 ~$190（≈NT$6,040）· 基本一樣，看到喜歡的顏色再入</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">Clifton 9 GTX · 防水路跑　<b style="color:var(--warn)">❌ 台灣略便宜</b></div><div class="cl-sub">台 NT$5,080 ／ 美 $165（≈NT$5,250）· 除非美國打折，否則台灣買即可</div></div>
+  </div>
+  <div class="cl-note">🛍 American Dream 內有運動鞋店（DSW、Foot Locker 等）；HOKA 官網會員首購 9 折可疊。出發前先在台灣試穿、記好 US 尺碼。</div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">Dyson Supersonic r 吹風機　<b style="color:var(--warn)">❌ 台灣便宜，別在美國買</b></div><div class="cl-sub">台 NT$14,900 ／ 美 $550起（dyson.com，≈NT$17,500+，電器另課稅）· 台灣反而便宜約 2,600+</div></div>
+  </div>
+  <div class="cl-note">⚠ 吹風機是電器，<b>免稅不適用</b>（紐澤西仍課 6.625%、紐約 8.875%）；美規電壓 120/127V（台灣 110V）、<b>美國保固不含台灣</b>。價＋稅＋保固三輸，<b>建議台灣買</b>（台灣現有滿額折價＋贈品活動）。</div>
+</div>
+
+<!-- ─── AI 建議分類（shop）─── -->
+<div class="checklist-card view" data-view="shop">
+  <div class="cl-title">AI 建議 · 值得買分類</div>
+  <div class="shop-cat">
+    <div class="shop-cat-h">💰 美國價格優勢（最推薦）</div>
+    <div class="shop-cat-d">通常比台灣便宜 20–50%，Outlet 折扣更高</div>
+    <div class="shop-tags"><span>Coach</span><span>Tory Burch</span><span>Kate Spade</span><span>Ralph Lauren</span><span>Levi's 牛仔褲</span><span>New Balance 美限</span><span>Brooks 跑鞋</span></div>
+  </div>
+  <div class="shop-cat">
+    <div class="shop-cat-h">🗽 紐約限定 · 伴手禮</div>
+    <div class="shop-tags"><span>Trader Joe's 環保袋</span><span>洋基棒球帽</span><span>Levain 曲奇</span><span>Fishs Eddy 餐具/馬克杯</span></div>
+  </div>
+  <div class="shop-cat">
+    <div class="shop-cat-h">🛒 Costco／超市必掃</div>
+    <div class="shop-tags"><span>Kirkland 綜合堅果</span><span>Ghirardelli 巧克力</span><span>See's Candies</span><span>美限口味零食/洋芋片</span><span>楓糖漿</span></div>
+  </div>
+  <div class="shop-cat">
+    <div class="shop-cat-h">💊 保健品（比台灣便宜不少）</div>
+    <div class="shop-tags"><span>Kirkland 系列</span><span>Nature Made</span><span>NOW Foods</span><span>Sports Research 魚油</span></div>
+  </div>
+  <div class="shop-cat">
+    <div class="shop-cat-h">🔌 電子產品（特價不錯，確認台灣保固）</div>
+    <div class="shop-tags"><span>Apple 配件</span><span>Anker</span><span>Belkin</span><span>Logitech</span></div>
+  </div>
+  <div class="shop-cat">
+    <div class="shop-cat-h">🎨 文創／紀念品</div>
+    <div class="shop-tags"><span>大都會博物館 The Met</span><span>MoMA 設計商品</span><span>The Strand 帆布袋</span></div>
+  </div>
+  <div class="cl-note">📍 順路買：<b>洋基帽</b>→Day 1 球場現場；<b>The Met 紀念品</b>→Day 2 館內；<b>Trader Joe's 環保袋</b>→72nd & Broadway 分店（離飯店近）；<b>精品／Levi's／Ralph Lauren</b>→Woodbury Common outlet（備案日）最便宜；<b>巧克力／堅果／保健品</b>→超市或 Costco（曼哈頓 East Harlem 店）。</div>
+</div>
+
+<!-- ─── 必買 Top 10（shop）─── -->
+<div class="checklist-card view" data-view="shop">
+  <div class="cl-title">必買 Top 10 · 精簡版</div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">1 · Trader Joe's 環保袋</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">2 · Levain Bakery 曲奇</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">3 · New York Yankees 帽子</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">4 · Coach／Kate Spade 包</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">5 · Levi's 牛仔褲</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">6 · Ralph Lauren 服飾</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">7 · Costco 保健品</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">8 · Ghirardelli 巧克力</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">9 · 大都會博物館紀念品</div></div>
+  </div>
+  <div class="cl-item" onclick="this.querySelector('.cl-box').classList.toggle('done')">
+    <div class="cl-box"></div>
+    <div><div class="cl-label">10 · Anker 充電配件</div></div>
   </div>
 </div>
 
