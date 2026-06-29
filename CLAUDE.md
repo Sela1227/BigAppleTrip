@@ -18,7 +18,7 @@
 
 ## 〇、當前狀態
 
-- **版本：** V1.12.9
+- **版本：** V1.12.10
 - **狀態：** 上線中（GitHub Pages、HTTPS）
 - **一句話定位：** 我家 2026 紐約 8 天親子旅遊的隨身網站 — 一個查行程、一個給小孩的探險 App，部署 GitHub Pages 給全家手機用
 - **技術棧：** 純 HTML + 原生 JS + CSS，零後端、零 build。index/itinerary 仍單檔；**kids 已拆層**：`kids.html` + `css/kids.css` + `js/kids.data.js`（資料）+ `js/kids.js`（邏輯）+ `sw.js`
@@ -198,6 +198,7 @@ grep -l "register('./sw.js'" index.html itinerary.html kids.html
 
 | 版本 | 重點 |
 |------|------|
+| V1.12.10 | **D5 改 Intrepid 航艦日**（取消水樂園、不去康尼島）（itinerary.html）：使用者決定不去 DreamWorks 水樂園、也不要康尼島。D5 整天改寫為 **Intrepid 海空暨太空博物館**（Pier 86，航母甲板/戰機 F-14·SR-71/太空梭 Enterprise/潛艇 Growler/Exploreum 兒童廳，11:00 約 3hr；查證週四 10:00-17:00、成人$32/童(5-12)$23、4D 模擬器另$11）→ Hell's Kitchen 9 大道泰式午餐（Pure Thai，新菜系）→ Hudson Yards The Shops+Vessel 下午室內躲熱 → 保留 Mercado Little Spain 西班牙晚餐（時間 18:30→18:00、交通註修正）。**連帶清理**：①概覽卡移除 American Dream 交通句；②訂票清單 DreamWorks 票→Intrepid 票；③候補卡移除已否決的 Coney Island 整列；④購物清單因不再去紐澤西（免稅消失）→ 頂部 note 改「紐約加 8.875% 稅」、買鞋地點改紐約店家（DSW/Foot Locker/Nordstrom Rack/Macy's）、**Hopara 2 ✅→➖**（加稅僅小贏~240）、**Stinson ➖→❌**（加稅台灣較便宜）、Clifton ❌ 不變。煙霧 38/38。只動 itinerary.html。|
 | V1.12.9 | **機場接送（肯驛 SmartTicket）**（itinerary.html）：①抵達日(7/4) 去程航班最前插入**送機** 15:00 台中西屯→桃園（訂單 **F15321514**、✓已訂 rt-done），info-panel 含訂單/時間/司機資訊/客戶＋**⚠航廈提醒**：票卡誤寫「第1航廈」，但長榮 BR32 在桃園實際 **T2**（已查證 EVA 桃園全部航班、赴美線皆 T2），請告知司機停 T2。②最後一天(D8) 回程 BR31 01:25 起飛列後插入**接機** 05:20 桃園 T2→台中西屯（✓已訂、回國接機、抵達前 6hr 提供司機）。客戶 林*儒 0932***248。兩列皆 rt-done。只動 itinerary.html。|
 | V1.12.8 | **購物清單獨立成頁＋AI 建議分類**（itinerary.html）：①daynav 新增「購物」chip（data-day=shop）；購物清單從「清單」頁（list）拆出，獨立為 **shop 頁**（已比價卡改名「已比價·鞋＋家電」=HOKA×3＋Dyson）。②新增「AI 建議·值得買分類」卡：6 類 pill tags（美國價格優勢 Coach/Tory Burch/Kate Spade/Ralph Lauren/Levi's/NB/Brooks、紐約限定 TJ環保袋/洋基帽/Levain/Fishs Eddy、Costco超市、保健品、電子、文創）＋**順路買動線提示**（洋基帽→D1球場、The Met→D2、TJ→72nd分店、精品→Woodbury、零食保健→Costco East Harlem）。③新增「必買 Top 10」可勾選卡。新增 `.shop-cat/.shop-tags` CSS。view 分布：shop=3、list=2。show() 通用邏輯免改。只動 itinerary.html。|
 | V1.12.7 | **購物清單加 Dyson Supersonic r 吹風機**（itinerary.html）：卡片改名「購物清單」（不限鞋）。台 NT$14,900 vs 美 $550起（dyson.com Amber silk $549.99、Best Buy $649.99，≈NT$17,500+）→ **❌ 台灣便宜約 2,600+**；且吹風機屬電器**免稅不適用**（紐澤西仍課 6.625%、紐約 8.875%）、美規 **120/127V**（台 110V）、**美國保固不跨台**，三輸建議台灣買。資料：ETtoday(台價)、dyson.com／Best Buy(美價)。只動 itinerary.html。|
