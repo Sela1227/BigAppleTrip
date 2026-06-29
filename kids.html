@@ -22,7 +22,7 @@
   <a href="index.html" class="topbar-home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></a>
   <div class="topbar-mid">
     <div class="topbar-title">紐約探險家</div>
-    <div class="topbar-sub">2026 · 我的旅行護照 · v1.14.2</div>
+    <div class="topbar-sub">2026 · 我的旅行護照 · v1.15.0</div>
   </div>
   <a href="itinerary.html" class="topbar-switch" aria-label="看行程"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></a>
   <div class="prog-badge"><svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:-2px"><path d="M12 2.5l2.7 5.9 6.4.6-4.8 4.3 1.4 6.3L12 16.9 6.3 19.6l1.4-6.3L2.9 9l6.4-.6z"/></svg> <span id="stamp-count">0</span><span style="font-weight:600;opacity:.65">/<span id="stamp-total">18</span></span></div>
@@ -199,16 +199,15 @@
   </div>
 </div>
 
-<!-- KID EDIT MODAL (face builder) -->
+<!-- KID EDIT MODAL (robot lab) -->
 <div class="modal" id="kid-modal" onclick="document.getElementById('kid-modal').classList.remove('open')">
   <div class="modal-box kid-edit-box" onclick="event.stopPropagation()">
-    <div class="modal-title">設計小探險家</div>
+    <div class="modal-title">選一隻機器人</div>
     <div class="avatar-preview" id="avatar-preview"></div>
     <input type="text" id="kid-name-input" class="kid-name-input" maxlength="10" placeholder="輸入名字">
-    <div class="kid-av-label">快速造型（點了再微調）</div>
-    <div class="av-presets" id="av-presets"></div>
-    <div class="av-cat-tabs" id="av-cat-tabs"></div>
-    <div class="av-options" id="av-options"></div>
+    <div class="robot-bar"><span class="kid-av-label">挑一隻探險機器人</span><button class="robot-random" onclick="randomRobot()">隨機換一隻</button></div>
+    <div class="av-options" id="robot-grid"></div>
+    <div class="robot-credit">機器人圖案：DiceBear · Bottts (Pablo Stanley)</div>
     <button class="modal-btn" onclick="saveKidEdit()">儲存 ✓</button>
   </div>
 </div>

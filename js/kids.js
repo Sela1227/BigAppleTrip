@@ -14,11 +14,11 @@ function storeSet(key,val){
 
 // ══ STATE ═════════════════════════════════════════════════════
 let kidNames=JSON.parse(storeGet('nyc-kidnames','["寶貝 1","寶貝 2"]'));
-let kidAvatars=JSON.parse(storeGet('nyc-kidavatars','[{"face":0,"skin":1,"hair":0,"hairColor":0,"brow":0,"eyes":0,"nose":2,"mouth":0,"acc":0},{"face":0,"skin":2,"hair":5,"hairColor":1,"brow":1,"eyes":2,"nose":2,"mouth":0,"acc":0}]'));
-// migrate old/partial avatars -> ensure config objects with all keys
+let kidAvatars=JSON.parse(storeGet('nyc-kidavatars','[{"robot":0},{"robot":7}]'));
+// migrate: 舊版人臉設定 → 機器人索引（無 robot 鍵就給預設機器人）
 kidAvatars=kidAvatars.map((a,i)=>{
-  const def=(i===0)?{face:0,skin:1,hair:0,hairColor:0,brow:0,eyes:0,nose:2,mouth:0,acc:0}:{face:0,skin:2,hair:5,hairColor:1,brow:1,eyes:2,nose:2,mouth:0,acc:0};
-  return (typeof a==='object'&&a!==null) ? Object.assign({},def,a) : def;
+  if(a&&typeof a.robot==='number') return {robot:a.robot};
+  return {robot:(i===0)?0:7};
 });
 let currentKid=parseInt(storeGet('nyc-curkid','0'))||0;
 const SPEECH_OK=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
@@ -62,198 +62,53 @@ function renderKidSwitcher(){
     </button>`).join('')+
     `<button class="kid-edit-btn" onclick="openKidEdit(${currentKid})" title="編輯"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M13.5 6.5l3 3"/></svg></button>`;
 }
-// ══ AVATAR (custom face builder) ══════════════════════════════
-const AV_SKIN=['#FCE3C8','#F7CDA1','#EAB384','#CE9263','#A06E47'];
-const AV_SKINSH=['#EBC9A6','#E6B584','#D69A6A','#B97C4E','#8A5A38'];
-const AV_HAIRC=['#3A2E27','#6B4423','#A9742E','#E3BE54','#C94A33','#5183C9','#E372A8'];
-const AV_NOSEC='rgba(150,95,70,0.45)';
+// ══ AVATAR (機器人實驗室 — DiceBear bottts，預產於 kids.data.js 的 ROBOTS) ══
 let _avuid=0;
-const AV_CATS=[['face','臉型',6,'shape'],['skin','膚色',5,'color',AV_SKIN],['hair','髮型',22,'shape'],['hairColor','髮色',7,'color',AV_HAIRC],['brow','眉毛',8,'shape'],['eyes','眼睛',16,'shape'],['nose','鼻子',5,'shape'],['mouth','嘴巴',8,'shape'],['acc','配件',10,'shape']];
-function avLighten(hex){let h=hex.replace('#','');let r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);r=Math.min(255,r+(255-r)*0.25|0);g=Math.min(255,g+(255-g)*0.25|0);b=Math.min(255,b+(255-b)*0.25|0);return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');}
-function avDarken(hex,f){f=f||0.18;let h=hex.replace('#','');let r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);r=r*(1-f)|0;g=g*(1-f)|0;b=b*(1-f)|0;return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');}
-function avFace(i,uid){
- const TOP='M14,52 C12,28 28,16 50,16 C72,16 88,28 86,52';
- const B=[' C86,80 70,95 50,95 C30,95 14,80 14,52 Z',' C86,84 69,98 50,98 C31,98 14,84 14,52 Z',' L86,76 Q86,94 70,94 L30,94 Q14,94 14,76 Z',' C86,78 66,96 50,98 C34,96 14,78 14,52 Z',' C88,82 71,96 50,96 C29,96 12,82 14,52 Z',' C85,88 66,99 50,99 C34,99 15,88 14,52 Z'];
- const d=TOP+(B[i]||B[0]);
- return `<path d="${d}" fill="url(#sk${uid})"/><ellipse cx="50" cy="36" rx="26" ry="16" fill="#fff" opacity="0.10"/><ellipse cx="50" cy="88" rx="22" ry="9" fill="url(#sh${uid})" opacity="0.4"/>`;
-}
-function avBrow(i,c){return [
- `<rect x="32" y="47" width="13" height="3.4" rx="1.7" fill="${c}"/><rect x="55" y="47" width="13" height="3.4" rx="1.7" fill="${c}"/>`,
- `<path d="M32,49 Q38,45 45,48" stroke="${c}" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M68,49 Q62,45 55,48" stroke="${c}" stroke-width="3.4" fill="none" stroke-linecap="round"/>`,
- `<path d="M32,45 L45,49 L45,46 L32,42 Z" fill="${c}"/><path d="M68,45 L55,49 L55,46 L68,42 Z" fill="${c}"/>`,
- `<rect x="32" y="46" width="13" height="4.8" rx="2.4" fill="${c}"/><rect x="55" y="46" width="13" height="4.8" rx="2.4" fill="${c}"/>`,
- `<rect x="33" y="48" width="12" height="2.2" rx="1.1" fill="${c}"/><rect x="55" y="48" width="12" height="2.2" rx="1.1" fill="${c}"/>`,
- `<path d="M33,47 Q39,49.5 45,48.5" stroke="${c}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M67,47 Q61,49.5 55,48.5" stroke="${c}" stroke-width="3" fill="none" stroke-linecap="round"/>`,
- `<path d="M32,48.5 L45,45 L45,48 L32,51.5 Z" fill="${c}"/><path d="M68,48.5 L55,45 L55,48 L68,51.5 Z" fill="${c}"/>`,
- ''
-][i]||'';}
-function avHairBack(i,c){return ['','','','','','',
- `<path d="M7,60 Q0,94 18,97 L28,97 Q19,74 21,54 Z M93,60 Q100,94 82,97 L72,97 Q81,74 79,54 Z" fill="${c}"/>`,
- `<path d="M82,34 Q99,40 96,64 Q93,80 82,76 Q92,58 78,44 Z" fill="${c}"/>`,
- `<path d="M12,52 Q-2,58 3,80 Q8,94 19,86 Q7,68 22,56 Z M88,52 Q102,58 97,80 Q92,94 81,86 Q93,68 78,56 Z" fill="${c}"/>`,
- `<circle cx="50" cy="11" r="10" fill="${c}"/>`,
- `<path d="M7,58 Q1,82 9,96 Q13,84 13,74 Q11,88 21,95 Q19,74 22,56 Z M93,58 Q99,82 91,96 Q87,84 87,74 Q89,88 79,95 Q81,74 78,56 Z" fill="${c}"/>`,
- '','','',
- `<path d="M8,60 Q3,90 17,95 L25,95 Q18,72 21,55 Z M92,60 Q97,90 83,95 L75,95 Q82,72 79,55 Z" fill="${c}"/>`,
- '',
- `<path d="M11,52 Q3,84 13,96 L26,96 Q19,72 21,52 Z M89,52 Q97,84 87,96 L74,96 Q81,72 79,52 Z" fill="${c}"/>`,
- '',
- '',
- `<path d="M14,56 Q3,80 11,95 Q16,84 17,74 Q15,90 27,93 Q22,72 24,56 Z M86,56 Q97,80 89,95 Q84,84 83,74 Q85,90 73,93 Q78,72 76,56 Z" fill="${c}"/>`,
- '',
- ''
-][i]||'';}
-function avHair(i,c){return [
- `<path d="M10,66 C7,36 16,12 50,11 C84,12 93,36 90,66 C89,55 84,49 78,50 L74,44 L70,51 L64,43 L59,51 L53,42 L47,51 L41,43 L36,51 L30,44 L26,50 C20,49 12,54 10,66 Z" fill="${c}"/>`,
- `<path d="M10,66 C7,35 16,12 50,11 C84,12 93,35 90,66 C89,54 83,49 76,50 C66,42 40,40 30,49 C26,43 20,42 16,49 C13,52 11,58 10,66 Z" fill="${c}"/>`,
- `<path d="M10,66 C7,35 16,12 50,11 C84,12 93,35 90,66 C89,54 82,49 74,50 C66,44 56,45 52,52 L50,46 L48,52 C44,45 34,44 26,50 C19,49 12,54 10,66 Z" fill="${c}"/>`,
- `<path d="M10,66 C7,34 16,11 50,10 C84,11 93,34 90,66 C89,52 84,47 76,47 C64,46 58,49 50,49 C42,49 36,46 24,47 C16,47 11,52 10,66 Z" fill="${c}"/>`,
- `<path d="M10,64 C9,40 12,18 50,16 C88,18 91,40 90,64 C89,52 84,47 78,48 L80,33 L72,46 L70,30 L61,45 L58,29 L50,44 L42,29 L39,45 L30,30 L28,46 L20,33 L22,48 C16,47 11,52 10,64 Z" fill="${c}"/>`,
- `<path d="M9,72 C6,32 16,10 50,9 C84,10 94,32 91,72 C90,76 86,74 85,68 C83,52 80,48 74,49 C64,42 38,42 28,49 C22,48 18,52 16,68 C15,74 11,76 9,72 Z" fill="${c}"/>`,
- `<path d="M9,68 C6,33 16,10 50,9 C84,10 94,33 91,68 C90,54 84,48 76,49 C66,41 40,41 30,49 C24,43 14,52 9,68 Z" fill="${c}"/>`,
- `<path d="M11,64 C8,34 16,12 50,11 C84,12 92,34 89,64 C88,52 82,47 76,48 C66,41 40,41 30,48 C24,42 14,52 11,64 Z" fill="${c}"/><circle cx="82" cy="37" r="3.5" fill="#E5503A"/>`,
- `<path d="M11,62 C8,33 16,12 50,11 C84,12 92,33 89,62 C88,50 82,46 76,47 C66,40 40,40 30,47 C24,41 14,50 11,62 Z" fill="${c}"/><circle cx="13" cy="54" r="3.4" fill="#E5503A"/><circle cx="87" cy="54" r="3.4" fill="#E5503A"/>`,
- `<path d="M11,64 C8,34 18,15 50,14 C82,15 92,34 89,64 C88,52 82,47 76,48 C66,41 40,41 30,48 C24,42 14,52 11,64 Z" fill="${c}"/>`,
- `<path d="M9,66 C6,32 16,10 50,9 C84,10 94,32 91,66 C90,52 83,47 75,48 C64,40 36,40 25,48 C17,47 12,52 9,66 Z" fill="${c}"/>`,
- `<path d="M11,60 a8,8 0 0,1 0,-12 a9,9 0 0,1 8,-12 a10,10 0 0,1 14,-6 a10,10 0 0,1 17,0 a10,10 0 0,1 17,0 a10,10 0 0,1 14,6 a9,9 0 0,1 8,12 a8,8 0 0,1 0,12 C88,50 82,47 76,48 C66,42 40,42 30,48 C20,47 13,51 11,60 Z" fill="${c}"/>`,
- `<path d="M14,54 C13,32 22,18 50,17 C78,18 87,32 86,54 C84,42 76,36 50,36 C24,36 16,42 14,54 Z" fill="${c}"/>`,
- `<path d="M43,8 L57,8 L55,40 L45,40 Z M14,58 C13,42 20,34 30,33 C22,40 20,50 20,58 Z M86,58 C87,42 80,34 70,33 C78,40 80,50 80,58 Z" fill="${c}"/>`,
- `<path d="M9,66 C6,32 16,10 50,9 C84,10 94,32 91,66 C90,52 82,47 73,48 C62,40 36,40 28,49 C24,43 16,46 13,52 C11,56 10,60 9,66 Z" fill="${c}"/>`,
- `<path d="M11,60 C9,32 18,12 50,11 C82,12 91,30 89,60 C88,48 82,44 74,45 C70,34 56,34 50,40 C44,34 30,36 28,46 C20,45 13,50 11,60 Z" fill="${c}"/>`,
- `<path d="M10,66 C8,34 18,13 50,12 C82,13 92,34 90,66 C88,53 82,49 74,50 C70,41 56,43 51,51 L50,45 L49,51 C44,43 30,41 26,50 C18,49 12,53 10,66 Z" fill="${c}"/>`,
- `<path d="M12,62 C10,33 20,15 50,14 C80,15 90,33 88,62 C86,50 80,46 73,47 C64,40 36,40 27,47 C20,46 14,50 12,62 Z" fill="${c}"/><ellipse cx="50" cy="12" rx="9.5" ry="8.5" fill="${c}"/><rect x="42" y="19" width="16" height="4" rx="2" fill="${c}"/>`,
- `<path d="M13,60 C11,33 21,15 50,14 C79,15 89,33 87,60 C85,49 79,45 72,46 C63,39 37,39 28,46 C21,45 15,49 13,60 Z" fill="${c}"/><circle cx="25" cy="20" r="8.5" fill="${c}"/><circle cx="75" cy="20" r="8.5" fill="${c}"/>`,
- `<path d="M13,62 C11,33 21,15 50,14 C79,15 89,33 87,62 C85,50 79,46 72,47 C63,40 37,40 28,47 C21,46 15,50 13,62 Z" fill="${c}"/>`,
- `<path d="M13,58 C12,30 23,14 50,14 C77,14 88,30 87,58 C85,47 79,43 72,45 C63,38 37,38 28,45 C21,43 15,47 13,58 Z" fill="${c}"/><g fill="${c}"><circle cx="50" cy="13" r="9.5"/><circle cx="34" cy="16" r="8.5"/><circle cx="66" cy="16" r="8.5"/><circle cx="22" cy="27" r="8"/><circle cx="78" cy="27" r="8"/><circle cx="16" cy="41" r="7.5"/><circle cx="84" cy="41" r="7.5"/><circle cx="43" cy="11" r="7"/><circle cx="57" cy="11" r="7"/></g>`,
- `<path d="M16,50 C15,30 24,18 50,17 C76,18 85,30 84,50 C82,40 74,35 50,35 C26,35 18,40 16,50 Z" fill="${c}"/>`
-][i]||'';}
-function avEye1(cx){return `<ellipse cx="${cx}" cy="59" rx="7" ry="8.8" fill="#fff" stroke="#2a2018" stroke-width="1.4"/><circle cx="${cx}" cy="60" r="5.4" fill="#46301f"/><circle cx="${cx}" cy="60" r="3.1" fill="#14100a"/>`;}
-function avEyes(i){return [
- avEye1(37)+avEye1(63),
- '<path d="M31,59 Q37,52 43,59" stroke="#3a2b22" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M57,59 Q63,52 69,59" stroke="#3a2b22" stroke-width="3.2" fill="none" stroke-linecap="round"/>',
- '<circle cx="37" cy="58" r="5.4" fill="#fff" stroke="#d8b9a0" stroke-width="0.6"/><circle cx="63" cy="58" r="5.4" fill="#fff" stroke="#d8b9a0" stroke-width="0.6"/><circle cx="37" cy="58.5" r="3.4" fill="#5a3b28"/><circle cx="63" cy="58.5" r="3.4" fill="#5a3b28"/><circle cx="37" cy="58.8" r="1.7" fill="#241a12"/><circle cx="63" cy="58.8" r="1.7" fill="#241a12"/><circle cx="38.4" cy="56.6" r="0.7" fill="#fff" opacity="0.7"/><circle cx="64.4" cy="56.6" r="0.7" fill="#fff" opacity="0.7"/>',
- '<path d="M31,58 Q37,52 43,58" stroke="#3a2b22" stroke-width="3.2" fill="none" stroke-linecap="round"/>'+avEye1(63),
- '<ellipse cx="37" cy="58" rx="6.5" ry="4.3" fill="#fff" stroke="#d8b9a0" stroke-width="0.6"/><ellipse cx="63" cy="58" rx="6.5" ry="4.3" fill="#fff" stroke="#d8b9a0" stroke-width="0.6"/><circle cx="37" cy="58" r="3" fill="#3a2b22"/><circle cx="63" cy="58" r="3" fill="#3a2b22"/><circle cx="38" cy="57.2" r="0.6" fill="#fff" opacity="0.6"/><circle cx="64" cy="57.2" r="0.6" fill="#fff" opacity="0.6"/>',
- '<path d="M31,57 Q37,61 43,57" stroke="#3a2b22" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M57,57 Q63,61 69,57" stroke="#3a2b22" stroke-width="3" fill="none" stroke-linecap="round"/>',
- '<path d="M37,51 l1.9,4.2 4.5,.4 -3.5,3 1.1,4.4 -4,-2.4 -4,2.4 1.1,-4.4 -3.5,-3 4.5,-.4 z" fill="#F4B942"/><path d="M63,51 l1.9,4.2 4.5,.4 -3.5,3 1.1,4.4 -4,-2.4 -4,2.4 1.1,-4.4 -3.5,-3 4.5,-.4 z" fill="#F4B942"/>',
- '<ellipse cx="37" cy="58" rx="6.5" ry="8" fill="#fff" stroke="#d8b9a0" stroke-width="0.6"/><ellipse cx="63" cy="58" rx="6.5" ry="8" fill="#fff" stroke="#d8b9a0" stroke-width="0.6"/><circle cx="37" cy="59" r="5" fill="#5a3b28"/><circle cx="63" cy="59" r="5" fill="#5a3b28"/><circle cx="37" cy="59" r="2.5" fill="#241a12"/><circle cx="63" cy="59" r="2.5" fill="#241a12"/><circle cx="39" cy="56.5" r="0.9" fill="#fff" opacity="0.75"/><circle cx="65" cy="56.5" r="0.9" fill="#fff" opacity="0.75"/>',
- '<path d="M32,55 L43,58 L42,60 L32,58 Z" fill="#3a2b22"/><path d="M68,55 L57,58 L58,60 L68,58 Z" fill="#3a2b22"/>',
- '<path d="M32,56 Q37,55 43,58 Q37,62 32,60 Z" fill="#3a2b22"/><path d="M68,56 Q63,55 57,58 Q63,62 68,60 Z" fill="#3a2b22"/>',
- '<rect x="33" y="54" width="8" height="8" rx="1.5" fill="#3a2b22"/><rect x="59" y="54" width="8" height="8" rx="1.5" fill="#3a2b22"/><rect x="34.5" y="55.5" width="2.5" height="2.5" fill="#fff"/><rect x="60.5" y="55.5" width="2.5" height="2.5" fill="#fff"/>',
- avEye1(37).replace('r="5.4" fill="#46301f"','r="5.4" fill="#357a4d"')+avEye1(63).replace('r="5.4" fill="#46301f"','r="5.4" fill="#357a4d"'),
-  avEye1(37)+'<path d="M29.5,53 l-3,-2 M29.5,56 l-3.4,-1.2" stroke="#1a120c" stroke-width="1.6" stroke-linecap="round"/>'+avEye1(63)+'<path d="M70.5,53 l3,-2 M70.5,56 l3.4,-1.2" stroke="#1a120c" stroke-width="1.6" stroke-linecap="round"/>',
-  '<ellipse cx="37" cy="59" rx="7" ry="8.8" fill="#fff" stroke="#2a2018" stroke-width="1.4"/><circle cx="37" cy="61" r="5" fill="#6b4a32"/><circle cx="37" cy="61.5" r="2.6" fill="#1a120c"/><path d="M30,55 Q37,51 44,55" stroke="#2a2018" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="63" cy="59" rx="7" ry="8.8" fill="#fff" stroke="#2a2018" stroke-width="1.4"/><circle cx="63" cy="61" r="5" fill="#6b4a32"/><circle cx="63" cy="61.5" r="2.6" fill="#1a120c"/><path d="M56,55 Q63,51 70,55" stroke="#2a2018" stroke-width="1.8" fill="none" stroke-linecap="round"/>',
-  '<ellipse cx="37" cy="59" rx="6.5" ry="8.5" fill="#fff" stroke="#2a2018" stroke-width="1.4"/><circle cx="37" cy="59.5" r="6" fill="#1a120c"/><circle cx="39.2" cy="56.5" r="1.1" fill="#fff" opacity="0.8"/><ellipse cx="63" cy="59" rx="6.5" ry="8.5" fill="#fff" stroke="#2a2018" stroke-width="1.4"/><circle cx="63" cy="59.5" r="6" fill="#1a120c"/><circle cx="65.2" cy="56.5" r="1.1" fill="#fff" opacity="0.8"/>',
-  avEye1(37)+'<path d="M35,55 l1,2.2 2.4,.2 -1.8,1.6 .5,2.3 -2.1,-1.2 -2.1,1.2 .5,-2.3 -1.8,-1.6 2.4,-.2 z" fill="#fff"/>'.replace(/35,55/g,'35,55')+avEye1(63),
-][i]||'';}
-function avNose(i){return ['',
- `<path d="M48,64 Q50,68 52,64" stroke="${AV_NOSEC}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`,
- `<ellipse cx="50" cy="66" rx="3" ry="2.4" fill="${AV_NOSEC}"/>`,
- `<path d="M50,61 L50,66" stroke="${AV_NOSEC}" stroke-width="2" fill="none" stroke-linecap="round"/>`,
- `<circle cx="50" cy="66" r="2" fill="${AV_NOSEC}"/>`
-][i]||'';}
-function avMouth(i){return [
- '<path d="M41,75 Q50,82 59,75" stroke="#C0506A" stroke-width="3" fill="none" stroke-linecap="round"/>',
- '<path d="M40,74 Q50,84 60,74 Q50,77 40,74 Z" fill="#B83C5A"/><path d="M45,76 Q50,78 55,76 Q50,81 45,76Z" fill="#fff"/>',
- '<ellipse cx="50" cy="76" rx="3.5" ry="4" fill="#B83C5A"/>',
- '<path d="M44,76 L56,76" stroke="#C0506A" stroke-width="3" stroke-linecap="round"/>',
- '<path d="M41,75 Q50,81 59,75" stroke="#C0506A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M47,78 Q50,84 53,78 Z" fill="#E8849A"/>',
- '<path d="M37,74 Q50,85 63,74 Q58,80 50,80 Q42,80 37,74Z" fill="#B83C5A"/><rect x="43" y="75" width="14" height="3" fill="#fff"/>',
- '<path d="M44,75 Q47,78 50,75 Q53,78 56,75" stroke="#C0506A" stroke-width="2.5" fill="none" stroke-linecap="round"/>',
- '<path d="M45,76 Q50,80 55,76" stroke="#C0506A" stroke-width="3" fill="none" stroke-linecap="round"/>'
-][i]||'';}
-function avAcc(i,c){return [
- '',
- '<g fill="none" stroke="#444" stroke-width="2.3"><circle cx="37" cy="58" r="8.5"/><circle cx="63" cy="58" r="8.5"/><line x1="45.5" y1="58" x2="54.5" y2="58"/></g>',
- '<g fill="#2b2b2b"><rect x="27" y="52" width="18" height="12" rx="5"/><rect x="55" y="52" width="18" height="12" rx="5"/><rect x="45" y="56" width="10" height="3"/></g>',
- '<g fill="#E5503A"><path d="M50,22 L37,13 Q34,22 37,31 Z"/><path d="M50,22 L63,13 Q66,22 63,31 Z"/></g><circle cx="50" cy="22" r="4.5" fill="#C0392B"/>',
- '<path d="M16,32 Q50,2 84,32 Q85,37 79,38 L21,38 Q15,37 16,32 Z" fill="#3B9AD9"/><path d="M78,35 Q96,34 93,43 L78,42 Z" fill="#2C7AB8"/>',
- '<path d="M15,40 Q50,28 85,40 L85,47 Q50,35 15,47 Z" fill="#E673B0"/>',
- '<path d="M29,31 L29,17 L40,25 L50,12 L60,25 L71,17 L71,31 Z" fill="#F4B942" stroke="#D99B1F" stroke-width="1"/><rect x="29" y="30" width="42" height="4" rx="2" fill="#E0A92A"/><circle cx="50" cy="13" r="2.3" fill="#E5503A"/><circle cx="32" cy="19" r="1.9" fill="#3B9AD9"/><circle cx="68" cy="19" r="1.9" fill="#3B9AD9"/>',
- '<path d="M17,54 Q17,25 50,25 Q83,25 83,54" fill="none" stroke="#3a3a3a" stroke-width="4" stroke-linecap="round"/><rect x="10" y="51" width="10" height="17" rx="4.5" fill="#E5503A"/><rect x="80" y="51" width="10" height="17" rx="4.5" fill="#E5503A"/>',
- '<g transform="translate(72,39)"><circle cx="0" cy="-4.2" r="3.1" fill="#F5A0B0"/><circle cx="4" cy="-1.3" r="3.1" fill="#F5A0B0"/><circle cx="2.5" cy="3.4" r="3.1" fill="#F5A0B0"/><circle cx="-2.5" cy="3.4" r="3.1" fill="#F5A0B0"/><circle cx="-4" cy="-1.3" r="3.1" fill="#F5A0B0"/><circle cx="0" cy="0" r="2.5" fill="#F4B942"/></g>',
- '<path d="M16,46 Q16,15 50,15 Q84,15 84,46 Q84,39 75,39 L25,39 Q16,39 16,46 Z" fill="#5183C9"/><rect x="13" y="39" width="74" height="7.5" rx="3.7" fill="#EAF0FA"/><circle cx="50" cy="12" r="5.2" fill="#EAF0FA"/>'
-][i]||'';}
 function buildAvatar(cfg,size){
-  cfg=cfg||{}; const s=size||34; const uid=_avuid++;
-  const si=cfg.skin||0; const skin=AV_SKIN[si]||AV_SKIN[0]; const sh=AV_SKINSH[si]||AV_SKINSH[0];
-  const hc=AV_HAIRC[cfg.hairColor||0]||AV_HAIRC[0];
-  return `<svg viewBox="0 0 100 100" width="${s}" height="${s}" class="avatar-svg" style="vertical-align:middle">`
-    +`<defs><radialGradient id="sk${uid}" cx="50%" cy="38%" r="72%"><stop offset="0%" stop-color="${avLighten(skin)}"/><stop offset="68%" stop-color="${skin}"/><stop offset="100%" stop-color="${sh}"/></radialGradient><radialGradient id="sh${uid}"><stop offset="0%" stop-color="${sh}"/><stop offset="100%" stop-color="${sh}" stop-opacity="0"/></radialGradient><linearGradient id="hr${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${avLighten(hc)}"/><stop offset="42%" stop-color="${hc}"/><stop offset="100%" stop-color="${avDarken(hc)}"/></linearGradient></defs>`
-    +avHairBack(cfg.hair||0,`url(#hr${uid})`)+`<ellipse cx="14" cy="60" rx="6.5" ry="7.5" fill="${skin}"/><ellipse cx="86" cy="60" rx="6.5" ry="7.5" fill="${skin}"/><circle cx="13" cy="60" r="2.3" fill="${sh}" opacity="0.5"/><circle cx="87" cy="60" r="2.3" fill="${sh}" opacity="0.5"/>`
-    +avFace(cfg.face||0,uid)
-    +`<path d="M22,40 Q50,31 78,40 Q50,43 22,40 Z" fill="#000" opacity="0.05"/>`
-    +`<ellipse cx="31" cy="77" rx="5" ry="3" fill="#F0A8B2" opacity="0.2"/><ellipse cx="69" cy="77" rx="5" ry="3" fill="#F0A8B2" opacity="0.2"/>`
-    +avHair(cfg.hair||0,`url(#hr${uid})`)+`<g transform="translate(0,-2.5)">`+avBrow(cfg.brow||0,avDarken(hc,0.12))+avEyes(cfg.eyes||0)+avAcc(cfg.acc||0,hc)+`</g><g transform="translate(0,6.5)">`+avNose(cfg.nose||0)+avMouth(cfg.mouth||0)+`</g>`
-    +`</svg>`;
+  cfg=cfg||{}; const s=size||34;
+  const list=(typeof ROBOTS!=='undefined'&&ROBOTS.length)?ROBOTS:[''];
+  let idx=cfg.robot|0; idx=((idx%list.length)+list.length)%list.length;
+  const inner=(list[idx]||'').replace(/AVID/g,'a'+(_avuid++)+'_');
+  return '<svg viewBox="0 0 100 100" width="'+s+'" height="'+s+'" class="avatar-svg" style="vertical-align:middle">'+inner+'</svg>';
 }
 
-// ── Face-builder editor ──
-const AV_PRESETS=[
- {face:0,skin:1,hair:21,hairColor:0,brow:0,eyes:15,nose:1,mouth:3,acc:2},
- {face:1,skin:2,hair:11,hairColor:4,brow:5,eyes:0,nose:2,mouth:0,acc:7},
- {face:2,skin:0,hair:7,hairColor:6,brow:0,eyes:0,nose:1,mouth:6,acc:1},
- {face:0,skin:3,hair:13,hairColor:0,brow:6,eyes:14,nose:2,mouth:7,acc:0},
- {face:3,skin:1,hair:16,hairColor:1,brow:4,eyes:14,nose:2,mouth:0,acc:0},
- {face:1,skin:2,hair:9,hairColor:5,brow:0,eyes:0,nose:2,mouth:3,acc:9},
- {face:0,skin:1,hair:5,hairColor:0,brow:2,eyes:13,nose:2,mouth:3,acc:0},
- {face:2,skin:2,hair:20,hairColor:0,brow:1,eyes:0,nose:2,mouth:0,acc:0},
- {face:4,skin:3,hair:17,hairColor:6,brow:0,eyes:14,nose:2,mouth:6,acc:4},
- {face:1,skin:1,hair:8,hairColor:4,brow:5,eyes:11,nose:2,mouth:3,acc:0}
-];
-function applyPreset(i){ editCfg=Object.assign({},AV_PRESETS[i]); renderAvOptions(); renderAvPreview(); renderAvPresets(); }
-function renderAvPresets(){
-  const box=document.getElementById('av-presets'); if(!box)return;
-  box.innerHTML=AV_PRESETS.map((p,i)=>`<button class="av-preset" onclick="applyPreset(${i})">${buildAvatar(p,42)}</button>`).join('');
-}
-let editCfg={}, editCat='skin';
+// ── Robot lab editor ──
+let editRobot=0, currentKidEdit=0;
 function openKidEdit(k){
   currentKidEdit=k;
-  editCfg=Object.assign({face:0,skin:0,hair:0,hairColor:0,brow:0,eyes:0,nose:1,mouth:0,acc:0}, kidAvatars[k]||{});
-  document.getElementById('kid-name-input').value=kidNames[k];
-  renderAvPresets();
-  renderAvCats();
-  renderAvOptions();
-  renderAvPreview();
+  editRobot=(kidAvatars[k]&&typeof kidAvatars[k].robot==='number')?kidAvatars[k].robot:0;
+  const ni=document.getElementById('kid-name-input'); if(ni) ni.value=kidNames[k];
+  renderRobotGrid(); renderAvPreview();
   document.getElementById('kid-modal').classList.add('open');
 }
-let currentKidEdit=0;
 function renderAvPreview(){
-  const p=document.getElementById('avatar-preview'); if(p) p.innerHTML=buildAvatar(editCfg,104);
+  const p=document.getElementById('avatar-preview'); if(p) p.innerHTML=buildAvatar({robot:editRobot},104);
 }
-function renderAvCats(){
-  const t=document.getElementById('av-cat-tabs'); if(!t)return;
-  t.innerHTML=AV_CATS.map(c=>`<button class="av-cat${c[0]===editCat?' active':''}" onclick="setAvCat('${c[0]}')">${c[1]}</button>`).join('');
-}
-function setAvCat(cat){ editCat=cat; renderAvCats(); renderAvOptions(); }
-function renderAvOptions(){
-  const box=document.getElementById('av-options'); if(!box)return;
-  const cat=AV_CATS.find(c=>c[0]===editCat);
-  const [key,label,count,type,colors]=cat;
+function renderRobotGrid(){
+  const box=document.getElementById('robot-grid'); if(!box)return;
   let h='';
-  for(let i=0;i<count;i++){
-    const sel=(editCfg[key]||0)===i;
-    if(type==='color'){
-      h+=`<button class="av-opt2${sel?' sel':''}" onclick="setAvPart('${key}',${i})"><span class="av-sw" style="background:${colors[i]}"></span></button>`;
-    } else {
-      const tmp=Object.assign({},editCfg); tmp[key]=i;
-      h+=`<button class="av-opt2${sel?' sel':''}" onclick="setAvPart('${key}',${i})">${buildAvatar(tmp,46)}</button>`;
-    }
+  for(let i=0;i<ROBOTS.length;i++){
+    h+='<button class="av-opt2'+(i===editRobot?' sel':'')+'" onclick="pickRobot('+i+')">'+buildAvatar({robot:i},50)+'</button>';
   }
   box.innerHTML=h;
 }
-function setAvPart(key,i){ editCfg[key]=i; renderAvOptions(); renderAvPreview(); }
+function pickRobot(i){ editRobot=i; renderRobotGrid(); renderAvPreview(); }
+function randomRobot(){
+  if(ROBOTS.length<2)return;
+  let r; do{ r=Math.floor(Math.random()*ROBOTS.length); }while(r===editRobot);
+  editRobot=r; renderRobotGrid(); renderAvPreview();
+  const g=document.getElementById('robot-grid'); if(g){const sel=g.querySelector('.av-opt2.sel'); if(sel&&sel.scrollIntoView)sel.scrollIntoView({block:'nearest'});}
+}
 function saveKidEdit(){
-  const nm=document.getElementById('kid-name-input').value.trim()||('寶貝 '+(currentKidEdit+1));
+  const ni=document.getElementById('kid-name-input');
+  const nm=(ni&&ni.value.trim())||('寶貝 '+(currentKidEdit+1));
   kidNames[currentKidEdit]=nm;
-  kidAvatars[currentKidEdit]=Object.assign({},editCfg);
+  kidAvatars[currentKidEdit]={robot:editRobot};
   storeSet('nyc-kidnames',JSON.stringify(kidNames));
   storeSet('nyc-kidavatars',JSON.stringify(kidAvatars));
   document.getElementById('kid-modal').classList.remove('open');
-  renderKidSwitcher();
-  renderHome();
+  renderKidSwitcher(); renderHome();
 }
-
 
 // ══ HOME ══════════════════════════════════════════════════════
 function renderHome(){

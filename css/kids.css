@@ -375,3 +375,9 @@ html,body{height:100%;font-family:ui-rounded,'SF Pro Rounded',-apple-system,Blin
 .quiz-num{display:inline-block;background:var(--navy);color:#fff;font-size:.66rem;font-weight:800;padding:1px 7px;border-radius:8px;margin-right:4px;vertical-align:1px}
 
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+.robot-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.robot-bar .kid-av-label{margin-bottom:0}
+.robot-random{background:var(--gold);color:var(--navy);border:none;border-radius:20px;padding:6px 14px;font-size:.8rem;font-weight:800;font-family:inherit;cursor:pointer;flex-shrink:0}
+.robot-random:active{opacity:.7}
+.robot-credit{font-size:.62rem;color:var(--text2);opacity:.7;text-align:center;margin:2px 0 12px}
